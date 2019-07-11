@@ -1,0 +1,17 @@
+- include_vars: vault.yml
+
+- name: Add limited user accounts for all Sunrise sysadmins
+  user:
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    shell: "{{ item.shell }}"
+    groups: sudo
+  loop: "{{ users }}"
+  tags: user_password
+
+- name: Add ssh keys for all Sunrise sysadmins
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.sshKey }}"
+  loop: "{{ users }}"
+  tags: authorized_keys

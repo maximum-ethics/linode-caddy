@@ -1,0 +1,17 @@
+---
+
+- hosts: localhost
+  connection: local
+  vars:
+    linode_label: attenborough
+    linode_token: "{{ sunrise_linode_token }}"
+
+  tasks:
+  - name: pip install linode_api4
+    pip:
+      name: linode_api4
+  - name: Ensure linode is missing (delete if present)
+    linode_v4:
+      label: "{{ linode_label }}"
+      access_token: "{{ linode_token }}"
+      state: absent

@@ -1,0 +1,63 @@
+---
+# working as of July 10, 2019
+
+- hosts: localhost
+  connection: local
+  # API documentation: https://developers.linode.com/api/v4/
+  vars:
+    linode_label: attenborough
+    linode_type: g6-nanode-1 # https://api.linode.com/v4/linode/types
+    linode_region: us-east # https://api.linode.com/v4/regions
+    linode_image: linode/ubuntu18.04 # https://api.linode.com/v4/images
+    linode_token: "{{ sunrise_linode_token }}"
+    # create Personal Access Token by clicking your profile in the upper right
+    # My Profile -> API Tokens -> [+] Add a Personal Access Token
+    # Give read/write access to at least Linodes if not everything else
+    # Put PAT in ansible hosts file e.g. /usr/local/etc/ansible/hosts
+    # under [local:vars] after defining [local] as localhost
+    password: "{{ pass_attenborough }}"
+
+  tasks:
+  - name: pip install linode_api4 # Dependency for linode_v4 module
+    # https://pypi.org/project/linode-api4/
+    pip:
+      name: linode_api4
+  - name: Ensure linode is running (create if missing)
+    # linode_v4 Ansible module documentation:
+    # https://docs.ansible.com/ansible/latest/modules/linode_v4_module.html
+    linode_v4:
+      label: "{{ linode_label }}"
+      type: "{{ linode_type }}"
+      region: "{{ linode_region }}"
+      image: "{{ linode_image }}"
+      access_token: "{{ linode_token }}"
+      root_pass: "{{ password }}"
+      authorized_keys:
+        - "{{ ssh_pub_key }}"
+      state: present
+    register: created_linode
+
+  - name: print ipv4 address
+    debug:
+      var: created_linode.instance.ipv4
+  - name: print ipv6 address
+    debug:
+      var: created_linode.instance.ipv6
+  - name: Remove lines with unwanted occurrences of hostname
+    lineinfile:
+      dest: /etc/hosts
+      regexp: "^(?!{{ created_linode.instance.ipv4.0|replace('.', '\\.') }}|{{ created_linode.instance.ipv6.split('/')[0] | lower }})\\S+\\s+{{ linode_label }}$"
+      state: absent
+    become: true
+  - name: Add the server's ipv6 address to local /etc/hosts file
+    lineinfile:
+      dest: /etc/hosts
+      line: "{{ created_linode.instance.ipv6.split('/')[0] | lower }}\t{{ linode_label }}"
+      state: present
+    become: true
+  - name: Add the server's ipv4 address to local /etc/hosts file
+    lineinfile:
+      dest: /etc/hosts
+      line: "{{ created_linode.instance.ipv4.0 }}\t{{ linode_label }}"
+      state: present
+    become: true
