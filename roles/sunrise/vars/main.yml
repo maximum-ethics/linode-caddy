@@ -1,23 +1,17 @@
-users: "{{ vault_users }}"
-
-# users:
-#   - name: cgalo
-# #    password: "correct zebra battery staple"
-#     password: "$6$mysecretsalt$KX2mLFmN1x9gF/urPk7EpzaMJMcY4yoFetMlQw0W9Lm2MJZ8cVI/7dk25PVyb6cLx7IUwTxON5HucMHOdsP.Y0" # correct zebra battery staple
-#     shell: /bin/bash
-#     sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHIW0Q+UmqzgscnENf/gRVJLnxGVoEMynhLKaj+vQSlBWDB956er6u74p9LhOn+Iqcc6M7Q3bDO/1comnYmiGSmxNS/wbRPCuYaI4wFpNWtSWmNKeoqDUDxBVUtPPF+jDJgsNr2caPE0HcLg+lq3u1yVuUreyEdePP93WfpDmrMhPwORgeL46hiGcN+eF9EL0xFCGiAHjcSZpSx5NxUMiD/7FzNtLrWcEMx+egtwq+jk5+6m0U1P5zR+pcX4qLnmGdxkdQdSKjfMZJB/cGPyNd1s7y1TnlSUsde/SI2hDDqU0tScrTRcp9AC3Jn/QHUjVQGZnHpEW70NUr8WGVIlJkAFhEaY+20Rc05Q8B8eRSdCbz8qDmw9q+a7Qqm2nBuee5EBDmjteqQ5e58k5Slr94pFPIQVxruFWNDlx+XujINGgFut3u1U+niS9ckjFHhOc+tw4Vpd7pcONg4dwafUw+FrxQjKpmRPolFRTHMN0ORnMMr7mUQryaNW9wJxqTOtC2DOV+1OFFoKtrDtZrCRtRMYamwgsbbU7WlwQ/G+5oJOsWGA5DO4ZAFFYRSVDmlD6k9WaAqzvk8RJblJGLamki1KteYRDe0cHW/jfqsJpc0Ifto1dc0IC7zOQxAGkB2twqpXD7DwqkX4nURgasa5DKBkXvNy+ocgosF/5u1cczcw== christian.galo@outlook.com # noqa 204 - turn off Ansible linter
-#   - name: wilsonbr
-# #    password: "correct zebra battery staple"
-#     password: "$6$mysecretsalt$.4XJlhlqT8KmGw/DfEM0TN/j26UuKHTMDzaCsP3aeumg9SR/UgsZ/NvZxhX0TCGgSDbvMcq7uLArXYWEKlsHQ/" # flattering dichromatic gecko
-#     shell: /bin/bash
-#     sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC+PZBZT6xx8CipPWt3kWIf5vctvdHZKn7FhAWbyeLP7fwQhA8Ly2q3Hkzun5tEChxOh2e/xr+F6B6d0gZwAeYYKZE6H0IcFgJGQ32oSJg7M4rtMghwKn9m1F1WS5I0sTu41PPGfqaMQJQZctFzSyokVQQZHp1E/5CrXjHlHG6hHgan/fk2FEqr7LMg5jJF/F1Ie8W9OUnqWnwb7ajm0a97HWHQSr/xDbpd8lu4Iv8eWPqgDXhd/AdbkWx6MGOTsKp16i/z1siLiVxYEMWG2tVhVOn/x0kOQ4SmhbmXP14JjjKXiTJSbQkdyQOjQEVLnPyKr9TJuWr2B0anQOysulCoPVYLYcWRKpSBIPLoJtr7h30ickyQjAOCkpxuP+vPa7lIFW0fA3H3CtanNl98Dal3b3vulsMTdhbvEgatyJzL9wJHWxrRCDuqr9UjJPBObVdmA3WUyALtPdiXJlddbsaK8uMWi4cdd7NM0ylSJOKWjaPoZaMHLnl3CGZI8KpzQLgVeOEfp0Ppv8BhEwfTIAxnP5h4hmyVNFFDD573bYG2CjuA98HIgAb/7u6GcFTIYnqFya9AlxXbH1gTX2CLdAFrszBrHHFTahKl4IVbPESVq6B3cE/LJfb5a2mOA5swYaEeRbZO/D9SKc5i6Bnizf04JZ2UiTfu95s1hDeXEuVidQ== bawilson1991@gmail.com # noqa 204 - turn off Ansible linter
-#   - name: lukeconley
-# #    password: "correct zebra battery staple"
-#     password: "$6$mysecretsalt$VN0L8bzkxg0VLxR2NCWeJ3GoV.Iao28eegu1HF9nUvszhSNUpX0H4Vz4PZL.aKFdvaaZD0j5Sv9ZOk1Anw4l3/" # bookshelf western omelette
-#     shell: /bin/bash
-#     sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDdC++bmax+KdBzeY+H756RJF2LZ28cF35trfnor6UKV402tVYHmcuyQl3AbLgMz7RxZWg1PmRxDzD5m0XG0wll4PsNe8GGerpDZ2IqUlzxGKgY6kakkw0SrwlMyR7ebobqSSvf6UGHR9BnRVIQaaiMTIDE4RtUNDBiHtdBI2E+5PCHF79FopNLv43ma8W5++DwLYzcUvPL+toitiCleHDQFsn255R2Xb1jRzeXi5GQ7FDnl4z10uuCjp5mblq21Qg9dtOPwuDjzwjHSuiqgIxI8uScL43T5q+WEBkcsOjt8Z55en/1wlxltpSRVvkG1L4dxtQ06xL9M7nXjIOHoFhJ lukeconley@Lukes-Air.home # noqa 204 - turn off Ansible linter
-#   - name: lukewestby
-# #    password: "correct zebra battery staple"
-#     password: "$6$mysecretsalt$rsKUXicoIFMtPeH8fDB/uXenrylpqUPDgUA6cwSCtZ95POOAPLhSRomXAYCsTpd09CzHKHglw8bvYJIghuZGQ/" # monogamy novel totem torment
-#     shell: /bin/bash # zsh is not installed yet, sorry
-#     sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCsDNRr3/nL+KgnFX1V/VPekYfASE+ePWRiTCOVlU0roRc0r3ArNNXHlax607tSLinN/EuGuS8kOmBhfK4Zbx12EY84gb/LLrZI9UhLnCMwv21q/3agY0rfyNxqdYXWk2dPhOSGAsJMuOEWX1OLy0Y03yKyjHInVy2Ze5ANs0F5m0e2efkGz17MPBLgRyqE+Hv6EZIXU4diItSpLU+illdMdP87SZB/7qYwW3+9gnfPRPzt/U30JSgzabFqFbfilUHq9q8sDlAbfkIL1aoensoAtEm7wq2vSXcHRFzbVgE86d10wRbqCH8SdpZ5unMzDdAXBq4ccFDBBmqwFyD8o/BYrOGceLOSvkCD5+ZjDucreUlPNHnhGxct/IyMsFqOFsaX5YS0G16LNd6vZN5oY9CdX/BnSbCXSAde0FNIMxZKXozcc8CdxhC3wAtdaOqCT52fbgd0TcGcCVXH5t4yslRGK43bg4thZcbiragsjNAIU9jIv5mTQ/cGUJ5btC8eL2GtMDyFCe/XAxnkjHhiIb6hiuKTZL1mHso48iRqL2Ks/qduQzYZEtrdMUQh67a8otl2lLIJeccO+6Wbh6ycbS5Gv7X0MJa1Hr7QIErUXNWPm4OO5CrRgE7xryobJE0+Mzx+2/XQpnYtsxiXA46jgucBXvsGVo/G32cSMGKayRmRuQ== lukewestby1@gmail.com # noqa 204 - turn off Ansible linter
+users:
+  - name: cgalo
+    password: "$6$mysecretsalt$KX2mLFmN1x9gF/urPk7EpzaMJMcY4yoFetMlQw0W9Lm2MJZ8cVI/7dk25PVyb6cLx7IUwTxON5HucMHOdsP.Y0"
+    shell: /bin/bash
+    sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHIW0Q+UmqzgscnENf/gRVJLnxGVoEMynhLKaj+vQSlBWDB956er6u74p9LhOn+Iqcc6M7Q3bDO/1comnYmiGSmxNS/wbRPCuYaI4wFpNWtSWmNKeoqDUDxBVUtPPF+jDJgsNr2caPE0HcLg+lq3u1yVuUreyEdePP93WfpDmrMhPwORgeL46hiGcN+eF9EL0xFCGiAHjcSZpSx5NxUMiD/7FzNtLrWcEMx+egtwq+jk5+6m0U1P5zR+pcX4qLnmGdxkdQdSKjfMZJB/cGPyNd1s7y1TnlSUsde/SI2hDDqU0tScrTRcp9AC3Jn/QHUjVQGZnHpEW70NUr8WGVIlJkAFhEaY+20Rc05Q8B8eRSdCbz8qDmw9q+a7Qqm2nBuee5EBDmjteqQ5e58k5Slr94pFPIQVxruFWNDlx+XujINGgFut3u1U+niS9ckjFHhOc+tw4Vpd7pcONg4dwafUw+FrxQjKpmRPolFRTHMN0ORnMMr7mUQryaNW9wJxqTOtC2DOV+1OFFoKtrDtZrCRtRMYamwgsbbU7WlwQ/G+5oJOsWGA5DO4ZAFFYRSVDmlD6k9WaAqzvk8RJblJGLamki1KteYRDe0cHW/jfqsJpc0Ifto1dc0IC7zOQxAGkB2twqpXD7DwqkX4nURgasa5DKBkXvNy+ocgosF/5u1cczcw== christian.galo@outlook.com # noqa 204 - turn off Ansible linter
+  - name: wilsonbr
+    password: "$6$mysecretsalt$KX2mLFmN1x9gF/urPk7EpzaMJMcY4yoFetMlQw0W9Lm2MJZ8cVI/7dk25PVyb6cLx7IUwTxON5HucMHOdsP.Y0"
+    shell: /bin/bash
+    sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC+PZBZT6xx8CipPWt3kWIf5vctvdHZKn7FhAWbyeLP7fwQhA8Ly2q3Hkzun5tEChxOh2e/xr+F6B6d0gZwAeYYKZE6H0IcFgJGQ32oSJg7M4rtMghwKn9m1F1WS5I0sTu41PPGfqaMQJQZctFzSyokVQQZHp1E/5CrXjHlHG6hHgan/fk2FEqr7LMg5jJF/F1Ie8W9OUnqWnwb7ajm0a97HWHQSr/xDbpd8lu4Iv8eWPqgDXhd/AdbkWx6MGOTsKp16i/z1siLiVxYEMWG2tVhVOn/x0kOQ4SmhbmXP14JjjKXiTJSbQkdyQOjQEVLnPyKr9TJuWr2B0anQOysulCoPVYLYcWRKpSBIPLoJtr7h30ickyQjAOCkpxuP+vPa7lIFW0fA3H3CtanNl98Dal3b3vulsMTdhbvEgatyJzL9wJHWxrRCDuqr9UjJPBObVdmA3WUyALtPdiXJlddbsaK8uMWi4cdd7NM0ylSJOKWjaPoZaMHLnl3CGZI8KpzQLgVeOEfp0Ppv8BhEwfTIAxnP5h4hmyVNFFDD573bYG2CjuA98HIgAb/7u6GcFTIYnqFya9AlxXbH1gTX2CLdAFrszBrHHFTahKl4IVbPESVq6B3cE/LJfb5a2mOA5swYaEeRbZO/D9SKc5i6Bnizf04JZ2UiTfu95s1hDeXEuVidQ== bawilson1991@gmail.com # noqa 204 - turn off Ansible linter
+  - name: lukeconley
+    password: "$6$mysecretsalt$KX2mLFmN1x9gF/urPk7EpzaMJMcY4yoFetMlQw0W9Lm2MJZ8cVI/7dk25PVyb6cLx7IUwTxON5HucMHOdsP.Y0"
+    shell: /bin/bash
+    sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDdC++bmax+KdBzeY+H756RJF2LZ28cF35trfnor6UKV402tVYHmcuyQl3AbLgMz7RxZWg1PmRxDzD5m0XG0wll4PsNe8GGerpDZ2IqUlzxGKgY6kakkw0SrwlMyR7ebobqSSvf6UGHR9BnRVIQaaiMTIDE4RtUNDBiHtdBI2E+5PCHF79FopNLv43ma8W5++DwLYzcUvPL+toitiCleHDQFsn255R2Xb1jRzeXi5GQ7FDnl4z10uuCjp5mblq21Qg9dtOPwuDjzwjHSuiqgIxI8uScL43T5q+WEBkcsOjt8Z55en/1wlxltpSRVvkG1L4dxtQ06xL9M7nXjIOHoFhJ lukeconley@Lukes-Air.home # noqa 204 - turn off Ansible linter
+  - name: lukewestby
+    password: "$6$mysecretsalt$KX2mLFmN1x9gF/urPk7EpzaMJMcY4yoFetMlQw0W9Lm2MJZ8cVI/7dk25PVyb6cLx7IUwTxON5HucMHOdsP.Y0"
+    shell: /bin/bash # zsh is not installed yet, sorry
+    sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCsDNRr3/nL+KgnFX1V/VPekYfASE+ePWRiTCOVlU0roRc0r3ArNNXHlax607tSLinN/EuGuS8kOmBhfK4Zbx12EY84gb/LLrZI9UhLnCMwv21q/3agY0rfyNxqdYXWk2dPhOSGAsJMuOEWX1OLy0Y03yKyjHInVy2Ze5ANs0F5m0e2efkGz17MPBLgRyqE+Hv6EZIXU4diItSpLU+illdMdP87SZB/7qYwW3+9gnfPRPzt/U30JSgzabFqFbfilUHq9q8sDlAbfkIL1aoensoAtEm7wq2vSXcHRFzbVgE86d10wRbqCH8SdpZ5unMzDdAXBq4ccFDBBmqwFyD8o/BYrOGceLOSvkCD5+ZjDucreUlPNHnhGxct/IyMsFqOFsaX5YS0G16LNd6vZN5oY9CdX/BnSbCXSAde0FNIMxZKXozcc8CdxhC3wAtdaOqCT52fbgd0TcGcCVXH5t4yslRGK43bg4thZcbiragsjNAIU9jIv5mTQ/cGUJ5btC8eL2GtMDyFCe/XAxnkjHhiIb6hiuKTZL1mHso48iRqL2Ks/qduQzYZEtrdMUQh67a8otl2lLIJeccO+6Wbh6ycbS5Gv7X0MJa1Hr7QIErUXNWPm4OO5CrRgE7xryobJE0+Mzx+2/XQpnYtsxiXA46jgucBXvsGVo/G32cSMGKayRmRuQ== lukewestby1@gmail.com # noqa 204 - turn off Ansible linter
