@@ -1,11 +1,10 @@
-- include_vars: vault.yml
-
 - name: Add limited user accounts for all Sunrise sysadmins
   user:
     name: "{{ item.name }}"
     password: "{{ item.password }}"
     shell: "{{ item.shell }}"
     groups: sudo
+    update_password: on_create
   loop: "{{ users }}"
   tags: user_password
 
