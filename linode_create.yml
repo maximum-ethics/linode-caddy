@@ -1,6 +1,7 @@
 ---
-# working as of July 10, 2019
+# working as of August 14, 2019
 
+# tasks to create Linode from local machine using web api #
 - hosts: localhost
   connection: local
   # API documentation: https://developers.linode.com/api/v4/
@@ -31,7 +32,7 @@
       region: "{{ linode_region }}"
       image: "{{ linode_image }}"
       access_token: "{{ linode_token }}"
-      root_pass: "{{ password }}"
+#      root_pass: "{{ password }}"
       authorized_keys:
         - "{{ ssh_pub_key }}"
       state: present
@@ -40,9 +41,19 @@
   - name: print ipv4 address
     debug:
       var: created_linode.instance.ipv4
+      verbosity: 2
   - name: print ipv6 address
     debug:
       var: created_linode.instance.ipv6
+      verbosity: 2
+  - name: print the whole fucking thing
+    debug:
+      var: created_linode.instance
+      verbosity: 3
+  - name: print the root password
+    debug:
+      var: created_linode.instance.root_pass
+      verbosity: 2
   - name: Remove lines with unwanted occurrences of hostname
     lineinfile:
       dest: /etc/hosts
@@ -61,3 +72,14 @@
       line: "{{ created_linode.instance.ipv4.0 }}\t{{ linode_label }}"
       state: present
     become: true
+
+# tasks on remote server once it has been created #
+- hosts: sunrise
+  vars:
+    ansible_user: root
+
+  tasks:
+  - name: install aptitude
+    apt:
+      name: aptitude
+      state: present
