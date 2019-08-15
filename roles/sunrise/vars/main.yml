@@ -17,3 +17,7 @@ users:
     password: "{{ default_pass }}"
     shell: /bin/bash # zsh is not installed yet, sorry
     sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCsDNRr3/nL+KgnFX1V/VPekYfASE+ePWRiTCOVlU0roRc0r3ArNNXHlax607tSLinN/EuGuS8kOmBhfK4Zbx12EY84gb/LLrZI9UhLnCMwv21q/3agY0rfyNxqdYXWk2dPhOSGAsJMuOEWX1OLy0Y03yKyjHInVy2Ze5ANs0F5m0e2efkGz17MPBLgRyqE+Hv6EZIXU4diItSpLU+illdMdP87SZB/7qYwW3+9gnfPRPzt/U30JSgzabFqFbfilUHq9q8sDlAbfkIL1aoensoAtEm7wq2vSXcHRFzbVgE86d10wRbqCH8SdpZ5unMzDdAXBq4ccFDBBmqwFyD8o/BYrOGceLOSvkCD5+ZjDucreUlPNHnhGxct/IyMsFqOFsaX5YS0G16LNd6vZN5oY9CdX/BnSbCXSAde0FNIMxZKXozcc8CdxhC3wAtdaOqCT52fbgd0TcGcCVXH5t4yslRGK43bg4thZcbiragsjNAIU9jIv5mTQ/cGUJ5btC8eL2GtMDyFCe/XAxnkjHhiIb6hiuKTZL1mHso48iRqL2Ks/qduQzYZEtrdMUQh67a8otl2lLIJeccO+6Wbh6ycbS5Gv7X0MJa1Hr7QIErUXNWPm4OO5CrRgE7xryobJE0+Mzx+2/XQpnYtsxiXA46jgucBXvsGVo/G32cSMGKayRmRuQ== lukewestby1@gmail.com # noqa 204 - turn off Ansible linter
+  - name: nelson
+    password: "{{ default_pass }}"
+    shell: /bin/bash
+    sshKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDMjjO5XKL+RqMIInA85ZVycw7D1OApFlUNCEQgTejQKqIWXHeXgweI+u/OcRlHIeBGmPCAKGmSnPrhDKSsjhYMWYrL1lLb1n3lVASsr4Ermp9FUoxys1QlKuKhuoggnXVRZMB2lzOD/LZkQ/iAhBhtLHnqLnVFE0XZ6tksR2rMO+FI3VpcqR/zXDoZQmWIX7wGm1JcQWPdJgtP1TYkBNRusPbFJdwH/xTM0BwGLVY0M9o9OCmkKZryNmcJl8ymv6DtCY122h8U8+QmR9bDFdWjwEc0mLHSnjhYMJdKBgbqwrVU24Dri9RMrqHEQTRk3FTgF6/WhkvsHHZuI8XUBwH nelson@Valence.local # noqa 204 - turn off Ansible linter
