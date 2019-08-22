@@ -1,0 +1,15 @@
+make an inventory file at '/etc/ansible/hosts' (or /usr/local/etc/ansible/hosts if you use homebrew on Mac to install Ansible) with the following contents:
+[sunrise]
+attenborough
+
+[local]
+localhost
+
+[local:vars]
+pass_attenborough=[get the pass over signal (for now)]
+ssh_pub_key=[PASTE YOUR OWN PUBLIC KEY]
+sunrise_linode_token=[PASTE YOUR OWN LINODE API TOKEN]
+
+run:
+ansible-playbook linode_create.yml --ask-become-pass
+ansible-playbook sunrise.yml -u root -k
