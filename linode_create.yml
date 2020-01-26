@@ -9,7 +9,7 @@
     linode_label: attenborough
     linode_type: g6-nanode-1 # https://api.linode.com/v4/linode/types
     linode_region: us-east # https://api.linode.com/v4/regions
-    linode_image: linode/ubuntu18.04 # https://api.linode.com/v4/images
+    linode_image: linode/ubuntu19.10 # https://api.linode.com/v4/images
     linode_token: "{{ sunrise_linode_token }}"
     # create Personal Access Token by clicking your profile in the upper right
     # My Profile -> API Tokens -> [+] Add a Personal Access Token
@@ -19,6 +19,9 @@
     password: "{{ pass_attenborough }}"
 
   tasks:
+# TIP: If Ansible can't find pip, check your inventory for
+# ansible_python_interpreter and see if it's using the right location/version
+# https://stackoverflow.com/questions/57167948/module-failed-to-start-ansible
   - name: pip install linode_api4 # Dependency for linode_v4 module
     # https://pypi.org/project/linode-api4/
     pip:
@@ -46,7 +49,7 @@
     debug:
       var: created_linode.instance.ipv6
       verbosity: 1
-  - name: print the whole fucking thing
+  - name: print the whole ducking thing
     debug:
       var: created_linode.instance
       verbosity: 2
@@ -72,10 +75,10 @@
       line: "{{ created_linode.instance.ipv4.0 }}\t{{ linode_label }}"
       state: present
     become: true
-# TODO: Clear known_hosts
+# TODO: Clear known_hosts - OK this has been done in linode_destroy
 
 
-# tasks on remote server once it has been created #
+# tasks on remote server once it has been created, as root #
 # TODO: DISABLE RUNNING THESE TASKS IF SERVER ALREADY EXISTED (how tho?)
 - hosts: sunrise
   gather_facts: no
@@ -85,13 +88,14 @@
   tasks:
   - name: Don't do anything until server is reachable via SSH
     wait_for_connection:
-      timeout: 120
+      delay: 10
+      timeout: 60
   - name: Gather facts for first time
     setup:
 
   - name: include user vars
     include_vars:
-      file: user_vars.yml
+      file: roles/sunrise/vars/main.yml
 
   - name: Disallow password authentication
     lineinfile:
@@ -101,55 +105,96 @@
       state: present
     notify: restart ssh
 
+  # - name: Make sure we have a 'wheel' group
+  #   group:
+  #     name: wheel
+  #
+  # - name: Allow 'wheel' group to have passwordless sudo
+  #   lineinfile:
+  #     dest: /etc/sudoers
+  #     state: present
+  #     regexp: '^%wheel'
+  #     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+  #     validate: 'visudo -cf %s'
+
 # add user accounts
-  - name: Add limited user accounts for all Sunrise sysadmins
+  - name: Add sudoing user accounts for all Sunrise sysadmins
     user:
       name: "{{ item.name }}"
       password: "{{ item.password }}"
       shell: "{{ item.shell }}"
       groups: sudo
+      append: yes
       update_password: on_create
     loop: "{{ users }}"
     register: new_accounts
 # TODO: Don't do this as a notify, try it as a task at the end of step 3
-    notify: force change password
+    # notify: force change password
 #########################################################################
-    tags: user_password
+    tags: add_users
+
+  - name: print the array of new accounts
+    debug:
+      var: new_accounts
+      verbosity: 2
+
+  - name: print my password
+    debug:
+      var: new_accounts.results[4].item.password
+      verbosity: 2
 
   - name: Add ssh keys for all Sunrise sysadmins
     authorized_key:
       user: "{{ item.name }}"
       key: "{{ item.sshKey }}"
     loop: "{{ users }}"
-    tags: authorized_keys
+    tags: add_keys
+
+
 
   handlers:
-  - name: force change password
-    command: "chage -d 0 {{ item.name }}"
-    when: item.changed
-    loop: "{{ new_accounts.results }}"
+  # - name: force change password
+  #   command: "chage -d 0 {{ item.name }}"
+  #   when: item.changed
+  #   loop: "{{ new_accounts.results }}"
   - name: restart ssh
     service:
       name: ssh
       state: restarted
 
-# tasks on remote server once it has been created #
+# tasks on remote server once it has been created, as your own user #
 - hosts: sunrise
+  become: yes
+  vars: # TODO: hide password somehow, this is stupid
+    ansible_become_pass: "correct zebra battery staple"
   tasks:
   - name: install aptitude
     apt:
       name: aptitude
-      state: present
+      update_cache: yes
+      cache_valid_time: 3600
   - name: Disallow root SSH access
     lineinfile:
       dest: /etc/ssh/sshd_config
       regexp: "^PermitRootLogin"
       line: "PermitRootLogin no"
       state: present
-    notify: restart ssh
+    notify:
+    - restart ssh
+    # change passwords last, you can't do anything else afterwards!
+    - force change password
 
   handlers:
   - name: restart ssh
     service:
       name: ssh
       state: restarted
+
+# IMPORTANT TODO:
+# This currently requires the user's entry to be last in user_vars.yml!
+# Otherwise it can't finish b/c the user hasn't updated their password
+# There must be some better way to do this that is less Nelson-specific
+  - name: force change password
+    command: "chage -d 0 {{ item.name }}"
+    when: item.changed
+    loop: "{{ new_accounts.results }}"

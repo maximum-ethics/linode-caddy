@@ -14,3 +14,79 @@
     key: "{{ item.sshKey }}"
   loop: "{{ users }}"
   tags: authorized_keys
+
+- name: update apt sources + upgrade packages
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    upgrade: safe
+  tags: updategrade
+
+# first, put local_hostname in /usr/local/etc/ansible/host_vars/[servername]
+- name: ensure hostname utility is installed
+  apt:
+    name: hostname
+- name: set system's hostname
+  hostname:
+    name: "{{ local_hostname }}"
+  tags: hostname
+- name: print hostname
+  debug:
+    msg: Inventory item {{ inventory_hostname }} has hostname {{ ansible_hostname }}
+    verbosity: 1
+
+- name: print datetime before setting timezone
+  debug:
+    var: ansible_date_time
+    verbosity: 1
+# to get list of possible timezones, run "timedatectl list-timezones"
+- name: set timezone to NYC
+  timezone:
+    name: America/New_York
+    # name: America/Los_Angeles
+  tags: timezone
+  notify: "restart cron"
+
+- name: install unattended-upgrades
+  apt:
+    name: unattended-upgrades
+# TODO: set up unattended-upgrades
+# Should the server automatically reboot to install security updates?
+# Probably not for a production server, since the server could fail to come
+# back up when no human is paying attention to it. Better to manually reboot
+# so we know someone is watching to see if a reboot breaks anything.
+
+- name: configure firewall using UFW
+# Maybe I should use iptables directly, but it's easier/simpler to set up UFW
+# persistently using Ansible, so let's try it for now.
+# https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04
+  include: ufw.yml
+  tags: ufw
+
+# TODO: fail2ban?
+
+- name: install mosh # better than SSH over crappy/mobile connections
+  apt:
+    name: mosh
+- name: allow mosh traffic through ufw
+  ufw:
+    rule: allow
+    port: 60000:61000
+    proto: udp
+  tags: mosh
+
+- name: customize the message of the day when logging in to the server
+  include: motd.yml
+  tags: motd
+
+# TODO: set up Longview - record and view stats, data to help diagnose problems
+
+# TODO: set up e-mail so unattend-upgrades, Wordpress etc. can mail you
+# - name: install postfix
+#   apt:
+#     name: postfix
+
+# TODO: set up Caddy v2 webserver
+# in progress at caddy_v2_setup.yml
+
+# TODO: install Wordpress

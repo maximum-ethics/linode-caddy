@@ -1,0 +1,8 @@
+- hosts: webservers
+  become: yes
+  tasks:
+  - name: update apt sources (if we haven't lately) + upgrade packages
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+      upgrade: safe

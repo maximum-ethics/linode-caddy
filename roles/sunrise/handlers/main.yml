@@ -1,0 +1,16 @@
+- name: restart cron
+  service:
+    name: cron
+    state: restarted
+  listen: "restart cron"
+# - name: wait 5 secs for cron to restart
+#   wait_for:
+#     timeout: 5
+#   listen: "restart cron"
+- name: update facts so we can see if the timezone is correct now
+  setup:
+  listen: "restart cron"
+- name: print datetime after setting timezone
+  debug:
+    var: ansible_date_time
+  listen: "restart cron"

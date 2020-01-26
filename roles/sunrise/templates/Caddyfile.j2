@@ -1,0 +1,36 @@
+# global options block
+{
+	storage file_system {
+		root	/etc/caddy/storage
+	}
+	experimental_http3
+	email 	{{ admin_email }}
+}
+
+# reusable snippets
+(boilerplate) {
+	encode gzip zstd
+	file_server
+}
+
+# start site blocks
+
+# test page
+www.sunrisemovement.dev {
+	root * /srv/sunrisemovement.dev/public/
+#	try_files {path}.html {path}
+	import boilerplate
+}
+
+# redirect no-www to www
+sunrisemovement.dev {
+	redir https://www.sunrisemovement.dev
+}
+
+# handcoded Rhode Island site
+ri.sunrisemovement.dev {
+	root * /srv/sunrisemovement.dev/ri/public
+#	try_files {path}/ {path} {path}.php
+	import boilerplate
+	php_fastcgi unix//var/run/php/php7.3-fpm.sock
+}

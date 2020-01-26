@@ -1,5 +1,4 @@
 ---
-
 - hosts: localhost
   connection: local
   vars:
@@ -14,4 +13,9 @@
     linode_v4:
       label: "{{ linode_label }}"
       access_token: "{{ linode_token }}"
+      state: absent
+  - name: Remove hostname from ~/.ssh/known_hosts
+    lineinfile:
+      dest: ~/.ssh/known_hosts
+      regexp: "^{{ linode_label }}"
       state: absent

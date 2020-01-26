@@ -11,5 +11,24 @@ ssh_pub_key=[PASTE YOUR OWN PUBLIC KEY]
 sunrise_linode_token=[PASTE YOUR OWN LINODE API TOKEN]
 
 run:
+# to create the Linode server from your computer by connecting to the Linode API
 ansible-playbook linode_create.yml --ask-become-pass
-ansible-playbook sunrise.yml -u root -k
+# to change your password from our default, so you can log in as yourself
+ssh attenborough
+# to set up the server
+ansible-playbook sunrise.yml
+
+# WAIT! If you are changing the IP address for an existing domain name, consider the TTL
+# Linode's default TTL is 24 hours:
+# https://www.linode.com/docs/platform/manager/dns-manager/#troubleshoot-dns-records
+# Many of our Godaddy subdomains currently have the TTL set to 1 hour.
+# If you power up your new Caddy webserver before DNS resolves correctly,
+# it won't be able to get certificates from Let's Encrypt, and won't serve your websites.
+# Worse, you may annoy Let's Encrypt by exceeding their rate limits
+# (requesting certs you can't get) and then you'll have to wait even longer!
+# Make sure the domain resolves to the correct IP address before setting up Caddy.
+
+# to install the Caddy v2 webserver
+ansible-playbook caddy_v2_setup.yml
+# to install RI's handcoded PHP website
+ansible-playbook new_handcoded_v2.yml

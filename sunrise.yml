@@ -1,5 +1,6 @@
 ---
 
 - hosts: sunrise
+  become: yes
   roles:
     - sunrise

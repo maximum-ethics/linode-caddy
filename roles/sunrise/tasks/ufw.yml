@@ -1,0 +1,58 @@
+- name: install ufw
+  apt:
+    name: ufw
+- name: let ufw handle IPv6
+  lineinfile:
+    path: /etc/default/ufw
+    regexp: '^IPV6='
+    line: IPV6=yes
+- name: rate limit SSH traffic
+# ufw will deny connections if an IP address has attempted to initiate 6
+# or more connections in the last 30 seconds
+# sez https://docs.ansible.com/ansible/latest/modules/ufw_module.html#examples
+  ufw:
+    rule: limit
+    port: ssh
+    proto: tcp
+- name: allow HTTP, HTTPS
+  ufw:
+    rule: allow
+    port: '{{ item }}'
+  loop:
+    - http
+    - https
+- name: allow QUIC aka HTTP/3
+  ufw:
+    rule: allow
+    port: '443'
+    proto: udp
+
+# IMPORTANT: UFW rules remain active until you delete them, so simply removing
+# a task from this playbook and running it again will not get rid of a rule
+# you no longer want. You must (temporarily) include a task to delete a rule,
+# as demonstrated below.
+
+# - name: delete udp port 80 since server isn't listening there for HTTP/3
+#   ufw:
+#     rule: allow
+#     port: '80'
+#     proto: udp
+#     delete: yes
+
+- name: enable logging
+  ufw:
+    logging: "on"
+- name: reject incoming and enable UFW
+  ufw:
+    state: enabled
+    policy: reject
+    direction: incoming
+# - name: allow outgoing
+#   ufw:
+#     policy: allow
+#     direction: outgoing
+#     delete: yes
+
+# TODO: should we default to blocking outgoing traffic?
+# https://securityskeptic.typepad.com/the-security-skeptic/firewall-best-practices-egress-traffic-filtering.html
+# It would make writing firewall rules more annoying, but may make us better netizens
