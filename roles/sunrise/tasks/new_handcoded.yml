@@ -1,0 +1,29 @@
+---
+# TIP: add the subdomain's A + AAAA records to the Linode control panel first!
+# Otherwise Let's Encrypt can't verify your certificates
+- name: install packages
+  apt:
+    name: '{{ item }}'
+  loop:
+    - git
+    - php-fpm
+
+- name: install Caddyfile from template
+  template:
+    src: Caddyfile.j2
+    dest: /etc/caddy/Caddyfile
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - reload caddy
+
+- name: clone git repository for subdomain
+  git:
+    repo: "{{ item.git_repo }}"
+    dest: /srv/{{ item.domain_name }}/{{ item.subdomain }}/public/
+  loop: "{{ handcoded_websites }}"
+  notify:
+    - make www-data owner
+    - reload caddy
+

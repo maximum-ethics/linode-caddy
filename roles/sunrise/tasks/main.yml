@@ -79,6 +79,14 @@
   include: motd.yml
   tags: motd
 
+- name: setup Caddy V2 web server
+  include: caddy_v2.yml
+  tags: caddy_v2
+
+- name: set up some handcoded websites
+  include: new_handcoded.yml
+  tags: new_handcoded
+
 # TODO: set up Longview - record and view stats, data to help diagnose problems
 
 # TODO: set up e-mail so unattend-upgrades, Wordpress etc. can mail you

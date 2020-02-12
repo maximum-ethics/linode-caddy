@@ -14,3 +14,32 @@
   debug:
     var: ansible_date_time
   listen: "restart cron"
+
+# - name: just force systemd to reread configs (2.4 and above)
+#   systemd:
+#     daemon_reload: yes
+#   listen: "reload caddy"
+- name: reload caddy
+  service:
+    name: caddy
+    state: reloaded
+  # listen: "reload caddy"
+- name: restart caddy
+  service:
+    name: caddy
+    state: restarted
+  listen: restart caddy
+- name: let caddy bind to ports 80 and 443
+  capabilities:
+    path: /usr/local/bin/caddy
+    capability: cap_net_bind_service=+ep
+    state: present
+  listen: restart caddy
+
+- name: make www-data owner #of everything in the darn directory
+  file:
+    path: /srv/{{ item.domain_name }}/{{ item.subdomain }}
+    owner: www-data
+    group: www-data
+    recurse: yes
+  loop: "{{ handcoded_websites }}"

@@ -1,0 +1,93 @@
+# some tips for systemd services: https://github.com/caddyserver/caddy/blob/master/dist/init/linux-systemd/README.md
+- name: install caddy.service file
+  copy:
+    src: caddy.service
+    dest: /etc/systemd/system
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  notify:
+    - reload caddy
+- name: create /etc/caddy directory
+  file:
+    path: /etc/caddy
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+- name: create data directory # it's not just tls certificates
+  file:
+    path: /etc/caddy/storage
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+- name: create folder for config autosave
+  file:
+    path: /var/www
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: install Caddyfile from template
+  template:
+    src: Caddyfile.j2
+    dest: /etc/caddy/Caddyfile
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - reload caddy
+  tags: caddyfile
+
+- name: create srv directory to hold website data
+  file:
+    path: /srv/{{ test_domain }}
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0555'
+- name: install test website
+  copy:
+    src: index.html
+    dest: /srv/{{ test_domain }}/public/
+
+- name: create tmp dir for caddy download
+  file:
+    path: "/tmp/{{ ansible_date_time.date }}-caddydownload"
+    state: directory
+    mode: 0755
+- name: download Caddy binary
+  get_url:
+    url: "{{ caddy_binary_url }}"
+    dest: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
+    mode: 0755
+# - name: replace caddy binary
+#   synchronize:
+#     mode: pull
+#     src: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
+#     dest: /usr/local/bin/caddy
+#   delegate_to: "{{ inventory_hostname }}"
+- name: replace caddy binary
+  copy:
+    remote_src: yes
+    src: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
+    dest: /usr/local/bin/caddy
+  notify:
+    - restart caddy
+- name: ensure binary is executable
+  file:
+    path: /usr/local/bin/caddy
+    owner: www-data
+    group: www-data
+    mode: u=rwx,g=rx,o=rx
+
+- name: start caddy service
+  service:
+    name: caddy
+    state: started
+- name: enable caddy service
+  service:
+    name: caddy
+    enabled: yes
