@@ -1,6 +1,4 @@
 ---
-# mostly working as of August 21, 2019 :(
-
 # tasks to create Linode from local machine using web api #
 - hosts: localhost
   connection: local
@@ -10,12 +8,12 @@
     linode_type: g6-nanode-1 # https://api.linode.com/v4/linode/types
     linode_region: us-east # https://api.linode.com/v4/regions
     linode_image: linode/ubuntu19.10 # https://api.linode.com/v4/images
-    linode_token: "{{ sunrise_linode_token }}"
     # create Personal Access Token by clicking your profile in the upper right
     # My Profile -> API Tokens -> [+] Add a Personal Access Token
-    # Give read/write access to at least Linodes if not everything else
+    # Give read/write access to at least Linodes, if not everything else
     # Put PAT in ansible hosts file e.g. /usr/local/etc/ansible/hosts
     # under [local:vars] after defining [local] as localhost
+    linode_token: "{{ sunrise_linode_token }}"
     password: "{{ pass_attenborough }}"
 
   tasks:
@@ -128,9 +126,6 @@
       update_password: on_create
     loop: "{{ users }}"
     register: new_accounts
-# TODO: Don't do this as a notify, try it as a task at the end of step 3
-    # notify: force change password
-#########################################################################
     tags: add_users
 
   - name: print the array of new accounts
