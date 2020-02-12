@@ -21,12 +21,16 @@ sunrise_linode_token=[PASTE YOUR OWN LINODE API TOKEN]
 ```
 
 ### Create the Linode server from your computer by connecting to the Linode web API
-Run: `ansible-playbook linode_create.yml --ask-become-pass`
+`ansible-playbook linode_create.yml --ask-become-pass`
 ### Change your password from our default, so you can log in as yourself (not root)
-Run: `ssh attenborough`, change your password when prompted, and then you will be automatically logged out.
+`ssh attenborough`
+
+Change your password when prompted, and then you will be automatically logged out.
+
 ### Set up the server
-This includes setting up the [Caddy v2 web server](https://caddyserver.com/), serving some hand-coded hub websites.
 `ansible-playbook sunrise.yml`
+
+This includes setting up the [Caddy v2 web server](https://caddyserver.com/), serving some hand-coded hub websites.
 
 **WAIT!** If you are changing the IP address for an existing domain name, consider the TTL! [Linode's default TTL is 24 hours](https://www.linode.com/docs/platform/manager/dns-manager/#troubleshoot-dns-records). Many of our Godaddy subdomains currently have the TTL set to 1 hour.
 
