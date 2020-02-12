@@ -94,7 +94,4 @@
 #   apt:
 #     name: postfix
 
-# TODO: set up Caddy v2 webserver
-# in progress at caddy_v2_setup.yml
-
 # TODO: install Wordpress

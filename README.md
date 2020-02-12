@@ -37,3 +37,7 @@ This includes setting up the [Caddy v2 web server](https://caddyserver.com/), se
 If you power up your new Caddy webserver before DNS resolves correctly, it won't be able to get certificates from Let's Encrypt, and won't serve your websites. Worse, you may annoy Let's Encrypt by exceeding their rate limits (requesting certs you can't get) and then you'll have to wait even longer! (In the future we'll set up a dev environment so that you can test this playbook without requesting certs from Let's Encrypt.)
 
 Make sure the domain resolves to the correct IP address before setting up Caddy.
+
+To set up the server but avoid setting up Caddy, try:
+
+`ansible-playbook sunrise.yml --skip-tags "caddy_v2,new_handcoded"`
