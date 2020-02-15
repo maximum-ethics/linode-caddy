@@ -7,6 +7,7 @@
   loop:
     - git
     - php-fpm
+    - acl # allows becoming unprivileged user (for git clone)
 
 - name: install Caddyfile from template
   template:
@@ -18,12 +19,23 @@
   notify:
     - reload caddy
 
+- name: create srv directory if it doesn't exist
+  file:
+    path: /srv/{{ item.domain_name }}/{{ item.subdomain }}
+    state: directory
+    mode: 0755
+    owner: www-data
+    group: www-data
+  loop: "{{ handcoded_websites }}"
+
 - name: clone git repository for subdomain
   git:
     repo: "{{ item.git_repo }}"
     dest: /srv/{{ item.domain_name }}/{{ item.subdomain }}/public/
   loop: "{{ handcoded_websites }}"
-  notify:
-    - make www-data owner
-    - reload caddy
-
+  become: yes
+  become_user: www-data
+  tags: hand_git  
+  # notify:
+  #   - make www-data owner
+  #   - reload caddy
