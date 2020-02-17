@@ -1,0 +1,7 @@
+---
+- name: include vars file
+  include_vars: hugo.yml
+
+- name: install latest Hugo .deb from Github
+  apt:
+    deb: "{{ hugo_deb_url }}"
