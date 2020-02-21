@@ -8,11 +8,25 @@
   loop: "{{ users }}"
   tags: user_password
 
+# - name: Add ssh keys for all Sunrise sysadmins
+#   authorized_key:
+#     user: "{{ item.name }}"
+#     key: "{{ item.sshKey }}"
+#   loop: "{{ users }}"
+#   tags: authorized_keys
+
 - name: Add ssh keys for all Sunrise sysadmins
   authorized_key:
-    user: "{{ item.name }}"
-    key: "{{ item.sshKey }}"
-  loop: "{{ users }}"
+    user: "{{ item.0.name }}"
+    key: "{{ item.1 }}"
+# old syntax for doing loop with subelements:
+# https://docs.ansible.com/ansible/latest/plugins/lookup/subelements.html
+  # with_subelements:
+  #   - "{{ users }}"
+  #   - sshKey
+# new syntax described here:
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html#with-subelements
+  loop: "{{ users|subelements('sshKey') }}"
   tags: authorized_keys
 
 - name: update apt sources + upgrade packages

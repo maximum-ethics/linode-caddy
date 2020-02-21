@@ -5,3 +5,5 @@
 - name: install latest Hugo .deb from Github
   apt:
     deb: "{{ hugo_deb_url }}"
+
+# TODO: Create our own apt repository for Caddy and Hugo
