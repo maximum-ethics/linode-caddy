@@ -7,3 +7,20 @@
     deb: "{{ hugo_deb_url }}"
 
 # TODO: Create our own apt repository for Caddy and Hugo
+
+# Create site directories
+- name: create srv directory if it doesn't exist
+  file:
+    path: /srv/{{ item.domain }}/{{ item.subdomain }}
+    state: directory
+    mode: 0755
+    owner: www-data
+    group: www-data
+  loop: "{{ hugo_sites }}"
+  register: hugo_sites.output
+
+- name: Create new Hugo site
+    command: hugo new site /srv/{{ domain_name }}
+    args:
+      creates: /srv/{{ domain_name }}
+    when: hugo_sites.output.changed == true #add when

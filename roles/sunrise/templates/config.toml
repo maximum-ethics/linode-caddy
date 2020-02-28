@@ -1,0 +1,15 @@
+baseURL = "https://{{ subdomain }}.{{ domain }}"
+languageCode = "en-us"
+title = "{{ title }}"
+theme = "{{ theme_name }}"
+
+[params]
+  sitename = "{{ title }}"
+  mainSections = ["blog", "press_release"]
+
+[menu]
+
+  [[menu.main]]
+    name = "Home"
+    url = "https://{{ subdomain }}.{{ domain }}"
+    weight = 1.0
