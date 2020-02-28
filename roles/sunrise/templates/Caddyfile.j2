@@ -28,12 +28,11 @@ sunrisemovement.dev {
 }
 
 # handcoded Rhode Island site
-ri.sunrisemovement.dev {
-	root * /srv/sunrisemovement.dev/ri/public
-#	try_files {path}/ {path} {path}.php
-	import boilerplate
-	php_fastcgi unix//var/run/php/php7.3-fpm.sock
-}
+# ri.sunrisemovement.dev {
+# 	root * /srv/sunrisemovement.dev/ri/public
+# 	import boilerplate
+# 	php_fastcgi unix//var/run/php/php7.3-fpm.sock
+# }
 
 # handcoded SF Bay website (originally Github Pages)
 sfbay.sunrisemovement.dev {

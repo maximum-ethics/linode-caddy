@@ -29,7 +29,7 @@ users:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDMjjO5XKL+RqMIInA85ZVycw7D1OApFlUNCEQgTejQKqIWXHeXgweI+u/OcRlHIeBGmPCAKGmSnPrhDKSsjhYMWYrL1lLb1n3lVASsr4Ermp9FUoxys1QlKuKhuoggnXVRZMB2lzOD/LZkQ/iAhBhtLHnqLnVFE0XZ6tksR2rMO+FI3VpcqR/zXDoZQmWIX7wGm1JcQWPdJgtP1TYkBNRusPbFJdwH/xTM0BwGLVY0M9o9OCmkKZryNmcJl8ymv6DtCY122h8U8+QmR9bDFdWjwEc0mLHSnjhYMJdKBgbqwrVU24Dri9RMrqHEQTRk3FTgF6/WhkvsHHZuI8XUBwH nelson@Valence.local # noqa 204 - turn off Ansible linter
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHhOEJBnYlsQ/+6T3L0GxagZdCCCgqOaGFtgh5agZB4P u0_a278@localhost
 
-caddy_binary_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.14/caddy2_beta14_linux_amd64
+caddy_binary_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.15/caddy2_beta15_linux_amd64
 test_domain: sunrisemovement.dev
 
 handcoded_websites:
