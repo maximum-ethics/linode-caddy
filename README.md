@@ -1,5 +1,5 @@
 # Sunrise Movement devops
-Ansible role that will (eventually) automatically set up a Sunrise server, currently using a virtual server on [Linode](https://www.linode.com/).
+Ansible role that will (eventually) automatically set up a web server for [Sunrise Movement](https://www.sunrisemovement.org/), currently using a virtual server on [Linode](https://www.linode.com/).
 
 ## Steps to set up server on Linode
 First, ask Nelson for an account on the Sunrise Linode, so that you can create an API token. Then:
