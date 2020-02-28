@@ -20,7 +20,6 @@
   register: hugo_sites.output
 
 - name: Create new Hugo site
-    command: hugo new site /srv/{{ domain_name }}
-    args:
-      creates: /srv/{{ domain_name }}
-    when: hugo_sites.output.changed == true #add when
+  command: hugo new site /srv/{{ item.domain }}/{{ item.subdomain }}
+  loop: "{{ hugo_sites }}"
+  when: hugo_sites.output.changed == true
