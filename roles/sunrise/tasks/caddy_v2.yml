@@ -52,6 +52,8 @@
   copy:
     src: index.html
     dest: /srv/{{ test_domain }}/public/
+  notify:
+    - reload caddy
 
 - name: create tmp dir for caddy download
   file:
