@@ -68,7 +68,7 @@
 
 # tasks on remote server once it has been created, as root #
 # TODO: DISABLE RUNNING THESE TASKS IF SERVER ALREADY EXISTED (how tho?)
-- hosts: "{{ ansible_host_group }}"
+- hosts: sunrise
   gather_facts: no
   vars:
     ansible_user: root
@@ -154,7 +154,7 @@
       state: restarted
 
 # tasks on remote server once it has been created, as your own user #
-- hosts: "{{ ansible_host_group }}"
+- hosts: sunrise
   become: yes
   vars: # TODO: hide password somehow, this is stupid
     ansible_become_pass: "correct zebra battery staple"
