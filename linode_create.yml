@@ -2,21 +2,11 @@
 # tasks to create Linode from local machine using web api #
 - hosts: localhost
   connection: local
-  # API documentation: https://developers.linode.com/api/v4/
-  vars:
-    linode_label: attenborough
-    linode_type: g6-nanode-1 # https://api.linode.com/v4/linode/types
-    linode_region: us-east # https://api.linode.com/v4/regions
-    linode_image: linode/ubuntu19.10 # https://api.linode.com/v4/images
-    # create Personal Access Token by clicking your profile in the upper right
-    # My Profile -> API Tokens -> [+] Add a Personal Access Token
-    # Give read/write access to at least Linodes, if not everything else
-    # Put PAT in ansible hosts file e.g. /usr/local/etc/ansible/hosts
-    # under [local:vars] after defining [local] as localhost
-    linode_token: "{{ sunrise_linode_token }}"
-    password: "{{ pass_attenborough }}"
 
   tasks:
+  - name: include variables
+    include_vars:
+      file: roles/sunrise/vars/linode.yml
 # TIP: If Ansible can't find pip, check your inventory for
 # ansible_python_interpreter and see if it's using the right location/version
 # https://stackoverflow.com/questions/57167948/module-failed-to-start-ansible
@@ -78,7 +68,7 @@
 
 # tasks on remote server once it has been created, as root #
 # TODO: DISABLE RUNNING THESE TASKS IF SERVER ALREADY EXISTED (how tho?)
-- hosts: sunrise
+- hosts: "{{ ansible_host_group }}"
   gather_facts: no
   vars:
     ansible_user: root
@@ -164,7 +154,7 @@
       state: restarted
 
 # tasks on remote server once it has been created, as your own user #
-- hosts: sunrise
+- hosts: "{{ ansible_host_group }}"
   become: yes
   vars: # TODO: hide password somehow, this is stupid
     ansible_become_pass: "correct zebra battery staple"
