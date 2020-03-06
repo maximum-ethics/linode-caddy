@@ -128,11 +128,8 @@
     owner: www-data
     group: www-data
     mode: u=rwx,g=rx,o=rx
-- name: start caddy service
+- name: start and enable caddy service
   service:
     name: caddy
     state: started
-- name: enable caddy service
-  service:
-    name: caddy
     enabled: yes
