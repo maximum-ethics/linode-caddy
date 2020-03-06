@@ -43,3 +43,9 @@
     group: www-data
     recurse: yes
   loop: "{{ handcoded_websites }}"
+
+- name: regenerate hugo
+  command: hugo
+  args:
+    chdir: /srv/{{ domain_name }}
+    creates: /srv/{{ domain_name }}/public

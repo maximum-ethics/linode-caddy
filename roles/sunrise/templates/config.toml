@@ -1,15 +1,15 @@
-baseURL = "https://{{ subdomain }}.{{ domain }}"
+baseURL = "https://{{ item.subdomain }}.{{ item.domain }}"
 languageCode = "en-us"
-title = "{{ title }}"
-theme = "{{ theme_name }}"
+title = "{{ item.title }}"
+theme = "{{ item.theme_name }}"
 
 [params]
-  sitename = "{{ title }}"
+  sitename = "{{ item.title }}"
   mainSections = ["blog", "press_release"]
 
 [menu]
 
   [[menu.main]]
     name = "Home"
-    url = "https://{{ subdomain }}.{{ domain }}"
+    url = "https://{{ item.subdomain }}.{{ item.domain }}"
     weight = 1.0

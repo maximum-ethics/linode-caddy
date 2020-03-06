@@ -101,6 +101,7 @@
   include: new_handcoded.yml
   tags: new_handcoded
 
+# Hugo playbook doesn't work yet
 # - name: set up Hugo websites
 #   include: hugo.yml
 #   tags: hugo
