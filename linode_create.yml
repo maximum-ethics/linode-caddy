@@ -23,7 +23,6 @@
       region: "{{ linode_region }}"
       image: "{{ linode_image }}"
       access_token: "{{ linode_token }}"
-#      root_pass: "{{ password }}"
       authorized_keys:
         - "{{ ssh_pub_key }}"
       state: present
@@ -93,18 +92,6 @@
       state: present
     notify: restart ssh
 
-  # - name: Make sure we have a 'wheel' group
-  #   group:
-  #     name: wheel
-  #
-  # - name: Allow 'wheel' group to have passwordless sudo
-  #   lineinfile:
-  #     dest: /etc/sudoers
-  #     state: present
-  #     regexp: '^%wheel'
-  #     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-  #     validate: 'visudo -cf %s'
-
 # add user accounts
   - name: Add sudoing user accounts for all Sunrise sysadmins
     user:
@@ -144,10 +131,6 @@
 
 
   handlers:
-  # - name: force change password
-  #   command: "chage -d 0 {{ item.name }}"
-  #   when: item.changed
-  #   loop: "{{ new_accounts.results }}"
   - name: restart ssh
     service:
       name: ssh
