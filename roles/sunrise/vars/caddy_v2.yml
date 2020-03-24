@@ -1,4 +1,5 @@
 caddy_binary_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.20/caddy2_beta20_linux_amd64
 test_domain: sunrisemovement.dev
+test_subdomain: www
 building_caddy: false
 # caddy_git_version: v2

@@ -46,15 +46,15 @@
 
 - name: create srv directory to hold website data
   file:
-    path: /srv/{{ test_domain }}
+    path: /srv/{{ test_domain }}/{{ test_subdomain }}
     state: directory
     owner: www-data
     group: www-data
-    mode: '0555'
+    mode: 0755
 - name: install test website
   copy:
     src: index.html
-    dest: /srv/{{ test_domain }}/public/
+    dest: /srv/{{ test_domain }}/{{ test_subdomain }}/public/
   notify:
     - reload caddy
 
