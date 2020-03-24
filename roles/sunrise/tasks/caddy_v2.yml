@@ -105,13 +105,13 @@
   git:
     repo: https://github.com/caddyserver/caddy.git
     dest: /tmp/caddy
-    version: v2
+    # version: '{{ caddy_git_version }}'
   when: building_caddy
 - name: build Caddy
   command: go build
   args:
     chdir: /tmp/caddy/cmd/caddy
-    creates: /tmp/caddy/cmd/caddy/caddy
+    # creates: /tmp/caddy/cmd/caddy/caddy
   when: building_caddy
 - name: replace caddy binary
   copy:
