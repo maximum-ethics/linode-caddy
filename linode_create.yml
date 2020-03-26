@@ -7,6 +7,26 @@
   - name: include variables
     include_vars:
       file: roles/sunrise/vars/linode.yml
+
+# put local_hostname in /usr/local/etc/ansible/host_vars/[servername]
+  - name: create host_vars directory for this hostname
+    file:
+      path: '{{ inventory_directory }}/host_vars/{{ linode_label }}'
+      state: directory
+      mode: 0755
+  - name: create vars file for this server
+    file:
+      path: '{{ inventory_directory }}/host_vars/{{ linode_label }}/vars.yml'
+      state: touch
+      mode: 0644
+      modification_time: preserve
+      access_time: preserve
+  - name: store hostname in relevant host_vars vars file
+    lineinfile:
+      path: '{{ inventory_directory }}/host_vars/{{ linode_label }}/vars.yml'
+      regexp: '^local_hostname:'
+      line: 'local_hostname: {{ linode_label }}'
+
 # TIP: If Ansible can't find pip, check your inventory for
 # ansible_python_interpreter and see if it's using the right location/version
 # https://stackoverflow.com/questions/57167948/module-failed-to-start-ansible
@@ -67,7 +87,7 @@
 
 # tasks on remote server once it has been created, as root #
 # TODO: DISABLE RUNNING THESE TASKS IF SERVER ALREADY EXISTED (how tho?)
-- hosts: sunrise
+- hosts: arch
   gather_facts: no
   vars:
     ansible_user: root
@@ -76,7 +96,7 @@
   - name: Don't do anything until server is reachable via SSH
     wait_for_connection:
       delay: 10
-      timeout: 60
+      timeout: 90
   - name: Gather facts for first time
     setup:
 
@@ -92,13 +112,23 @@
       state: present
     notify: restart ssh
 
-# add user accounts
+  - name: Make sure we have a 'wheel' group
+    group:
+      name: wheel
+  - name: Allow 'wheel' group to execute any command
+    lineinfile:
+      dest: /etc/sudoers
+      state: present
+      regexp: '^%wheel'
+      line: '%wheel ALL=(ALL) ALL'
+      validate: 'visudo -cf %s'
+
   - name: Add sudoing user accounts for all Sunrise sysadmins
     user:
       name: "{{ item.name }}"
       password: "{{ item.password }}"
       shell: "{{ item.shell }}"
-      groups: sudo
+      groups: wheel
       append: yes
       update_password: on_create
     loop: "{{ users }}"
@@ -133,20 +163,15 @@
   handlers:
   - name: restart ssh
     service:
-      name: ssh
+      name: sshd
       state: restarted
 
 # tasks on remote server once it has been created, as your own user #
-- hosts: sunrise
+- hosts: arch
   become: yes
   vars: # TODO: hide password somehow, this is stupid
     ansible_become_pass: "correct zebra battery staple"
   tasks:
-  - name: install aptitude
-    apt:
-      name: aptitude
-      update_cache: yes
-      cache_valid_time: 3600
   - name: Disallow root SSH access
     lineinfile:
       dest: /etc/ssh/sshd_config
@@ -161,7 +186,7 @@
   handlers:
   - name: restart ssh
     service:
-      name: ssh
+      name: sshd
       state: restarted
 
 # IMPORTANT TODO:
