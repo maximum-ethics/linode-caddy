@@ -1,5 +1,6 @@
-- name: include vars file
-  include_vars: caddy_v2.yml
+- name: include testing vars file when testing
+  include_vars: test_vars.yml
+  when: test_mode
 
 # some tips for systemd services: https://github.com/caddyserver/caddy/blob/master/dist/init/linux-systemd/README.md
 - name: install caddy.service file
@@ -35,7 +36,7 @@
 
 - name: install Caddyfile from template
   template:
-    src: Caddyfile.j2
+    src: {{ caddyfile_name }}
     dest: /etc/caddy/Caddyfile
     owner: root
     group: root
@@ -87,32 +88,28 @@
   when: not building_caddy
 
 # Build latest Caddy from source and install it
-- name: add PPA so we can install latest version of Go
-  apt_repository:
-    repo: ppa:longsleep/golang-backports
-  when: building_caddy
-- name: install latest Go
-  apt:
+- name: install Go
+  package:
     name: '{{ item }}'
-    state: latest
-    update_cache: yes
-    cache_valid_time: 3600
   loop:
     - git
     - golang-go
   when: building_caddy
+
 - name: checkout Caddy v2 repository
   git:
     repo: https://github.com/caddyserver/caddy.git
     dest: /tmp/caddy
     # version: '{{ caddy_git_version }}'
   when: building_caddy
+
 - name: build Caddy
   command: go build
   args:
     chdir: /tmp/caddy/cmd/caddy
     # creates: /tmp/caddy/cmd/caddy/caddy
   when: building_caddy
+
 - name: replace caddy binary
   copy:
     remote_src: yes
@@ -120,7 +117,7 @@
     dest: /usr/local/bin/caddy
   notify:
     - restart caddy
-  when: building_caddy    
+  when: building_caddy
 
 - name: ensure binary is executable
   file:
@@ -128,6 +125,7 @@
     owner: www-data
     group: www-data
     mode: u=rwx,g=rx,o=rx
+    
 - name: start and enable caddy service
   service:
     name: caddy

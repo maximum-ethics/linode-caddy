@@ -39,3 +39,11 @@ handcoded_websites:
   - subdomain: sfbay
     domain_name: sunrisemovement.org
     git_repo: https://github.com/sunrise-bay-area/welcome.git
+
+# vars for caddy_v2.yml
+caddy_binary_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.20/caddy2_beta20_linux_amd64
+test_domain: sunrisemovement.dev
+test_subdomain: www
+building_caddy: false
+# caddy_git_version: v2
+caddyfile_name: Caddyfile.j2
