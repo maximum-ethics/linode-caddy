@@ -1,6 +1,21 @@
+# Useful links:
+# https://wiki.archlinux.org/index.php/Uncomplicated_Firewall
+# https://www.linode.com/docs/security/firewalls/configure-firewall-with-ufw/
+
+# It seems ufw can fail if you update the kernel image without restarting the system?
+# Rebooting is an easy fix, but pretty annoying for Ansible and our uptime:
+# https://stackoverflow.com/questions/21983554/iptables-v1-4-14-cant-initialize-iptables-table-nat-table-does-not-exist-d
+# It may be possible to avoid this issue by switching to Linode's latest 64 bit kernel:
+# https://www.linode.com/docs/platform/how-to-change-your-linodes-kernel/
+
 - name: install ufw
-  apt:
+  package:
     name: ufw
+- name: start and enable ufw service
+  service:
+    name: ufw
+    state: started
+    enabled: yes
 - name: let ufw handle IPv6
   lineinfile:
     path: /etc/default/ufw
@@ -47,6 +62,7 @@
     state: enabled
     policy: reject
     direction: incoming
+
 # - name: allow outgoing
 #   ufw:
 #     policy: allow
