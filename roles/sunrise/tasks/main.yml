@@ -57,7 +57,7 @@
     name: America/New_York
     # name: America/Los_Angeles
   tags: timezone
-  notify: "restart cron"
+  notify: "print datetime"
 
 - name: configure firewall using UFW
 # Maybe I should use iptables directly, but it's easier/simpler to set up UFW
@@ -78,9 +78,9 @@
     proto: udp
   tags: mosh
 
-- name: customize the message of the day when logging in to the server
-  import_tasks: motd.yml
-  tags: motd
+# - name: customize the message of the day when logging in to the server
+#   import_tasks: motd.yml
+#   tags: motd
 
 - name: setup Caddy V2 web server
   import_tasks: caddy_v2.yml
