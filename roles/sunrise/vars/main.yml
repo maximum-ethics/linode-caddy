@@ -26,8 +26,9 @@ users:
     password: "{{ default_pass }}"
     shell: /bin/bash
     sshKey: 
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDMjjO5XKL+RqMIInA85ZVycw7D1OApFlUNCEQgTejQKqIWXHeXgweI+u/OcRlHIeBGmPCAKGmSnPrhDKSsjhYMWYrL1lLb1n3lVASsr4Ermp9FUoxys1QlKuKhuoggnXVRZMB2lzOD/LZkQ/iAhBhtLHnqLnVFE0XZ6tksR2rMO+FI3VpcqR/zXDoZQmWIX7wGm1JcQWPdJgtP1TYkBNRusPbFJdwH/xTM0BwGLVY0M9o9OCmkKZryNmcJl8ymv6DtCY122h8U8+QmR9bDFdWjwEc0mLHSnjhYMJdKBgbqwrVU24Dri9RMrqHEQTRk3FTgF6/WhkvsHHZuI8XUBwH nelson@Valence.local # noqa 204 - turn off Ansible linter
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJcoG9tZKULXW2IQ+5MsZ3vgUBJ5C3uDbbG381S1Cjdl nelson@Valence.local
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHhOEJBnYlsQ/+6T3L0GxagZdCCCgqOaGFtgh5agZB4P u0_a278@localhost
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnUmCzUu/jrZz+T5rVTEJQ73zobj+CixKJS2N9jMkhz nelson@annalise
 
 handcoded_websites:
   - subdomain: ri

@@ -36,7 +36,7 @@
 
 - name: install Caddyfile from template
   template:
-    src: {{ caddyfile_name }}
+    src: '{{ caddyfile_name }}'
     dest: /etc/caddy/Caddyfile
     owner: root
     group: root
