@@ -101,8 +101,13 @@
 #   import_tasks: motd.yml
 #   tags: motd
 
-- name: setup Caddy V2 web server
-  import_tasks: caddy_v2.yml
+- name: setup Caddy V2 web server on Ubuntu
+  import_tasks: caddy_Ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+  tags: caddy_v2
+- name: setup Caddy V2 web server on Arch Linux
+  import_tasks: caddy_Archlinux.yml
+  when: ansible_os_family == 'Archlinux'
   tags: caddy_v2
 
 - name: set up some handcoded websites

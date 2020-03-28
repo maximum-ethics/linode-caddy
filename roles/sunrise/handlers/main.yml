@@ -30,14 +30,6 @@
     state: present
   listen: restart caddy
 
-- name: make www-data owner #of everything in the darn directory
-  file:
-    path: /srv/{{ item.domain_name }}/{{ item.subdomain }}
-    owner: www-data
-    group: www-data
-    recurse: yes
-  loop: "{{ handcoded_websites }}"
-
 - name: regenerate hugo
   command: hugo
   args:

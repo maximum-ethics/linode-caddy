@@ -16,22 +16,22 @@
   file:
     path: /etc/caddy
     state: directory
-    owner: www-data
-    group: www-data
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
     mode: '0755'
 - name: create data directory # it's not just tls certificates
   file:
     path: /etc/caddy/storage
     state: directory
-    owner: www-data
-    group: www-data
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
     mode: '0755'
 - name: create folder for config autosave
   file:
     path: /var/www
     state: directory
-    owner: www-data
-    group: www-data
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
     mode: '0755'
 
 - name: install Caddyfile from template
@@ -49,8 +49,8 @@
   file:
     path: /srv/{{ test_domain }}/{{ test_subdomain }}
     state: directory
-    owner: www-data
-    group: www-data
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
     mode: 0755
 - name: install test website
   copy:
@@ -88,9 +88,16 @@
   when: not building_caddy
 
 # Build latest Caddy from source and install it
-- name: install Go
-  package:
+- name: add PPA so we can install latest version of Go
+  apt_repository:
+    repo: ppa:longsleep/golang-backports
+  when: building_caddy
+- name: install latest Go
+  apt:
     name: '{{ item }}'
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
   loop:
     - git
     - golang-go
@@ -122,8 +129,8 @@
 - name: ensure binary is executable
   file:
     path: /usr/local/bin/caddy
-    owner: www-data
-    group: www-data
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
     mode: u=rwx,g=rx,o=rx
     
 - name: start and enable caddy service
