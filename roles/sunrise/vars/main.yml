@@ -29,6 +29,7 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJcoG9tZKULXW2IQ+5MsZ3vgUBJ5C3uDbbG381S1Cjdl nelson@Valence.local
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHhOEJBnYlsQ/+6T3L0GxagZdCCCgqOaGFtgh5agZB4P u0_a278@localhost
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnUmCzUu/jrZz+T5rVTEJQ73zobj+CixKJS2N9jMkhz nelson@annalise
+sudoing_group: wheel
 
 handcoded_websites:
   - subdomain: ri

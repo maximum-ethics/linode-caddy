@@ -1,9 +1,18 @@
+# - name: include testing vars file when testing
+#   include_vars: Ubuntu.yml
+#   when: ansible_distribution == 'Ubuntu'
+#   tags: always
+
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_distribution }}.yml"
+  tags: always
+
 - name: Add limited user accounts for all Sunrise sysadmins
   user:
     name: "{{ item.name }}"
     password: "{{ item.password }}"
     shell: "{{ item.shell }}"
-    groups: wheel
+    groups: "{{ sudoing_group }}"
     update_password: on_create
   loop: "{{ users }}"
   tags: user_password
@@ -29,11 +38,20 @@
   loop: "{{ users|subelements('sshKey') }}"
   tags: authorized_keys
 
+- name: update apt sources + upgrade packages
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    upgrade: safe
+  tags: updategrade
+  when: ansible_os_family == 'Debian'
+
 - name: update sources + upgrade packages
   pacman: 
     update_cache: yes
     upgrade: yes
   tags: updategrade
+  when: ansible_os_family == 'Archlinux'
 
 # first, put local_hostname in ansible inventory
 - name: set system's hostname
@@ -57,7 +75,8 @@
     name: America/New_York
     # name: America/Los_Angeles
   tags: timezone
-  notify: "print datetime"
+  notify: 
+    - restart cron + print time
 
 - name: configure firewall using UFW
 # Maybe I should use iptables directly, but it's easier/simpler to set up UFW

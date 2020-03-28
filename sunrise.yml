@@ -4,5 +4,3 @@
   become: yes
   roles:
     - sunrise
-  vars:
-    test_mode: true
