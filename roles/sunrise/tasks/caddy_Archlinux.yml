@@ -1,0 +1,129 @@
+- name: include testing vars file when testing
+  include_vars: test_vars.yml
+  when: test_mode
+
+# some tips for systemd services: https://github.com/caddyserver/caddy/blob/master/dist/init/linux-systemd/README.md
+- name: install caddy.service file
+  copy:
+    src: caddy.service
+    dest: /etc/systemd/system
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
+  notify:
+    - reload caddy
+- name: create /etc/caddy directory
+  file:
+    path: /etc/caddy
+    state: directory
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+    mode: '0755'
+- name: create data directory # it's not just tls certificates
+  file:
+    path: /etc/caddy/storage
+    state: directory
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+    mode: '0755'
+- name: create folder for config autosave
+  file:
+    path: /var/www
+    state: directory
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+    mode: '0755'
+
+- name: install Caddyfile from template
+  template:
+    src: '{{ caddyfile_name }}'
+    dest: /etc/caddy/Caddyfile
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - reload caddy
+  tags: caddyfile
+
+- name: create srv directory to hold website data
+  file:
+    path: /srv/{{ test_domain }}/{{ test_subdomain }}
+    state: directory
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+    mode: 0755
+- name: install test website
+  copy:
+    src: index.html
+    dest: /srv/{{ test_domain }}/{{ test_subdomain }}/public/
+  notify:
+    - reload caddy
+
+# Download binary from GitHub and install it
+- name: create tmp dir for caddy download
+  file:
+    path: "/tmp/{{ ansible_date_time.date }}-caddydownload"
+    state: directory
+    mode: 0755
+  when: not building_caddy
+- name: download Caddy binary
+  get_url:
+    url: "{{ caddy_binary_url }}"
+    dest: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
+    mode: 0755
+  when: not building_caddy
+
+- name: replace caddy binary
+  copy:
+    remote_src: yes
+    src: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
+    dest: /usr/local/bin/caddy
+  notify:
+    - restart caddy
+  when: not building_caddy
+
+# Build latest Caddy from source and install it
+- name: install Go
+  package:
+    name: '{{ item }}'
+  loop:
+    - git
+    - golang-go
+  when: building_caddy
+
+- name: checkout Caddy v2 repository
+  git:
+    repo: https://github.com/caddyserver/caddy.git
+    dest: /tmp/caddy
+    # version: '{{ caddy_git_version }}'
+  when: building_caddy
+
+- name: build Caddy
+  command: go build
+  args:
+    chdir: /tmp/caddy/cmd/caddy
+    # creates: /tmp/caddy/cmd/caddy/caddy
+  when: building_caddy
+
+- name: replace caddy binary
+  copy:
+    remote_src: yes
+    src: /tmp/caddy/cmd/caddy/caddy
+    dest: /usr/local/bin/caddy
+  notify:
+    - restart caddy
+  when: building_caddy
+
+# Either way, make sure the binary works, then get the service running
+- name: ensure binary is executable
+  file:
+    path: /usr/local/bin/caddy
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+    mode: u=rwx,g=rx,o=rx
+    
+- name: start and enable caddy service
+  service:
+    name: caddy
+    state: started
+    enabled: yes

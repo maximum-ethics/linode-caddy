@@ -24,8 +24,8 @@
     path: /srv/{{ item.domain_name }}/{{ item.subdomain }}
     state: directory
     mode: 0755
-    owner: www-data
-    group: www-data
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
   loop: "{{ handcoded_websites }}"
 
 - name: clone git repository for subdomain
@@ -34,8 +34,5 @@
     dest: /srv/{{ item.domain_name }}/{{ item.subdomain }}/public/
   loop: "{{ handcoded_websites }}"
   become: yes
-  become_user: www-data
-  tags: hand_git  
-  # notify:
-  #   - make www-data owner
-  #   - reload caddy
+  become_user: '{{ web_server_user }}'
+  tags: hand_git

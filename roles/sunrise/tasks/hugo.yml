@@ -24,8 +24,8 @@
     path: /srv/{{ item.domain }}/{{ item.subdomain }}/public
     state: directory
     mode: 0755
-    owner: www-data
-    group: www-data
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
   loop: "{{ hugo_sites }}"
   register: output
 
@@ -37,7 +37,7 @@
   command: hugo new site /srv/{{ item.item.domain }}/{{ item.item.subdomain }}/public
   loop: "{{ output.results }}"
   become: yes
-  become_user: www-data
+  become_user: '{{ web_server_user }}'
   when: item.changed == true
 
 - name: clone git theme
@@ -46,15 +46,15 @@
     dest: /srv/{{ item.domain }}/{{ item.subdomain }}/public/themes/{{ item.theme_name }}
   loop: "{{ hugo_sites }}"
   become: yes
-  become_user: www-data
+  become_user: '{{ web_server_user }}'
   register: theme_changes
 
 - name: create config.toml file from template
   template:
     src: config.toml
     dest: /srv/{{ item.domain }}/{{ item.subdomain }}/public/config.toml
-    owner: www-data
-    group: www-data
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
   loop: "{{ hugo_sites }}"
   register: config_changes
 
