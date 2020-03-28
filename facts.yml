@@ -1,0 +1,9 @@
+---
+
+- hosts: webservers
+  become: yes
+
+  tasks:
+    - name: print OS info
+      debug: 
+        msg: This server is running the {{ ansible_distribution }} distribution in the {{ ansible_os_family }} OS family.

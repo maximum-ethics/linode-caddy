@@ -1,21 +1,21 @@
+- name: restart cron
+  service:
+    name: cron
+    state: restarted
+  listen: restart cron + print time
+  when: ansible_os_family == 'Debian'
 - name: update facts so we can see if the timezone is correct now
   setup:
-  listen: "print datetime"
-
+  listen: restart cron + print time
 - name: print datetime after setting timezone
   debug:
     var: ansible_date_time
-  listen: "print datetime"
+  listen: restart cron + print time
 
-# - name: just force systemd to reread configs (2.4 and above)
-#   systemd:
-#     daemon_reload: yes
-#   listen: "reload caddy"
 - name: reload caddy
   service:
     name: caddy
     state: reloaded
-  # listen: "reload caddy"
 
 - name: restart caddy
   service:
