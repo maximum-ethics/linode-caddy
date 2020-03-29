@@ -101,6 +101,11 @@
 #   import_tasks: motd.yml
 #   tags: motd
 
+- name: print OS info
+  debug: 
+    msg: This server is running the {{ ansible_distribution }} distribution in the {{ ansible_os_family }} OS family.
+    verbosity: 1
+  tags: caddy_v2
 - name: setup Caddy V2 web server on Ubuntu
   import_tasks: caddy_Ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
