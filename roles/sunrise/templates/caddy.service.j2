@@ -13,8 +13,8 @@ Wants=network-online.target systemd-networkd-wait-online.service
 ;StartLimitBurst=10
 
 ; User and group the process will run as.
-User=www-data
-Group=www-data
+User={{ web_server_user }}
+Group={{ web_server_user }}
 
 ; caddy command assumes the caddyfile adapter if filename starts with Caddyfile
 ExecStart=/usr/local/bin/caddy run --config /etc/caddy/Caddyfile

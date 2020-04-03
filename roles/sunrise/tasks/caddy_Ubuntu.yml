@@ -3,10 +3,10 @@
   when: test_mode
 
 # some tips for systemd services: https://github.com/caddyserver/caddy/blob/master/dist/init/linux-systemd/README.md
-- name: install caddy.service file
-  copy:
-    src: caddy.service
-    dest: /etc/systemd/system
+- name: install caddy.service file from template
+  template:
+    src: caddy.service.j2
+    dest: /etc/systemd/system/caddy.service
     owner: root
     group: root
     mode: u=rw,g=r,o=r
