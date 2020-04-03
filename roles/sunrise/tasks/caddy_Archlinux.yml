@@ -3,13 +3,14 @@
   when: test_mode
 
 # some tips for systemd services: https://github.com/caddyserver/caddy/blob/master/dist/init/linux-systemd/README.md
-- name: install caddy.service file
-  copy:
-    src: caddy.service
-    dest: /etc/systemd/system
+- name: install caddy.service file from template
+  template:
+    src: caddy.service.j2
+    dest: /etc/systemd/system/caddy.service
     owner: root
     group: root
-    mode: u=rw,g=r,o=r
+    mode: u=rwx,g=rx,o=rx
+    # Arch Linux thinks this is an executable and won't run without x
   notify:
     - reload caddy
 - name: create /etc/caddy directory
@@ -47,7 +48,7 @@
 
 - name: create srv directory to hold website data
   file:
-    path: /srv/{{ test_domain }}/{{ test_subdomain }}
+    path: /srv/{{ test_domain }}/{{ test_subdomain }}/public/
     state: directory
     owner: '{{ web_server_user }}'
     group: '{{ web_server_user }}'
@@ -56,6 +57,9 @@
   copy:
     src: index.html
     dest: /srv/{{ test_domain }}/{{ test_subdomain }}/public/
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+    mode: 0755
   notify:
     - reload caddy
 
