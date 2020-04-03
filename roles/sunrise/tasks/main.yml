@@ -106,13 +106,8 @@
     msg: This server is running the {{ ansible_distribution }} distribution in the {{ ansible_os_family }} OS family.
     verbosity: 1
   tags: caddy_v2
-- name: setup Caddy V2 web server on Ubuntu
-  import_tasks: caddy_Ubuntu.yml
-  when: ansible_distribution == 'Ubuntu'
-  tags: caddy_v2
 - name: setup Caddy V2 web server on Arch Linux
-  import_tasks: caddy_Archlinux.yml
-  when: ansible_os_family == 'Archlinux'
+  import_tasks: caddy.yml
   tags: caddy_v2
 
 - name: set up some handcoded websites
