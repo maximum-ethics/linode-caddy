@@ -9,7 +9,8 @@
     dest: /etc/systemd/system/caddy.service
     owner: root
     group: root
-    mode: u=rw,g=r,o=r
+    mode: u=rwx,g=rx,o=rx
+    # Arch Linux thinks this is an executable and won't run without x
   notify:
     - reload caddy
 - name: create /etc/caddy directory
@@ -47,7 +48,7 @@
 
 - name: create srv directory to hold website data
   file:
-    path: /srv/{{ test_domain }}/{{ test_subdomain }}
+    path: /srv/{{ test_domain }}/{{ test_subdomain }}/public/
     state: directory
     owner: '{{ web_server_user }}'
     group: '{{ web_server_user }}'
@@ -56,10 +57,25 @@
   copy:
     src: index.html
     dest: /srv/{{ test_domain }}/{{ test_subdomain }}/public/
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+    mode: 0755
   notify:
     - reload caddy
 
 # Download binary from GitHub and install it
+# - name: download + extract caddy binary
+#   unarchive:
+#     src: '{{ caddy_archive_url }}'
+#     dest: /usr/local/bin/
+#     remote_src: True
+#     owner: '{{ web_server_user }}'
+#     group: '{{ web_server_user }}'
+#     mode: 0755
+#   notify:
+#   - restart caddy
+#   when: not building_caddy
+
 - name: create tmp dir for caddy download
   file:
     path: "/tmp/{{ ansible_date_time.date }}-caddydownload"
@@ -72,12 +88,6 @@
     dest: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
     mode: 0755
   when: not building_caddy
-# - name: replace caddy binary
-#   synchronize:
-#     mode: pull
-#     src: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
-#     dest: /usr/local/bin/caddy
-#   delegate_to: "{{ inventory_hostname }}"
 - name: replace caddy binary
   copy:
     remote_src: yes
@@ -91,13 +101,10 @@
 - name: add PPA so we can install latest version of Go
   apt_repository:
     repo: ppa:longsleep/golang-backports
-  when: building_caddy
-- name: install latest Go
-  apt:
+  when: building_caddy and ansible_distribution == 'Ubuntu'
+- name: install Go
+  package:
     name: '{{ item }}'
-    state: latest
-    update_cache: yes
-    cache_valid_time: 3600
   loop:
     - git
     - golang-go
@@ -122,10 +129,14 @@
     remote_src: yes
     src: /tmp/caddy/cmd/caddy/caddy
     dest: /usr/local/bin/caddy
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+    mode: 0755
   notify:
     - restart caddy
   when: building_caddy
 
+# Either way, make sure the binary works, then get the service running
 - name: ensure binary is executable
   file:
     path: /usr/local/bin/caddy
