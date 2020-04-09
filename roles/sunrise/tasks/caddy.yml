@@ -29,11 +29,13 @@
     mode: '0755'
 - name: create folder for config autosave
   file:
-    path: /var/www
+    path: '{{ caddy_conf_autosave_dir }}'
     state: directory
     owner: '{{ web_server_user }}'
     group: '{{ web_server_user }}'
     mode: '0755'
+  notify:
+    - restart caddy
 
 - name: install Caddyfile from template
   template:
@@ -64,38 +66,46 @@
     - reload caddy
 
 # Download binary from GitHub and install it
-# - name: download + extract caddy binary
-#   unarchive:
-#     src: '{{ caddy_archive_url }}'
-#     dest: /usr/local/bin/
-#     remote_src: True
-#     owner: '{{ web_server_user }}'
-#     group: '{{ web_server_user }}'
-#     mode: 0755
-#   notify:
-#   - restart caddy
-#   when: not building_caddy
-
-- name: create tmp dir for caddy download
-  file:
-    path: "/tmp/{{ ansible_date_time.date }}-caddydownload"
-    state: directory
+- name: download + extract caddy binary
+  unarchive:
+    src: '{{ caddy_archive_url }}'
+    dest: /usr/local/bin/
+    remote_src: True
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
     mode: 0755
-  when: not building_caddy
-- name: download Caddy binary
-  get_url:
-    url: "{{ caddy_binary_url }}"
-    dest: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
-    mode: 0755
-  when: not building_caddy
-- name: replace caddy binary
-  copy:
-    remote_src: yes
-    src: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
-    dest: /usr/local/bin/caddy
   notify:
     - restart caddy
-  when: not building_caddy
+  when: # list of conditions = AND
+    - not building_caddy
+    - caddy_archive_url is defined
+
+# - name: create tmp dir for caddy download
+#   file:
+#     path: "/tmp/{{ ansible_date_time.date }}-caddydownload"
+#     state: directory
+#     mode: 0755
+#   when:
+#     - not building_caddy
+#     - caddy_binary_url is defined
+# - name: download Caddy binary
+#   get_url:
+#     url: "{{ caddy_binary_url }}"
+#     dest: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
+#     mode: 0755
+#   when:
+#     - not building_caddy
+#     - caddy_binary_url is defined
+# - name: replace caddy binary
+#   copy:
+#     remote_src: yes
+#     src: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
+#     dest: /usr/local/bin/caddy
+#   notify:
+#     - restart caddy
+#   when:
+#     - not building_caddy
+#     - caddy_binary_url is defined
 
 # Build latest Caddy from source and install it
 - name: add PPA so we can install latest version of Go

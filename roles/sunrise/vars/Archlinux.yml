@@ -1,5 +1,5 @@
 sudoing_group: wheel
 web_server_user: http
 
-
 test_mode: true
+caddy_conf_autosave_dir: /srv/http/.config/caddy
