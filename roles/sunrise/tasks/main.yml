@@ -1,9 +1,4 @@
-# - name: include testing vars file when testing
-#   include_vars: Ubuntu.yml
-#   when: ansible_distribution == 'Ubuntu'
-#   tags: always
-
-- name: Include OS-specific variables.
+- name: Include OS-specific variables
   include_vars: "{{ ansible_distribution }}.yml"
   tags: always
 
@@ -16,13 +11,6 @@
     update_password: on_create
   loop: "{{ users }}"
   tags: user_password
-
-# - name: Add ssh keys for all Sunrise sysadmins
-#   authorized_key:
-#     user: "{{ item.name }}"
-#     key: "{{ item.sshKey }}"
-#   loop: "{{ users }}"
-#   tags: authorized_keys
 
 - name: Add ssh keys for all Sunrise sysadmins
   authorized_key:
