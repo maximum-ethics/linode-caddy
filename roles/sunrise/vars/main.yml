@@ -44,7 +44,7 @@ handcoded_websites:
 
 # vars for caddy_v2.yml
 caddy_archive_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-rc.1/caddy_2.0.0-rc.1_Linux_x86_64.tar.gz
-caddy_binary_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.20/caddy2_beta20_linux_amd64
+# caddy_binary_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.20/caddy2_beta20_linux_amd64
 test_domain: sunrisemovement.dev
 test_subdomain: www
 building_caddy: false
