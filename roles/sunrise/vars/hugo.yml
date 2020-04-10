@@ -1,4 +1,4 @@
-hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.68.3/hugo_0.68.3_Linux-64bit.deb
+hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.69.0/hugo_0.69.0_Linux-64bit.deb
 hugo_sites:
   - title: Sunrise Movement Philadelphia
     domain: sunrisemovement.dev
