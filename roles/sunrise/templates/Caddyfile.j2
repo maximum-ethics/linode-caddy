@@ -18,8 +18,10 @@
 # test page
 www.sunrisemovement.dev {
 	root * /srv/sunrisemovement.dev/www/public/
-#	try_files {path}.html {path}
 	import boilerplate
+	templates {
+		between (( ))
+	}
 }
 
 # redirect no-www to www

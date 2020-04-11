@@ -1,5 +1,9 @@
+initial_packages:
+  - which # to find where executables are installed
+  - go # needed to build Caddy from source
+
 sudoing_group: wheel
 web_server_user: http
 
-test_mode: true
+local_tls: true
 caddy_conf_autosave_dir: /srv/http/.config/caddy
