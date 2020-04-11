@@ -1,4 +1,4 @@
-# global options block
+# global options block: https://caddyserver.com/docs/caddyfile/options
 {
 	storage file_system {
 		root	/etc/caddy/storage
@@ -7,7 +7,7 @@
 	local_certs
 }
 
-# reusable snippets
+# reusable snippets: https://caddyserver.com/docs/caddyfile/concepts#snippets
 (boilerplate) {
 	encode gzip zstd
 	file_server
@@ -19,6 +19,8 @@
 brockovich.sunrisemovement.dev {
 	root * /srv/sunrisemovement.dev/www/public/
 	import boilerplate
+	# https://caddyserver.com/docs/caddyfile/directives/templates
+	# can't use default double curly braces b/c Ansible uses them
 	templates {
 		between (( ))
 	}
@@ -33,7 +35,6 @@ www.sunrisemovement.dev {
 		between (( ))
 	}
 }
-
 # redirect no-www to www
 sunrisemovement.dev {
 	redir https://www.sunrisemovement.dev

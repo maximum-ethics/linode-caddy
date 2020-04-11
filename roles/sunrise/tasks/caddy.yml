@@ -2,7 +2,7 @@
   include_vars: local_tls.yml
   when: local_tls
 
-# some tips for systemd services: https://github.com/caddyserver/caddy/blob/master/dist/init/linux-systemd/README.md
+# tips for systemd services: https://github.com/caddyserver/caddy/blob/master/dist/init/linux-systemd/README.md
 - name: install caddy.service file from template
   template:
     src: caddy.service.j2
@@ -78,6 +78,7 @@
     mode: 0755
   notify:
     - restart caddy
+  # https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html#the-when-statement
   when: # list of conditions = AND
     - not building_caddy
     - caddy_archive_url is defined
@@ -111,7 +112,7 @@
 
 # Build latest Caddy from source and install it
 - name: add PPA so we can install latest version of Go
-  apt_repository:
+  apt_repository: # https://github.com/golang/go/wiki/Ubuntu
     repo: ppa:longsleep/golang-backports
   when: building_caddy and ansible_distribution == 'Ubuntu'
 - name: install Go

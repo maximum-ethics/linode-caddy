@@ -8,6 +8,6 @@
   </head>
   <body>
     <p>Welcome to ((.Host)). The time is ((now | date "15:04:05 MST")) on ((now | date "Monday January 2, 2006")). Your IP is ((.RemoteIP)).</p>
-    <p>This server, named {{ local_hostname }}, is running the {{ ansible_distribution }} distribution in the {{ ansible_os_family }} OS family.</p>
+    <p>This server, named {{ ansible_hostname }}, is running the {{ ansible_distribution }} distribution in the {{ ansible_os_family }} OS family.</p>
   </body>
 </html>
