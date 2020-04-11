@@ -1,0 +1,40 @@
+# global options block
+{
+	storage file_system {
+		root	/etc/caddy/storage
+	}
+	experimental_http3
+	local_certs
+}
+
+# reusable snippets
+(boilerplate) {
+	encode gzip zstd
+	file_server
+}
+
+# start site blocks
+
+# public test page
+brockovich.sunrisemovement.dev {
+	root * /srv/sunrisemovement.dev/www/public/
+	import boilerplate
+	templates {
+		between (( ))
+	}
+	tls	{{ admin_email }}
+}
+
+# local test page
+www.sunrisemovement.dev {
+	root * /srv/sunrisemovement.dev/www/public/
+	import boilerplate
+	templates {
+		between (( ))
+	}
+}
+
+# redirect no-www to www
+sunrisemovement.dev {
+	redir https://www.sunrisemovement.dev
+}

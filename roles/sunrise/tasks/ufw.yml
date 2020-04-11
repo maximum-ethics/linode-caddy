@@ -7,6 +7,7 @@
 # https://stackoverflow.com/questions/21983554/iptables-v1-4-14-cant-initialize-iptables-table-nat-table-does-not-exist-d
 # It may be possible to avoid this issue by switching to Linode's latest 64 bit kernel:
 # https://www.linode.com/docs/platform/how-to-change-your-linodes-kernel/
+# I did so, and so far no problems...
 
 - name: install ufw
   package:

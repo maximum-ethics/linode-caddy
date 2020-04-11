@@ -1,5 +1,8 @@
+# initial_packages:
+#   - 
+
 sudoing_group: sudo
 web_server_user: www-data
 
-test_mode: false
+local_tls: false
 caddy_conf_autosave_dir: /var/www

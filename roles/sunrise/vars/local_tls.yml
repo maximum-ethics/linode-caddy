@@ -1,0 +1,2 @@
+# vars for caddy_v2.yml
+caddyfile_name: LocalCaddyfile.j2

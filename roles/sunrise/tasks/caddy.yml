@@ -1,6 +1,6 @@
 - name: include testing vars file when testing
-  include_vars: test_vars.yml
-  when: test_mode
+  include_vars: local_tls.yml
+  when: local_tls
 
 # some tips for systemd services: https://github.com/caddyserver/caddy/blob/master/dist/init/linux-systemd/README.md
 - name: install caddy.service file from template
@@ -55,15 +55,17 @@
     owner: '{{ web_server_user }}'
     group: '{{ web_server_user }}'
     mode: 0755
-- name: install test website
-  copy:
-    src: index.html
-    dest: /srv/{{ test_domain }}/{{ test_subdomain }}/public/
+
+- name: install test website from template
+  template:
+    src: index.html.j2
+    dest: /srv/{{ test_domain }}/{{ test_subdomain }}/public/index.html
     owner: '{{ web_server_user }}'
     group: '{{ web_server_user }}'
     mode: 0755
   notify:
     - reload caddy
+  tags: test_website
 
 # Download binary from GitHub and install it
 - name: download + extract caddy binary
@@ -118,7 +120,7 @@
   loop:
     - git
     - golang-go
-  when: building_caddy
+  when: building_caddy and ansible_distribution == 'Ubuntu'
 
 - name: checkout Caddy v2 repository
   git:
