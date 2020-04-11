@@ -17,12 +17,17 @@
   tags: updategrade
   when: ansible_os_family == 'Archlinux'
 
-- name: install initial packages
+- name: install common packages, shared by all OSes
   package:
     name: '{{ item }}'
-  loop: "{{ initial_packages }}"
+  loop: "{{ common_packages }}"
   tags: initial_packages
-  when: initial_packages is defined
+- name: install packages specific to each OS
+  package:
+    name: '{{ item }}'
+  loop: "{{ os_packages }}"
+  tags: initial_packages
+  when: os_packages is defined
 
 - name: Add limited user accounts for all Sunrise sysadmins
   user:
