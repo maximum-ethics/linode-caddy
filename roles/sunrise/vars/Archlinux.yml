@@ -1,4 +1,4 @@
-initial_packages:
+os_packages:
   - which # to find where executables are installed
   - go # needed to build Caddy from source
 
