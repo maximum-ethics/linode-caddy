@@ -1,6 +1,7 @@
-- name: include testing vars file when testing
+- name: include local TLS file when testing
   include_vars: local_tls.yml
   when: local_tls
+  tags: always
 
 # tips for systemd services: https://github.com/caddyserver/caddy/blob/master/dist/init/linux-systemd/README.md
 - name: install caddy.service file from template

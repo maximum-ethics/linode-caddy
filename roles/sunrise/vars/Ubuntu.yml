@@ -6,3 +6,9 @@ web_server_user: www-data
 
 local_tls: false
 caddy_conf_autosave_dir: /var/www
+
+# https://stackoverflow.com/questions/17570658/how-to-find-my-php-fpm-sock
+# Check /etc/php/7.3/fpm/pool.d/www.conf for location of unix socket
+# should be line like "listen = /run/php/php7.3-fpm.sock"
+php_fpm_unix_socket: /var/run/php/php7.3-fpm.sock
+php_fpm_service_name: php7.3-fpm

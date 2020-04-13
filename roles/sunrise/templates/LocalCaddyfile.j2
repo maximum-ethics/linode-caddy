@@ -39,3 +39,10 @@ www.sunrisemovement.dev {
 sunrisemovement.dev {
 	redir https://www.sunrisemovement.dev
 }
+
+# handcoded Rhode Island site
+ri.sunrisemovement.dev {
+	root * /srv/sunrisemovement.dev/ri/public
+	import boilerplate
+	php_fastcgi unix/{{ php_fpm_unix_socket }}
+}
