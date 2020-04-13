@@ -34,7 +34,7 @@ sunrisemovement.dev {
 ri.sunrisemovement.dev {
 	root * /srv/sunrisemovement.dev/ri/public
 	import boilerplate
-	php_fastcgi unix//var/run/php/php7.3-fpm.sock
+	php_fastcgi unix/{{ php_fpm_unix_socket }}
 }
 
 # handcoded SF Bay website (originally Github Pages)

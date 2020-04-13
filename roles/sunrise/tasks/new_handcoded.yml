@@ -1,17 +1,14 @@
 ---
 # TIP: add the subdomain's A + AAAA records to the Linode control panel first!
 # Otherwise Let's Encrypt can't verify your certificates
-- name: install packages
-  apt:
-    name: '{{ item }}'
-  loop:
-    - git
-    - php-fpm
-    - acl # allows becoming unprivileged user (for git clone)
+- name: include local TLS file when testing
+  include_vars: local_tls.yml
+  when: local_tls
+  tags: always
 
 - name: install Caddyfile from template
   template:
-    src: Caddyfile.j2
+    src: '{{ caddyfile_name }}'
     dest: /etc/caddy/Caddyfile
     owner: root
     group: root
@@ -36,3 +33,9 @@
   become: yes
   become_user: '{{ web_server_user }}'
   tags: hand_git
+
+- name: start and enable php-fpm service
+  service:
+    name: '{{ php_fpm_service_name }}'
+    state: started
+    enabled: yes

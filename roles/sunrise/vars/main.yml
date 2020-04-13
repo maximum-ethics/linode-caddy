@@ -1,5 +1,8 @@
 common_packages:
-  - git
+  - git # check out git repositories
+  - php
+  - php-fpm # serve PHP sites via FastCGI
+  - acl # allows becoming unprivileged user (for git clone)
 
 default_pass: "$6$mysecretsalt$KX2mLFmN1x9gF/urPk7EpzaMJMcY4yoFetMlQw0W9Lm2MJZ8cVI/7dk25PVyb6cLx7IUwTxON5HucMHOdsP.Y0"
 admin_email: skyfaller@gmail.com
@@ -34,22 +37,16 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnUmCzUu/jrZz+T5rVTEJQ73zobj+CixKJS2N9jMkhz nelson@annalise
 sudoing_group: wheel
 
+# vars for caddy_v2.yml
+caddy_archive_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-rc.3/caddy_2.0.0-rc.3_linux_amd64.tar.gz
+# caddy_binary_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.20/caddy2_beta20_linux_amd64
+test_domain: sunrisemovement.dev
+test_subdomain: www
+building_caddy: false
+# caddy_git_version: v2
+caddyfile_name: Caddyfile.j2
+
 handcoded_websites:
   - subdomain: ri
     domain_name: sunrisemovement.dev
     git_repo: https://github.com/michaelkearney55/ri.sunrisemovement.org.git
-  - subdomain: sfbay
-    domain_name: sunrisemovement.dev
-    git_repo: https://github.com/sunrise-bay-area/welcome.git
-  - subdomain: sfbay
-    domain_name: sunrisemovement.org
-    git_repo: https://github.com/sunrise-bay-area/welcome.git
-
-# vars for caddy_v2.yml
-caddy_archive_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-rc.2/caddy_2.0.0-rc.2_linux_amd64.tar.gz
-# caddy_binary_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.20/caddy2_beta20_linux_amd64
-test_domain: sunrisemovement.dev
-test_subdomain: www
-building_caddy: true
-# caddy_git_version: v2
-caddyfile_name: Caddyfile.j2
