@@ -1,4 +1,5 @@
 common_packages:
+  - mosh # better than SSH over crappy/mobile connections
   - git # check out git repositories
   - php
   - php-fpm # serve PHP sites via FastCGI

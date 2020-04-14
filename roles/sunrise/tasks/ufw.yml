@@ -42,6 +42,11 @@
     rule: allow
     port: '443'
     proto: udp
+- name: allow mosh
+  ufw:
+    rule: allow
+    port: 60000:61000
+    proto: udp
 
 # IMPORTANT: UFW rules remain active until you delete them, so simply removing
 # a task from this playbook and running it again will not get rid of a rule

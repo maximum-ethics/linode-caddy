@@ -91,17 +91,6 @@
 
 # TODO: fail2ban?
 
-- name: install mosh # better than SSH over crappy/mobile connections
-  package:
-    name: mosh
-  tags: mosh
-- name: allow mosh traffic through ufw
-  ufw:
-    rule: allow
-    port: 60000:61000
-    proto: udp
-  tags: mosh
-
 - name: customize the message of the day when logging in to the server
   import_tasks: motd.yml
   tags: motd
