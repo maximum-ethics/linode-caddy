@@ -12,7 +12,8 @@
     var: ansible_date_time
   listen: restart cron + print time
 
-- name: start and enable motd-news service (seems to act like a reload of the text?)
+# seems to act like a reload of the text?
+- name: update motd-news service
   service:
     name: motd-news
     state: started
