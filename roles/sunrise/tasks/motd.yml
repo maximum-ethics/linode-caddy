@@ -17,6 +17,10 @@
   notify:
   - update motd-news service
 
+# https://raymii.org/s/tutorials/Disable_dynamic_motd_and_motd_news_spam_on_Ubuntu_18.04.html
+# Unfortunately motd-news now refuses to start if 50-motd-news is unexecutable:
+# https://bugs.launchpad.net/ubuntu/+source/base-files/+bug/1803601
+# So setting ENABLED=0 seems like the best option
 - name: Disable Ubuntu commercial news
   lineinfile:
     path: /etc/default/motd-news
