@@ -5,32 +5,28 @@
     owner: root
     group: root
     mode: "u=rwx,g=rx,o=rx"
+  when: ansible_distribution == 'Ubuntu'
+  notify:
+  - update motd-news service
 
 - name: make 10-help-text unexecutable (remove help text)
   file:
     path: /etc/update-motd.d/10-help-text
     mode: "u=rw,g=r,o=r"
+  when: ansible_distribution == 'Ubuntu'
+  notify:
+  - update motd-news service
 
-- name: make 50-motd-news unexecutable (remove random Ubuntu news)
-  file:
-    path: /etc/update-motd.d/50-motd-news
-    mode: "u=rw,g=r,o=r"
-
-# - name: Ensure 60-nelson-info is installed, replacing landscape info
-#   copy:
-#     src: 60-nelson-info
-#     dest: /etc/update-motd.d/60-nelson-info
-#     owner: root
-#     group: root
-#     mode: "u=rwx,g=rx,o=rx"
+- name: Disable Ubuntu commercial news
+  lineinfile:
+    path: /etc/default/motd-news
+    regexp: '^ENABLED='
+    line: ENABLED=0
+  when: ansible_distribution == 'Ubuntu'
+  notify:
+  - update motd-news service
 
 - name: Ensure your_ip.sh is installed, telling you your IP on login
   copy:
     src: your_ip.sh
     dest: /etc/profile.d/your_ip.sh
-
-#- name: make mosh print Ubuntu message of the day
-#  file:
-#    src: /var/run/motd.dynamic
-#    dest: /etc/motd
-#    state: link

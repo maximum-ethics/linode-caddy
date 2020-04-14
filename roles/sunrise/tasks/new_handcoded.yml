@@ -1,10 +1,6 @@
 ---
 # TIP: add the subdomain's A + AAAA records to the Linode control panel first!
 # Otherwise Let's Encrypt can't verify your certificates
-- name: include local TLS file when testing
-  include_vars: local_tls.yml
-  when: local_tls
-  tags: always
 
 - name: install Caddyfile from template
   template:

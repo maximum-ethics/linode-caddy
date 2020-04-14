@@ -12,6 +12,12 @@
     var: ansible_date_time
   listen: restart cron + print time
 
+- name: start and enable motd-news service (seems to act like a reload of the text?)
+  service:
+    name: motd-news
+    state: started
+    enabled: yes
+
 - name: reload caddy
   service:
     name: caddy
@@ -22,7 +28,6 @@
     name: caddy
     state: restarted
   listen: restart caddy
-
 - name: let caddy bind to ports 80 and 443
   capabilities:
     path: /usr/local/bin/caddy

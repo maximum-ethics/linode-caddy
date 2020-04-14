@@ -2,6 +2,11 @@
   include_vars: "{{ ansible_distribution }}.yml"
   tags: always
 
+- name: include local TLS file when testing
+  include_vars: local_tls.yml
+  when: local_tls
+  tags: always
+
 - name: update apt sources + upgrade packages
   apt:
     update_cache: yes
@@ -97,9 +102,9 @@
     proto: udp
   tags: mosh
 
-# - name: customize the message of the day when logging in to the server
-#   import_tasks: motd.yml
-#   tags: motd
+- name: customize the message of the day when logging in to the server
+  import_tasks: motd.yml
+  tags: motd
 
 - name: print OS info
   debug: 

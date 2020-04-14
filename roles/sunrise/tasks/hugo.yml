@@ -1,9 +1,4 @@
 ---
-- name: include local TLS file when testing
-  include_vars: local_tls.yml
-  when: local_tls
-  tags: always
-
 - name: install latest Hugo .deb from Github
   apt:
     deb: "{{ hugo_deb_url }}"
