@@ -46,3 +46,9 @@ ri.sunrisemovement.dev {
 	import boilerplate
 	php_fastcgi unix/{{ php_fpm_unix_socket }}
 }
+
+# Hugo
+philadelphia.sunrisemovement.dev {
+	root * /srv/sunrisemovement.dev/philadelphia/public
+	import boilerplate
+}

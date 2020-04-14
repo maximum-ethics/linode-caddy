@@ -1,6 +1,7 @@
 os_packages:
   - which # to find where executables are installed
   - go # needed to build Caddy from source
+  - hugo # static site generator https://gohugo.io/
 
 sudoing_group: wheel
 web_server_user: http
