@@ -29,6 +29,7 @@ users:
     shell: /bin/bash
     sshKey:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC8KUsTI/jb70nGyvNcyiGezRhBI/jkNlH9yp5otR2aqgj1w+kSKotRScqDXI2UdNFmESHFKQ/RDisYz2j0HigvXbtzbbsUuLOCbX1JSAM3izwKYtJ8zHBQQvO/eaxovXjE+AnzVw5zFYuih4oajX/tB5vRlGhjYhy0jV339t1IywPCa8r0UM4gonQrzucucY4ACah1ZXHmxzlHt5IstBK5NgkQ2CdcOI6bnm2ba8+WThFIuMkh2KMbXdm3HwCazQiX3s25W9CDzwNhyCVCyNdp/0sHhnPwb76RR1vt95eGOT/uz1PhqCMVFYsMZ3TzPTPQyw7TKaaAtmDlVNgliZeehvsvf1sOScvcyVd+vixkWsxRVMgzEZta5zj9vNLb+hi5T4y+flGKudpiUw94NDmeG8pMQkOgfEOa/26J4XLkTZ5rptG6gd4Y+mA3kSmbxVLd36IuMDrvozNkZbUs585bV2C0aSeR4sE6cL17BuG6kZZPsdDHReR6PhrSv+mQ2zj+0npgsVBQOwGsaofBkV2vSyZiLSDo6/mDMo7tTufscc/TkOmykf3J9TlCpahGVE6GuhUawR18WDJzCY8TZyaDz5xFVUsVcIndkcSP5dChJb4+vZAOYgDs5pXoEOooy7MOh4CAVSUy2VxXGQi2PwEcQOBCcYN19MRt0GPQErlchQ== alxrsngrtn@google.com
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJv0PX5qFQEdTM2D9h0WbtBJh1G+GglQPoNLQh8tQw5z alxrsngrtn@gmail.com
   - name: nelson
     password: "{{ default_pass }}"
     shell: /bin/bash

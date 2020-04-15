@@ -64,6 +64,9 @@
     debug:
       var: created_linode.instance.root_pass
       verbosity: 2
+# TODO: rewrite using SSH aliases
+# https://collectiveidea.com/blog/archives/2011/02/04/how-to-ssh-aliases
+# TODO: create Github issues and include those in the code comments
   - name: Remove lines with unwanted occurrences of hostname
     lineinfile:
       dest: /etc/hosts
