@@ -22,6 +22,9 @@
   tags: updategrade
   when: ansible_os_family == 'Archlinux'
 
+# TODO: Also update packages installed from other sources, such as pip
+# linode_create.yml installs linode-api4 from pip
+
 - name: install common packages, shared by all OSes
   package:
     name: '{{ item }}'

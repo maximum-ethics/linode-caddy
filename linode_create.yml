@@ -34,6 +34,7 @@
     # https://pypi.org/project/linode-api4/
     pip:
       name: linode_api4
+      state: latest
   - name: Ensure linode is running (create if missing)
     # linode_v4 Ansible module documentation:
     # https://docs.ansible.com/ansible/latest/modules/linode_v4_module.html
@@ -210,3 +211,5 @@
     command: "chage -d 0 {{ item.name }}"
     when: item.changed
     loop: "{{ new_accounts.results }}"
+# I might have lifted this code from this relevant GitHub issue:
+# https://github.com/ansible/ansible/issues/18917#issuecomment-520254763

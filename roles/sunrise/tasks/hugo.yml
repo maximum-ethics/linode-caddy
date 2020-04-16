@@ -5,7 +5,7 @@
   when: ansible_os_family == 'Debian'
 
 # TODO: Create our own apt repository for Caddy and Hugo
-# Or possibly take over the packages in Arch to make sure they stay up to date
+# Or possibly help maintain the packages in Arch to make sure they stay up to date
 
 - name: install Caddyfile from template
   template:
@@ -64,6 +64,7 @@
   debug:
     var: config_changes
 
+# TODO: fix this failing task: https://github.com/sunrisemovement/devops/issues/11
 - name: decide which sites to reload
   set_fact:
     regen_sites: "{{ theme_changes.results + config_changes.results | default([]) + [item.item] }}"
