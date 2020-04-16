@@ -6,19 +6,29 @@
   - name: include variables
     include_vars:
       file: roles/sunrise/vars/linode.yml
+
   - name: pip install linode_api4
     pip:
       name: linode_api4
+
   - name: Ensure linode is missing (delete if present)
     linode_v4:
       label: "{{ linode_label }}"
       access_token: "{{ linode_token }}"
       state: absent
+
+  # - name: Remove hostname from ~/.ssh/known_hosts
+  #   lineinfile:
+  #     dest: ~/.ssh/known_hosts
+  #     regexp: "^{{ linode_label }}"
+  #     state: absent
+ 
+  # There's a module for that: https://docs.ansible.com/ansible/latest/modules/known_hosts_module.html
   - name: Remove hostname from ~/.ssh/known_hosts
-    lineinfile:
-      dest: ~/.ssh/known_hosts
-      regexp: "^{{ linode_label }}"
+    known_hosts:
+      name: '{{ linode_label }}'
       state: absent
+      
 # TODO: add task for manual confirmation
 # We don't want to destroy servers by accident
 # https://github.com/sunrisemovement/devops/issues/3
