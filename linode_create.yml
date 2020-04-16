@@ -64,9 +64,11 @@
     debug:
       var: created_linode.instance.root_pass
       verbosity: 2
+# TODO: create Github issues and include those in the code comments
+# https://github.com/sunrisemovement/devops/issues/2
 # TODO: rewrite using SSH aliases
 # https://collectiveidea.com/blog/archives/2011/02/04/how-to-ssh-aliases
-# TODO: create Github issues and include those in the code comments
+# https://github.com/sunrisemovement/devops/issues/4
   - name: Remove lines with unwanted occurrences of hostname
     lineinfile:
       dest: /etc/hosts
@@ -86,10 +88,12 @@
       state: present
     become: true
 # TODO: Clear known_hosts - OK this has been done in linode_destroy
+# https://github.com/sunrisemovement/devops/issues/5
 
 
 # tasks on remote server once it has been created, as root #
 # TODO: DISABLE RUNNING THESE TASKS IF SERVER ALREADY EXISTED (how tho?)
+# https://github.com/sunrisemovement/devops/issues/9
 - hosts: arch
   gather_facts: no
   vars:
@@ -162,17 +166,17 @@
     loop: "{{ users|subelements('sshKey') }}"
     tags: authorized_keys
 
-
   handlers:
   - name: restart ssh
     service:
       name: sshd
       state: restarted
 
+
 # tasks on remote server once it has been created, as your own user #
 - hosts: arch
   become: yes
-  vars: # TODO: hide password somehow, this is stupid
+  vars: # TODO: hide password somehow, this is stupid - https://github.com/sunrisemovement/devops/issues/6
     ansible_become_pass: "correct zebra battery staple"
   tasks:
   - name: Disallow root SSH access
@@ -183,8 +187,13 @@
       state: present
     notify:
     - restart ssh
-    # change passwords last, you can't do anything else afterwards!
+# change passwords last, you can't do anything else afterwards!
     - force change password
+# note that handlers are executed in the order they are written down, NOT in the order they are notified
+# https://stackoverflow.com/questions/35130051/order-of-notify-handlers
+# TODO: make sure handlers execute in the correct order, by e.g. calling the 2nd handler from the first handler
+# don't rely on the order in which handlers are written down, which seems fragile
+# https://github.com/sunrisemovement/devops/issues/7
 
   handlers:
   - name: restart ssh
@@ -193,9 +202,10 @@
       state: restarted
 
 # IMPORTANT TODO:
-# This currently requires the user's entry to be last in user_vars.yml!
-# Otherwise it can't finish b/c the user hasn't updated their password
+# This handler currently requires the user's entry to be last in the list of users!
+# Otherwise it can't finish b/c the user hasn't updated their password yet
 # There must be some better way to do this that is less Nelson-specific
+# https://github.com/sunrisemovement/devops/issues/8
   - name: force change password
     command: "chage -d 0 {{ item.name }}"
     when: item.changed

@@ -19,5 +19,6 @@
       dest: ~/.ssh/known_hosts
       regexp: "^{{ linode_label }}"
       state: absent
-# TODO: add task for manual confirmation? 
+# TODO: add task for manual confirmation
 # We don't want to destroy servers by accident
+# https://github.com/sunrisemovement/devops/issues/3

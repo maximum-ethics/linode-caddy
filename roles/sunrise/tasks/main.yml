@@ -59,6 +59,7 @@
   tags: authorized_keys
 
 # first, put local_hostname in ansible inventory
+# linode_create.yml does this automatically, but (for now) only for the person creating the server
 - name: set system's hostname
   hostname:
     name: "{{ local_hostname }}"
