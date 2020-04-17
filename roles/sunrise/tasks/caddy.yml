@@ -152,7 +152,7 @@
     owner: '{{ web_server_user }}'
     group: '{{ web_server_user }}'
     mode: u=rwx,g=rx,o=rx
-    
+
 - name: start and enable caddy service
   service:
     name: caddy

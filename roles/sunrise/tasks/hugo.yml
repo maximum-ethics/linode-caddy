@@ -33,15 +33,15 @@
     var: created_directories
     verbosity: 1
 
-  # item.item is used because we're iterating over the registered results from creating the directories.
-  # see https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html#registering-variables-with-a-loop for results structure
+# item.item is used because we're iterating over the registered results from creating the directories.
+# see https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html#registering-variables-with-a-loop for results structure
 
-  # Create Site Directories task loops over hugo_sites to make directories for each element of the hugo_sites array (a Hugo website). 
-  # The output of each loop iteration is stored in created_directories.
-  # Each output item in created_directories has a subelement named item, 
-  # which stores the hugo_sites element that the Create Site Directories task was run on.
-  # Thus, in this task, item refers to the loop output collection of metadata, 
-  # item.item is the subelement that contains the hugo_sites element previously described.
+# Create Site Directories task loops over hugo_sites to make directories for each element of the hugo_sites array (a Hugo website). 
+# The output of each loop iteration is stored in created_directories.
+# Each output item in created_directories has a subelement named item, 
+# which stores the hugo_sites element that the Create Site Directories task was run on.
+# Thus, in this task, item refers to the loop output collection of metadata, 
+# item.item is the subelement that contains the hugo_sites element previously described.
 - name: create new Hugo site
   command: hugo new site /srv/{{ item.item.domain }}/{{ item.item.subdomain }}/public
   become: yes

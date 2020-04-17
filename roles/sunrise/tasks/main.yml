@@ -16,7 +16,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: update sources + upgrade packages
-  pacman: 
+  pacman:
     update_cache: yes
     upgrade: yes
   tags: updategrade
@@ -84,7 +84,7 @@
     name: America/New_York
     # name: America/Los_Angeles
   tags: timezone
-  notify: 
+  notify:
     - restart cron + print time
 
 - name: configure firewall using UFW
@@ -100,7 +100,7 @@
   tags: motd
 
 - name: print OS info
-  debug: 
+  debug:
     msg: This server is running the {{ ansible_distribution }} distribution in the {{ ansible_os_family }} OS family.
     verbosity: 1
   tags: caddy_v2

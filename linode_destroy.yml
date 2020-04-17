@@ -22,13 +22,13 @@
   #     dest: ~/.ssh/known_hosts
   #     regexp: "^{{ linode_label }}"
   #     state: absent
- 
+
   # There's a module for that: https://docs.ansible.com/ansible/latest/modules/known_hosts_module.html
   - name: Remove hostname from ~/.ssh/known_hosts
     known_hosts:
       name: '{{ linode_label }}'
       state: absent
-      
+
 # TODO: add task for manual confirmation
 # We don't want to destroy servers by accident
 # https://github.com/sunrisemovement/devops/issues/3
