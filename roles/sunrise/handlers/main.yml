@@ -41,15 +41,19 @@
 # https://github.com/sunrisemovement/devops/issues/11
 - name: run Hugo if theme changed
   command: hugo
+  become: yes
+  become_user: '{{ web_server_user }}'
   args:
-    chdir: /srv/{{ item.item.domain }}/{{ item.item.subdomain }}/public
+    chdir: /srv/{{ item.item.domain }}/{{ item.item.subdomain }}
   loop: '{{ theme_changes.results }}'
   when: item.changed
   # listen: re-generate Hugo site
 - name: run Hugo if config changed
   command: hugo
+  become: yes
+  become_user: '{{ web_server_user }}'
   args:
-    chdir: /srv/{{ item.item.domain }}/{{ item.item.subdomain }}/public
+    chdir: /srv/{{ item.item.domain }}/{{ item.item.subdomain }}
   loop: '{{ config_changes.results }}'
   when: item.changed
   # listen: re-generate Hugo site

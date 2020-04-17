@@ -20,7 +20,7 @@
 # Create site directories
 - name: create srv directory if it doesn't exist
   file:
-    path: /srv/{{ item.domain }}/{{ item.subdomain }}/public
+    path: /srv/{{ item.domain }}/{{ item.subdomain }}
     state: directory
     mode: 0755
     owner: '{{ web_server_user }}'
@@ -43,7 +43,7 @@
 # Thus, in this task, item refers to the loop output collection of metadata, 
 # item.item is the subelement that contains the hugo_sites element previously described.
 - name: create new Hugo site
-  command: hugo new site /srv/{{ item.item.domain }}/{{ item.item.subdomain }}/public
+  command: hugo new site /srv/{{ item.item.domain }}/{{ item.item.subdomain }}
   become: yes
   become_user: '{{ web_server_user }}'
   when: item.changed
@@ -52,7 +52,7 @@
 - name: clone git theme
   git:
     repo: '{{ item.theme_repo }}'
-    dest: /srv/{{ item.domain }}/{{ item.subdomain }}/public/themes/{{ item.theme_name }}
+    dest: /srv/{{ item.domain }}/{{ item.subdomain }}/themes/{{ item.theme_name }}
   become: yes
   become_user: '{{ web_server_user }}'
   loop: '{{ hugo_sites }}'
@@ -62,7 +62,7 @@
 - name: create config.toml file from template
   template:
     src: config.toml.j2
-    dest: /srv/{{ item.domain }}/{{ item.subdomain }}/public/config.toml
+    dest: /srv/{{ item.domain }}/{{ item.subdomain }}/config.toml
     owner: '{{ web_server_user }}'
     group: '{{ web_server_user }}'
   loop: '{{ hugo_sites }}'
