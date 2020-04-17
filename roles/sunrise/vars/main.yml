@@ -12,17 +12,17 @@ users:
   - name: cgalo
     password: "{{ default_pass }}"
     shell: /bin/bash
-    sshKey: 
+    sshKey:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHIW0Q+UmqzgscnENf/gRVJLnxGVoEMynhLKaj+vQSlBWDB956er6u74p9LhOn+Iqcc6M7Q3bDO/1comnYmiGSmxNS/wbRPCuYaI4wFpNWtSWmNKeoqDUDxBVUtPPF+jDJgsNr2caPE0HcLg+lq3u1yVuUreyEdePP93WfpDmrMhPwORgeL46hiGcN+eF9EL0xFCGiAHjcSZpSx5NxUMiD/7FzNtLrWcEMx+egtwq+jk5+6m0U1P5zR+pcX4qLnmGdxkdQdSKjfMZJB/cGPyNd1s7y1TnlSUsde/SI2hDDqU0tScrTRcp9AC3Jn/QHUjVQGZnHpEW70NUr8WGVIlJkAFhEaY+20Rc05Q8B8eRSdCbz8qDmw9q+a7Qqm2nBuee5EBDmjteqQ5e58k5Slr94pFPIQVxruFWNDlx+XujINGgFut3u1U+niS9ckjFHhOc+tw4Vpd7pcONg4dwafUw+FrxQjKpmRPolFRTHMN0ORnMMr7mUQryaNW9wJxqTOtC2DOV+1OFFoKtrDtZrCRtRMYamwgsbbU7WlwQ/G+5oJOsWGA5DO4ZAFFYRSVDmlD6k9WaAqzvk8RJblJGLamki1KteYRDe0cHW/jfqsJpc0Ifto1dc0IC7zOQxAGkB2twqpXD7DwqkX4nURgasa5DKBkXvNy+ocgosF/5u1cczcw== christian.galo@outlook.com # noqa 204 - turn off Ansible linter
   - name: wilsonbr
     password: "{{ default_pass }}"
     shell: /bin/bash
-    sshKey: 
+    sshKey:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKXBle8S/TLNfjlWAOCJ5UlWzVeVr77V5ZsksVJI6wB wilsonbr@Cthulhu
   - name: lukewestby
     password: "{{ default_pass }}"
     shell: /bin/bash # zsh is not installed yet, sorry
-    sshKey: 
+    sshKey:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCsDNRr3/nL+KgnFX1V/VPekYfASE+ePWRiTCOVlU0roRc0r3ArNNXHlax607tSLinN/EuGuS8kOmBhfK4Zbx12EY84gb/LLrZI9UhLnCMwv21q/3agY0rfyNxqdYXWk2dPhOSGAsJMuOEWX1OLy0Y03yKyjHInVy2Ze5ANs0F5m0e2efkGz17MPBLgRyqE+Hv6EZIXU4diItSpLU+illdMdP87SZB/7qYwW3+9gnfPRPzt/U30JSgzabFqFbfilUHq9q8sDlAbfkIL1aoensoAtEm7wq2vSXcHRFzbVgE86d10wRbqCH8SdpZ5unMzDdAXBq4ccFDBBmqwFyD8o/BYrOGceLOSvkCD5+ZjDucreUlPNHnhGxct/IyMsFqOFsaX5YS0G16LNd6vZN5oY9CdX/BnSbCXSAde0FNIMxZKXozcc8CdxhC3wAtdaOqCT52fbgd0TcGcCVXH5t4yslRGK43bg4thZcbiragsjNAIU9jIv5mTQ/cGUJ5btC8eL2GtMDyFCe/XAxnkjHhiIb6hiuKTZL1mHso48iRqL2Ks/qduQzYZEtrdMUQh67a8otl2lLIJeccO+6Wbh6ycbS5Gv7X0MJa1Hr7QIErUXNWPm4OO5CrRgE7xryobJE0+Mzx+2/XQpnYtsxiXA46jgucBXvsGVo/G32cSMGKayRmRuQ== lukewestby1@gmail.com # noqa 204 - turn off Ansible linter
   - name: alxrsngrtn
     password: "{{ default_pass }}"
@@ -33,7 +33,7 @@ users:
   - name: nelson
     password: "{{ default_pass }}"
     shell: /bin/bash
-    sshKey: 
+    sshKey:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJcoG9tZKULXW2IQ+5MsZ3vgUBJ5C3uDbbG381S1Cjdl nelson@Valence.local
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHhOEJBnYlsQ/+6T3L0GxagZdCCCgqOaGFtgh5agZB4P u0_a278@localhost
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnUmCzUu/jrZz+T5rVTEJQ73zobj+CixKJS2N9jMkhz nelson@annalise
@@ -58,5 +58,10 @@ hugo_sites:
   - title: Sunrise Movement Philadelphia
     domain: sunrisemovement.dev
     subdomain: philadelphia
+    theme_repo: https://github.com/sunrisemovement/hugo-black-and-light-theme.git
+    theme_name: black-and-light
+  - title: Sunrise Movement Houston
+    domain: sunrisemovement.dev
+    subdomain: houston
     theme_repo: https://github.com/sunrisemovement/hugo-black-and-light-theme.git
     theme_name: black-and-light

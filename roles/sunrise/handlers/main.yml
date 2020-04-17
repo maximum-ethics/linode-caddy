@@ -36,8 +36,20 @@
     state: present
   listen: restart caddy
 
-- name: regenerate hugo
+# TODO: this handler runs twice if both theme and config changed
+# should only run once
+# https://github.com/sunrisemovement/devops/issues/11
+- name: re-generate Hugo if theme changed
   command: hugo
   args:
-    chdir: /srv/{{ domain_name }}
-    creates: /srv/{{ domain_name }}/public
+    chdir: /srv/{{ item.item.domain }}/{{ item.item.subdomain }}/public
+  loop: '{{ theme_changes.results }}'
+  when: item.changed
+  listen: re-generate Hugo site
+- name: re-generate Hugo if config changed
+  command: hugo
+  args:
+    chdir: /srv/{{ item.item.domain }}/{{ item.item.subdomain }}/public
+  loop: '{{ config_changes.results }}'
+  when: item.changed
+  listen: re-generate Hugo site
