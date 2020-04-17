@@ -57,7 +57,7 @@
   become_user: '{{ web_server_user }}'
   loop: '{{ hugo_sites }}'
   register: theme_changes
-  notify: re-generate Hugo site
+  notify: run Hugo if theme changed
 
 - name: create config.toml file from template
   template:
@@ -67,7 +67,7 @@
     group: '{{ web_server_user }}'
   loop: '{{ hugo_sites }}'
   register: config_changes
-  notify: re-generate Hugo site
+  notify: run Hugo if config changed
 
 - name: print theme_changes
   debug:
