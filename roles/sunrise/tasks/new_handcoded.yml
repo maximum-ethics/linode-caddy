@@ -19,13 +19,17 @@
     mode: 0755
     owner: '{{ web_server_user }}'
     group: '{{ web_server_user }}'
-  loop: "{{ handcoded_websites }}"
+  loop: '{{ handcoded_websites }}'
 
 - name: clone git repository for subdomain
   git:
-    repo: "{{ item.git_repo }}"
+    repo: '{{ item.git_repo }}'
     dest: /srv/{{ item.domain_name }}/{{ item.subdomain }}/public/
-  loop: "{{ handcoded_websites }}"
+# Let's include parameters for sites that have them, and ignore them for sites that don't
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#defaulting-undefined-variables
+    version: '{{ item.version | default(omit) }}'
+    depth: '{{ item.depth | default(omit) }}'
+  loop: '{{ handcoded_websites }}'
   become: yes
   become_user: '{{ web_server_user }}'
   tags: hand_git

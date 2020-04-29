@@ -1,2 +1,12 @@
 # vars for caddy_v2.yml
 caddyfile_name: LocalCaddyfile.j2
+
+handcoded_websites:
+  - subdomain: ri
+    domain_name: sunrisemovement.dev
+    git_repo: https://github.com/michaelkearney55/ri.sunrisemovement.org.git
+  - subdomain: sfbay
+    domain_name: sunrisemovement.org
+    git_repo: https://github.com/sunrise-bay-area/sunrise-bay-area.git
+    version: gh-pages
+    depth: 3
