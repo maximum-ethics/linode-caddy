@@ -54,11 +54,6 @@ handcoded_websites:
   - subdomain: ri
     domain_name: sunrisemovement.dev
     git_repo: https://github.com/michaelkearney55/ri.sunrisemovement.org.git
-  - subdomain: sfbay
-    domain_name: sunrisemovement.org
-    git_repo: https://github.com/sunrise-bay-area/sunrise-bay-area.git
-    version: gh-pages
-    depth: 3
 
 hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.69.2/hugo_0.69.2_Linux-64bit.deb
 hugo_sites:
