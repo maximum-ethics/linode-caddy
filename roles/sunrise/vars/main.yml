@@ -42,7 +42,6 @@ users:
 sudoing_group: wheel
 
 # vars for caddy_v2.yml
-caddy_archive_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-rc.3/caddy_2.0.0-rc.3_linux_amd64.tar.gz
 # caddy_binary_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.20/caddy2_beta20_linux_amd64
 test_domain: sunrisemovement.dev
 test_subdomain: www
@@ -55,7 +54,7 @@ handcoded_websites:
     domain_name: sunrisemovement.dev
     git_repo: https://github.com/michaelkearney55/ri.sunrisemovement.org.git
 
-hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.69.2/hugo_0.69.2_Linux-64bit.deb
+hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.70.0/hugo_0.70.0_Linux-64bit.deb
 hugo_sites:
   - title: Sunrise Movement Philadelphia
     domain: sunrisemovement.dev

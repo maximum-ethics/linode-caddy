@@ -1,14 +1,20 @@
-# tips for systemd services: https://github.com/caddyserver/caddy/blob/master/dist/init/linux-systemd/README.md
+# tips for systemd services: https://caddyserver.com/docs/install#debian-ubuntu-raspbian
+# We'll base ours off of https://github.com/caddyserver/dist/blob/master/init/caddy.service
 - name: install caddy.service file from template
   template:
     src: caddy.service.j2
     dest: /etc/systemd/system/caddy.service
     owner: root
     group: root
-    mode: u=rwx,g=rx,o=rx
     # Arch Linux thinks this is an executable and won't run without x
+    mode: u=rwx,g=rx,o=rx
+# TODO: make sure handlers run in correct order: 
+# https://github.com/sunrisemovement/devops/issues/7
   notify:
-    - reload caddy
+    - daemon-reload service caddy
+    - restart caddy
+  tags: caddy_service
+    
 - name: create /etc/caddy directory
   file:
     path: /etc/caddy
@@ -62,6 +68,25 @@
   notify:
     - reload caddy
   tags: test_website
+
+- name: add Caddy deb repository
+  apt_repository: # https://caddyserver.com/docs/install#debian-ubuntu-raspbian
+    # we are disabling signature verification temporarily, which is not secure:
+    # https://news.ycombinator.com/item?id=23074727
+    # TODO: fix this when a better solution is available
+    repo: deb [trusted=yes] https://apt.fury.io/caddy/ /
+    filename: caddy-fury
+  when: # list of conditions = AND
+    - not building_caddy
+    - ansible_os_family == 'Debian'
+- name: install Caddy from apt
+  apt: 
+    name: caddy 
+  notify:
+    - restart caddy
+  when: # list of conditions = AND
+    - not building_caddy
+    - ansible_os_family == 'Debian'
 
 # Download binary from GitHub and install it
 - name: download + extract caddy binary

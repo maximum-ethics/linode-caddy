@@ -1,42 +1,38 @@
+# caddy.service
+#
+# For using Caddy with a config file.
+#
+# Make sure the ExecStart and ExecReload commands are correct
+# for your installation.
+#
+# See https://caddyserver.com/docs/install for instructions.
+#
+# WARNING: This service does not use the --resume flag, so if you
+# use the API to make changes, they will be overwritten by the
+# Caddyfile next time the service is restarted. If you intend to
+# use Caddy's API to configure it, add the --resume flag to the
+# `caddy run` command or use the caddy-api.service file instead.
+
 [Unit]
-Description=Caddy v2 web server
+Description=Caddy
 Documentation=https://caddyserver.com/docs/
-After=network-online.target
-Wants=network-online.target systemd-networkd-wait-online.service
+After=network.target
 
 [Service]
-#Restart=on-abnormal
-
-; Do not allow the process to be restarted in a tight loop. If the
-; process fails to start, something critical needs to be fixed.
-;StartLimitIntervalSec=14400
-;StartLimitBurst=10
-
 ; User and group the process will run as.
 User={{ web_server_user }}
 Group={{ web_server_user }}
-
 ; caddy command assumes the caddyfile adapter if filename starts with Caddyfile
-ExecStart=/usr/local/bin/caddy run --config /etc/caddy/Caddyfile
-ExecReload=/usr/local/bin/caddy reload --config /etc/caddy/Caddyfile
-
-; Use graceful shutdown with a reasonable timeout
-ExecStop=/usr/local/bin/caddy stop
-KillMode=mixed
-KillSignal=SIGQUIT
+ExecStart={{ caddy_binary_location }} run --environ --config /etc/caddy/Caddyfile
+ExecReload={{ caddy_binary_location }} reload --config /etc/caddy/Caddyfile
 TimeoutStopSec=5s
-
-; Limit the number of file descriptors; see `man systemd.exec` for more limit settings.
+; Raise limit for file descriptors; see `man systemd.exec` for more limit settings.
 LimitNOFILE=1048576
-; Unmodified caddy is not expected to use more than that.
-LimitNPROC=4096
-
-; The following additional security directives only work with systemd v229 or later.
-; They further restrict privileges that can be gained by caddy. Uncomment if you like.
+LimitNPROC=512
+PrivateTmp=true
+ProtectSystem=full
 ; Note that you may have to add capabilities required by any plugins in use.
-CapabilityBoundingSet=CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
 
 [Install]
 WantedBy=multi-user.target

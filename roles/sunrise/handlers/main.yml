@@ -19,6 +19,11 @@
     state: started
     enabled: yes
 
+- name: daemon-reload service caddy
+  systemd:
+    name: caddy
+    daemon_reload: yes
+
 - name: reload caddy
   service:
     name: caddy
