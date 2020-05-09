@@ -14,21 +14,45 @@
     - daemon-reload service caddy
     - restart caddy
   tags: caddy_service
+
+- name: save info about web server user (including home dir)
+  user:
+    name: '{{ web_server_user }}'
+  register: webserver_user_registered
+  tags: webserver_user_registered
+- name: print home dir for web server user
+  debug:
+    var: webserver_user_registered.home
+    # verbosity: 1
+  tags: webserver_user_registered
     
-- name: create /etc/caddy directory
-  file:
-    path: /etc/caddy
-    state: directory
-    owner: '{{ web_server_user }}'
-    group: '{{ web_server_user }}'
-    mode: '0755'
+# Info on data directory location defaults (which we override with our Caddyfile):
+# https://caddyserver.com/docs/conventions#data-directory
+# - name: create data directory # it's not just tls certificates
+#   file:
+#     path: /etc/caddy/storage
+#     state: directory
+#     owner: '{{ web_server_user }}'
+#     group: '{{ web_server_user }}'
+#     mode: '0755'
+
+# Info on data directory location defaults:
+# https://caddyserver.com/docs/conventions#data-directory
 - name: create data directory # it's not just tls certificates
   file:
-    path: /etc/caddy/storage
+    path: '{{ caddy_storage_dir }}'
     state: directory
     owner: '{{ web_server_user }}'
     group: '{{ web_server_user }}'
     mode: '0755'
+
+# - name: copy contents of old data directory to new data dir
+#   synchronize:
+#     src: /etc/caddy/storage
+#     dest: '{{ caddy_storage_dir }}'
+#   delegate_to: '{{ inventory_hostname }}'
+
+# defaults: https://caddyserver.com/docs/conventions#configuration-directory
 - name: create folder for config autosave
   file:
     path: '{{ caddy_conf_autosave_dir }}'
@@ -177,6 +201,12 @@
     owner: '{{ web_server_user }}'
     group: '{{ web_server_user }}'
     mode: u=rwx,g=rx,o=rx
+
+# - name: install Caddy local CA cert
+#   command: '{{ caddy_binary_location }} trust'
+#   tags: caddy_trust
+#   notify:
+#     - restart caddy
 
 - name: start and enable caddy service
   service:

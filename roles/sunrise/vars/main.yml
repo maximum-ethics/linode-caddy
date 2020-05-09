@@ -42,6 +42,8 @@ users:
 sudoing_group: wheel
 
 # vars for caddy_v2.yml
+caddy_storage_dir: '{{ webserver_user_registered.home }}/.local/share/caddy'
+caddy_conf_autosave_dir: '{{ webserver_user_registered.home }}/.config/caddy'
 # caddy_binary_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.20/caddy2_beta20_linux_amd64
 test_domain: sunrisemovement.dev
 test_subdomain: www

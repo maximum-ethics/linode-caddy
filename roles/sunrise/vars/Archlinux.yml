@@ -1,5 +1,6 @@
 os_packages:
   - which # to find where executables are installed
+  - rsync # dependency for "synchronize" Ansible module
   - go # needed to build Caddy from source
   - hugo # static site generator https://gohugo.io/
 
@@ -7,7 +8,7 @@ sudoing_group: wheel
 web_server_user: http
 
 local_tls: true
-caddy_conf_autosave_dir: /srv/http/.config/caddy
+# caddy_conf_autosave_dir: /srv/http/.config/caddy
 caddy_archive_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0/caddy_2.0.0_linux_amd64.tar.gz
 caddy_binary_location: /usr/local/bin/caddy
 
