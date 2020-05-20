@@ -1,6 +1,6 @@
 ---
 
-- hosts: sunrise
+- hosts: greta
   become: yes
   roles:
     - sunrise

@@ -13,16 +13,16 @@
 # start site blocks
 
 # public test page
-brockovich.sunrisemovement.dev {
-	root * /srv/sunrisemovement.dev/www/public/
-	import boilerplate
-	# https://caddyserver.com/docs/caddyfile/directives/templates
-	# can't use default double curly braces b/c Ansible uses them
-	templates {
-		between (( ))
-	}
-	tls	{{ admin_email }}
-}
+#brockovich.sunrisemovement.dev {
+#	root * /srv/sunrisemovement.dev/www/public/
+#	import boilerplate
+#	# https://caddyserver.com/docs/caddyfile/directives/templates
+#	# can't use default double curly braces b/c Ansible uses them
+#	templates {
+#		between (( ))
+#	}
+#	tls	{{ admin_email }}
+#}
 
 # local test page
 www.sunrisemovement.dev {

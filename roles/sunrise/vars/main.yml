@@ -56,7 +56,7 @@ handcoded_websites:
     domain_name: sunrisemovement.dev
     git_repo: https://github.com/michaelkearney55/ri.sunrisemovement.org.git
 
-hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.70.0/hugo_0.70.0_Linux-64bit.deb
+hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.71.0/hugo_0.71.0_Linux-64bit.deb
 hugo_sites:
   - title: Sunrise Movement Philadelphia
     domain: sunrisemovement.dev

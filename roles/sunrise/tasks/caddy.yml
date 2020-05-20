@@ -23,9 +23,13 @@
 - name: print home dir for web server user
   debug:
     var: webserver_user_registered.home
-    # verbosity: 1
+    verbosity: 1
   tags: webserver_user_registered
-    
+- name: print caddy storage directory
+  debug:
+    var: caddy_storage_dir
+    verbosity: 1
+  tags: webserver_user_registered
 # Info on data directory location defaults (which we override with our Caddyfile):
 # https://caddyserver.com/docs/conventions#data-directory
 # - name: create data directory # it's not just tls certificates
