@@ -1,4 +1,5 @@
 os_packages:
+  - exa # ls alternative
   - which # to find where executables are installed
   - rsync # dependency for "synchronize" Ansible module
   - go # needed to build Caddy from source

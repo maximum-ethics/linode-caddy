@@ -1,4 +1,7 @@
 common_packages:
+  - fish # Nelson's favorite shell
+  - zsh # Luke likes this shell
+  - bat # cat alternative  
   - mosh # better than SSH over crappy/mobile connections
   - git # check out git repositories
   - php
@@ -20,7 +23,6 @@ users:
     sshKey:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKXBle8S/TLNfjlWAOCJ5UlWzVeVr77V5ZsksVJI6wB wilsonbr@Cthulhu
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMSoD1EE/VdDb9mBYDsebsIVowqhfvNWYhe2YBcfNeTo wilsonbr@cthulu2
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDbXISyCT7vq+dHUptKXz0j6vQ4/7QSxvjOyN4o+n7DNch3edl6OMS5VHMF6lhQ33cB4qSb7WOlTJEN6uzi3grtpCYaUWMkHcA1xzuWlOw0XrW4OVN+0lp+bBmyBpHwa33jDwqYjgHTNdUTloB76bfCmZtL6iATO5M59UWJ1m5I0gQgxkkFxdiKadrLkpRG9o4BJxHRBNiAj/uM9mM+toOgTKSG4BP2u30svm97u/YKxpQ3WxdxtZ3K7wh8dmZ0+csc+saqGUJpRz+M9hBWndBHQHGGr2mqad+BsAef5SJsWIQXywzZUwmtypUL5kWKCllILk5LraIyGIHMOQnzS91tNL0p3kixnF4VKaNonTg67VR024gHnnvycygNVZQoO3DQZXvV4USB5ibC4biPZssxbgoNkLhYm/hQSry1fIwAulRd0sdlNF+LfDUywaM0mAgG7FYfnumVkZdrJ9J+ExBl/9GuYs89dzV4UyWpzju+9Jh2fuRqX11ZD0H3k7gQhicBUD/nqmKk4ZK3R5MIta5U+O3cg6F4bwXq//gEEa4+pQz+eeDkZn/eeHmjY3KOyQ1/0P4jqkY93ETdJr8ComTdiPBxCtf9q6DPViJq49D1/FlJ0QukXsLKC9cQvZ+XzQpucgPXXZ3TWk45kFb5xoyRpXZP2WIYJOnq0JvJtqcSJw== wilsonbr@cthulu2
   - name: lukewestby
     password: "{{ default_pass }}"
     shell: /bin/bash # zsh is not installed yet, sorry
@@ -37,8 +39,8 @@ users:
     shell: /bin/bash
     sshKey:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJcoG9tZKULXW2IQ+5MsZ3vgUBJ5C3uDbbG381S1Cjdl nelson@Valence.local
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHhOEJBnYlsQ/+6T3L0GxagZdCCCgqOaGFtgh5agZB4P u0_a278@localhost
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnUmCzUu/jrZz+T5rVTEJQ73zobj+CixKJS2N9jMkhz nelson@annalise
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKg8msSyWifH18t2JmqV36UlarCg+HSHQ8LIXC3qykgC Nelson's Pixel 3a XL
 sudoing_group: wheel
 
 # vars for caddy_v2.yml
