@@ -8,5 +8,5 @@
       debug: 
         msg: >-
           This server is running the {{ ansible_distribution }} distribution,
-          version {{ ansible_distribution_version }},
+          version {{ ansible_distribution_version }} {{ ansible_distribution_release }},
           in the {{ ansible_os_family }} OS family.
