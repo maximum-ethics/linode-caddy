@@ -108,8 +108,8 @@
     - not building_caddy
     - ansible_os_family == 'Debian'
 - name: install Caddy from apt
-  apt: 
-    name: caddy 
+  apt:
+    name: caddy
   notify:
     - restart caddy
   when: # list of conditions = AND

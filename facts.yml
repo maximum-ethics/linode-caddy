@@ -5,7 +5,7 @@
 
   tasks:
     - name: print OS info
-      debug: 
+      debug:
         msg: >-
           This server is running the {{ ansible_distribution }} distribution,
           version {{ ansible_distribution_version }} {{ ansible_distribution_release }},

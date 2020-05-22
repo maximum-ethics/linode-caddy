@@ -11,6 +11,6 @@
   become: yes
   tasks:
   - name: Run the equivalent of "pacman -Syu", updating sources and packages
-    pacman: 
+    pacman:
       update_cache: yes
       upgrade: yes

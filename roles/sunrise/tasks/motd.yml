@@ -17,6 +17,13 @@
   notify:
   - update motd-news service
 
+- name: ensure 50-help-text is executable
+  file:
+    path: /etc/update-motd.d/50-motd-news
+    mode: "u=rwx,g=rx,o=rx"
+  when: ansible_distribution == 'Ubuntu'
+  notify:
+  - update motd-news service
 # https://raymii.org/s/tutorials/Disable_dynamic_motd_and_motd_news_spam_on_Ubuntu_18.04.html
 # Unfortunately motd-news now refuses to start if 50-motd-news is unexecutable:
 # https://bugs.launchpad.net/ubuntu/+source/base-files/+bug/1803601
