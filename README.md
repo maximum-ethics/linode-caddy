@@ -1,8 +1,7 @@
-# Sunrise Movement devops
-Ansible role that will (eventually) automatically set up a web server for [Sunrise Movement](https://www.sunrisemovement.org/), currently using a virtual server on [Linode](https://www.linode.com/).
+Ansible role that automatically sets up a web server running Caddy, using a virtual server on [Linode](https://www.linode.com/). This is currently written for the specific websites Maximum Ethics is hosting, and will have to be generalized later.
 
 ## Steps to set up server on Linode
-First, ask Nelson for an account on the Sunrise Linode, so that you can create an API token. Then:
+First, ask Nelson for an account on Linode, so that you can create an API token. Then:
 
 ### Create an inventory file for Ansible
 
