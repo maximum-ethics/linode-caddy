@@ -1,3 +1,19 @@
+- name: add hosts group to ansible hosts file
+  lineinfile:
+    path: "{{ inventory_directory }}/hosts"
+    line: '[{{ hosts_group }}]'
+- name: Remove lines with unwanted occurrences of hostname
+  lineinfile:
+    path: "{{ inventory_directory }}/hosts"
+    regexp: '^{{ linode_label }}$'
+    state: absent
+  become: true
+- name: add hostname to ansible hosts file
+  lineinfile:
+    path: "{{ inventory_directory }}/hosts"
+    insertafter: '[{{ hosts_group }}]'
+    line: '{{ linode_label }}'
+
 # put local_hostname in /usr/local/etc/ansible/host_vars/[servername]
 - name: create host_vars directory for this hostname
   file:

@@ -1,3 +1,4 @@
+hosts_group: maxethics
 # API documentation: https://developers.linode.com/api/v4/
 linode_label: america
 linode_type: g6-nanode-1 # https://api.linode.com/v4/linode/types
@@ -8,7 +9,7 @@ linode_image: linode/arch # https://api.linode.com/v4/images
 # Give read/write access to at least Linodes, if not everything else
 # Put PAT in ansible hosts file e.g. /usr/local/etc/ansible/hosts
 # under [local:vars] after defining [local] as localhost
-linode_token: "{{ linode_api_key }}"
+linode_token: "{{ maximum_ethics_linode_token }}"
 # password: "{{ pass_attenborough }}"
 
 # put local_hostname in /usr/local/etc/ansible/host_vars/[servername]
