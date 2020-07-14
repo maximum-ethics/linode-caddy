@@ -7,22 +7,21 @@ First, ask Nelson for an account on Linode, so that you can create an API token.
 
 Make an inventory file at '/etc/ansible/hosts' (or /usr/local/etc/ansible/hosts if you use homebrew on Mac to install Ansible) with the following contents:
 ```
-[sunrise]
-attenborough
+[maxethics]
+america
 
 [local]
 localhost
 
 [local:vars]
-pass_attenborough=[get the pass over Signal (for now)]
 ssh_pub_key=[PASTE YOUR OWN PUBLIC KEY]
-sunrise_linode_token=[PASTE YOUR OWN LINODE API TOKEN]
+linode_api_key=[PASTE YOUR OWN LINODE API TOKEN]
 ```
 
 ### Create the Linode server from your computer by connecting to the Linode web API
 `ansible-playbook linode_create.yml --ask-become-pass`
 ### Change your password from our default, so you can log in as yourself (not root)
-`ssh attenborough`
+`ssh america`
 
 Change your password when prompted, and then you will be automatically logged out.
 

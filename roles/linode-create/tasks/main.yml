@@ -1,0 +1,81 @@
+# put local_hostname in /usr/local/etc/ansible/host_vars/[servername]
+- name: create host_vars directory for this hostname
+  file:
+    path: '{{ inventory_directory }}/host_vars/{{ linode_label }}'
+    state: directory
+    mode: 0755
+- name: create vars file for this server
+  file:
+    path: '{{ inventory_directory }}/host_vars/{{ linode_label }}/vars.yml'
+    state: touch
+    mode: 0644
+    modification_time: preserve
+    access_time: preserve
+- name: store hostname in relevant host_vars vars file
+  lineinfile:
+    path: '{{ inventory_directory }}/host_vars/{{ linode_label }}/vars.yml'
+    regexp: '^local_hostname:'
+    line: 'local_hostname: {{ linode_label }}'
+
+# TIP: If Ansible can't find pip, check your inventory for
+# ansible_python_interpreter and see if it's using the right location/version
+# https://stackoverflow.com/questions/57167948/module-failed-to-start-ansible
+- name: pip install linode_api4 # Dependency for linode_v4 module
+  # https://pypi.org/project/linode-api4/
+  pip:
+    name: linode_api4
+- name: Ensure linode is running (create if missing)
+  # linode_v4 Ansible module documentation:
+  # https://docs.ansible.com/ansible/latest/modules/linode_v4_module.html
+  linode_v4:
+    label: "{{ linode_label }}"
+    type: "{{ linode_type }}"
+    region: "{{ linode_region }}"
+    image: "{{ linode_image }}"
+    access_token: "{{ linode_token }}"
+    authorized_keys:
+      - "{{ ssh_pub_key }}"
+    state: present
+  register: created_linode
+
+- name: print ipv4 address
+  debug:
+    var: created_linode.instance.ipv4
+    verbosity: 1
+- name: print ipv6 address
+  debug:
+    var: created_linode.instance.ipv6
+    verbosity: 1
+- name: print the whole ducking thing
+  debug:
+    var: created_linode.instance
+    verbosity: 2
+- name: print the root password
+  debug:
+    var: created_linode.instance.root_pass
+    verbosity: 2
+# TODO: create Github issues and include those in the code comments
+# https://github.com/sunrisemovement/devops/issues/2
+# TODO: rewrite using SSH aliases
+# https://collectiveidea.com/blog/archives/2011/02/04/how-to-ssh-aliases
+# https://github.com/sunrisemovement/devops/issues/4
+- name: Remove lines with unwanted occurrences of hostname
+  lineinfile:
+    dest: /etc/hosts
+    regexp: "^(?!{{ created_linode.instance.ipv4.0|replace('.', '\\.') }}|{{ created_linode.instance.ipv6.split('/')[0] | lower }})\\S+\\s+{{ linode_label }}$"
+    state: absent
+  become: true
+- name: Add the server's ipv6 address to local /etc/hosts file
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ created_linode.instance.ipv6.split('/')[0] | lower }}\t{{ linode_label }}"
+    state: present
+  become: true
+- name: Add the server's ipv4 address to local /etc/hosts file
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ created_linode.instance.ipv4.0 }}\t{{ linode_label }}"
+    state: present
+  become: true
+# TODO: Clear known_hosts - OK this has been done in linode_destroy
+# https://github.com/sunrisemovement/devops/issues/5
