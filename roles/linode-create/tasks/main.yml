@@ -1,3 +1,10 @@
+- name: ensure hosts file exists
+  file:
+    path: "{{ inventory_directory }}/hosts"
+    state: touch
+    mode: 0644
+    modification_time: preserve
+    access_time: preserve
 - name: add hosts group to ansible hosts file
   lineinfile:
     path: "{{ inventory_directory }}/hosts"
