@@ -9,6 +9,10 @@
   lineinfile:
     path: "{{ inventory_directory }}/hosts"
     line: '[{{ hosts_group }}]'
+# The following two tasks aren't currently idempotent
+# Also they don't place the host immediately after the host group
+# Consider replace module instead of lineinfile, using multiline regex
+# https://stackoverflow.com/questions/33094075/ansible-lineinfile-regex-multiline
 - name: Remove lines with unwanted occurrences of hostname
   lineinfile:
     path: "{{ inventory_directory }}/hosts"
