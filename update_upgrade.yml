@@ -1,4 +1,4 @@
-- hosts: ubuntu
+- hosts: webservers
   become: yes
   tasks:
   - name: update apt sources (if we haven't lately) + upgrade packages
@@ -6,11 +6,10 @@
       update_cache: yes
       cache_valid_time: 3600
       upgrade: safe
+    when: ansible_os_family == 'Debian'
 
-- hosts: arch
-  become: yes
-  tasks:
   - name: Run the equivalent of "pacman -Syu", updating sources and packages
     pacman:
       update_cache: yes
       upgrade: yes
+    when: ansible_os_family == 'Archlinux'
