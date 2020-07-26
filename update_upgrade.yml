@@ -1,4 +1,4 @@
-- hosts: webservers
+- hosts: all
   become: yes
   tasks:
   - name: update apt sources (if we haven't lately) + upgrade packages
@@ -6,7 +6,7 @@
       update_cache: yes
       cache_valid_time: 3600
       upgrade: safe
-    when: ansible_os_family == 'Debian'
+    when: ansible_os_family == 'Debian' or ansible_os_family == 'Pop!_OS'
 
   - name: Run the equivalent of "pacman -Syu", updating sources and packages
     pacman:

@@ -1,7 +1,7 @@
 ---
 
-- hosts: webservers
-  become: yes
+- hosts: all
+  # become: yes
 
   tasks:
     - name: print OS info
