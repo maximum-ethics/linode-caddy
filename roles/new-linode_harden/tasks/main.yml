@@ -1,0 +1,16 @@
+# tasks on remote server once it has been created, as your own user #
+- name: Disallow root SSH access
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin no"
+    state: present
+  notify:
+  - restart ssh
+# change passwords last, you can't do anything else afterwards!
+  - force change password
+# note that handlers are executed in the order they are written down, NOT in the order they are notified
+# https://stackoverflow.com/questions/35130051/order-of-notify-handlers
+# TODO: make sure handlers execute in the correct order, by e.g. calling the 2nd handler from the first handler
+# don't rely on the order in which handlers are written down, which seems fragile
+# https://github.com/sunrisemovement/devops/issues/7

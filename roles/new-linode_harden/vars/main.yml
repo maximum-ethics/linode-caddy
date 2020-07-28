@@ -1,0 +1,2 @@
+# TODO: hide password somehow, this is stupid - https://github.com/sunrisemovement/devops/issues/6
+ansible_become_pass: "correct zebra battery staple"

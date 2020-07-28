@@ -1,0 +1,65 @@
+# tasks on remote server once it has been created, as root #
+# TODO: DISABLE RUNNING THESE TASKS IF SERVER ALREADY EXISTED (how tho?)
+# https://github.com/sunrisemovement/devops/issues/9
+
+- name: Don't do anything until server is reachable via SSH
+  wait_for_connection:
+    delay: 10
+    timeout: 90
+- name: Gather facts for first time
+  setup:
+
+- name: Disallow password authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication no"
+    state: present
+  notify: restart ssh
+
+- name: Make sure we have a 'wheel' group
+  group:
+    name: wheel
+- name: Allow 'wheel' group to execute any command
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) ALL'
+    validate: 'visudo -cf %s'
+
+- name: Add sudoing user accounts for all sysadmins
+  user:
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    shell: "{{ item.shell }}"
+    groups: wheel
+    append: yes
+    update_password: on_create
+  loop: "{{ users }}"
+  register: new_accounts
+  tags: add_users
+
+- name: print the array of new accounts
+  debug:
+    var: new_accounts
+    verbosity: 2
+
+- name: print my password
+  debug:
+    var: new_accounts.results[4].item.password
+    verbosity: 2
+
+- name: Add ssh keys for all sysadmins
+  authorized_key:
+    user: "{{ item.0.name }}"
+    key: "{{ item.1 }}"
+# old syntax for doing loop with subelements:
+# https://docs.ansible.com/ansible/latest/plugins/lookup/subelements.html
+  # with_subelements:
+  #   - "{{ users }}"
+  #   - sshKey
+# new syntax described here:
+# https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html#with-subelements
+  loop: "{{ users|subelements('sshKey') }}"
+  tags: authorized_keys

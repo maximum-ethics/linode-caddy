@@ -1,0 +1,16 @@
+- name: restart ssh
+  service:
+    name: sshd
+    state: restarted
+
+# IMPORTANT TODO:
+# This handler currently requires the user's entry to be last in the list of users!
+# Otherwise it can't finish b/c the user hasn't updated their password yet
+# There must be some better way to do this that is less Nelson-specific
+# https://github.com/sunrisemovement/devops/issues/8
+- name: force change password
+  command: "chage -d 0 {{ item.name }}"
+  when: item.changed
+  loop: "{{ new_accounts.results }}"
+# I might have lifted this code from this relevant GitHub issue:
+# https://github.com/ansible/ansible/issues/18917#issuecomment-520254763

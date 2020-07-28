@@ -5,4 +5,16 @@
   connection: local
 
   roles:
-    - linode-create
+    - new-linode_create
+
+- hosts: webservers
+  gather_facts: no
+
+  roles:
+    - new-linode_initiate-users
+
+- hosts: webservers
+  become: yes
+
+  roles:
+    - new-linode_harden
