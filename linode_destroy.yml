@@ -5,7 +5,7 @@
   tasks:
   - name: include variables
     include_vars:
-      file: roles/sunrise/vars/linode.yml
+      file: roles/new-linode_create/vars/main.yml
 
   - name: pip install linode_api4
     pip:
@@ -14,7 +14,7 @@
   - name: Ensure linode is missing (delete if present)
     linode_v4:
       label: "{{ linode_label }}"
-      access_token: "{{ linode_token }}"
+      access_token: "{{ maximum_ethics_linode_token }}"
       state: absent
 
   # - name: Remove hostname from ~/.ssh/known_hosts

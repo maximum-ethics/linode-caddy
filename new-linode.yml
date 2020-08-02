@@ -7,13 +7,13 @@
   roles:
     - new-linode_create
 
-- hosts: webservers
+- hosts: maxethics
   gather_facts: no
 
   roles:
     - new-linode_initiate-users
 
-- hosts: webservers
+- hosts: maxethics
   become: yes
 
   roles:
