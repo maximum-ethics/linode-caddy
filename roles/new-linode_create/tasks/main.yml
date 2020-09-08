@@ -106,3 +106,4 @@
   become: true
 # TODO: Clear known_hosts - OK this has been done in linode_destroy
 # https://github.com/sunrisemovement/devops/issues/5
+- meta: refresh_inventory
