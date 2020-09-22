@@ -1,6 +1,6 @@
 hosts_group: maxethics
 # API documentation: https://developers.linode.com/api/v4/
-linode_label: america
+linode_label: bananac
 linode_type: g6-nanode-1 # https://api.linode.com/v4/linode/types
 linode_region: us-east # https://api.linode.com/v4/regions
 # linode_image: linode/arch # https://api.linode.com/v4/images

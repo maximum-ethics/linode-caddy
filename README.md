@@ -3,27 +3,49 @@ Ansible role that automatically sets up a web server running Caddy, using a virt
 ## Steps to set up server on Linode
 First, ask Nelson for an account on Linode, so that you can create an API token. Then:
 
-### Create an inventory file for Ansible
+### Install Ansible and other useful software
+to install on fresh Arch:
 
-Make an inventory file at '/etc/ansible/hosts' (or /usr/local/etc/ansible/hosts if you use homebrew on Mac to install Ansible) with the following contents:
+- ansible
+- fish
+- micro
+	- xclip
+- exa
+	- alias l "exa"
+	- funcsave l
+	- alias lt "exa --tree"
+	- alias lg "exa -halgG --git"
+- bat
+
+### Create Personal Access Token on Linode
+
+### Create SSH pub key
+use ED25519
+
+### Create localhost vars file
+at e.g. /etc/ansible/host_vars/localhost/vars.yml (or /usr/local/etc/ansible/hosts if you use homebrew on Mac to install Ansible)
+
 ```
-[maxethics]
-america
-
-[local]
-localhost
-
-[local:vars]
-ssh_pub_key=[PASTE YOUR OWN PUBLIC KEY]
-linode_api_key=[PASTE YOUR OWN LINODE API TOKEN]
+inventory_directory: [e.g. /etc/ansible]
+ansible_connection: local
+maximum_ethics_linode_token: [insert yours]
+ssh_pub_key: [insert yours]
 ```
+
+### Clone this git repo
+https://github.com/maximum-ethics/linode-caddy
+
+### Update variables
+modify roles/new-linode_create/vars/main.yml if you are changing the linode label or whatever
+
+add your ssh key to roles/new-linode_initiate-users/vars/main.yml
 
 ### Create the Linode server from your computer by connecting to the Linode web API
-`ansible-playbook linode_create.yml --ask-become-pass`
+`ansible-playbook new-linode.yml --ask-become-pass`
 ### Change your password from our default, so you can log in as yourself (not root)
-`ssh america`
+e.g. `ssh america`
 
-Change your password when prompted, and then you will be automatically logged out.
+Change your password when prompted, and then you will be automatically logged out. Then you can log in again.
 
 ### Set up the server
 `ansible-playbook sunrise.yml`
@@ -39,3 +61,10 @@ Make sure the domain resolves to the correct IP address before setting up Caddy.
 To set up the server but avoid setting up Caddy, try:
 
 `ansible-playbook sunrise.yml --skip-tags "caddy_v2,new_handcoded"`
+
+### Push your code changes
+Go to GitHub and sign in
+Profile->Settings->Developer Settings->Personal access tokens->Generate new token
+`git config --global credential.helper store`
+that will save your credentials next time you run a command. Then use the token in place of your password when you:
+`git push`
