@@ -15,7 +15,7 @@
   tags: updategrade
   when: ansible_os_family == 'Debian'
 
-- name: update sources + upgrade packages
+- name: update pacman sources + upgrade packages
   pacman:
     update_cache: yes
     upgrade: yes
@@ -45,7 +45,7 @@
     groups: "{{ sudoing_group }}"
     update_password: on_create
   loop: "{{ users }}"
-  tags: user_password
+  tags: user_accounts
 
 - name: Add ssh keys for all Sunrise sysadmins
   authorized_key:

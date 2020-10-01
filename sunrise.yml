@@ -1,6 +1,6 @@
 ---
 
-- hosts: sunrise
+- hosts: maxethics
   become: yes
   roles:
     - sunrise

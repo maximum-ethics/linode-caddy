@@ -1,6 +1,6 @@
 common_packages:
   - fish # Nelson's favorite shell
-  - bat # cat alternative  
+  - bat # cat alternative
   - mosh # better than SSH over crappy/mobile connections
   - git # check out git repositories
   - php
@@ -19,7 +19,7 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMSoD1EE/VdDb9mBYDsebsIVowqhfvNWYhe2YBcfNeTo wilsonbr@cthulu2
   - name: nelson
     password: "{{ default_pass }}"
-    shell: /bin/bash
+    shell: /usr/bin/fish
     sshKey:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJcoG9tZKULXW2IQ+5MsZ3vgUBJ5C3uDbbG381S1Cjdl nelson@Valence.local
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnUmCzUu/jrZz+T5rVTEJQ73zobj+CixKJS2N9jMkhz nelson@annalise
@@ -42,7 +42,7 @@ handcoded_websites:
     domain_name: sunrisemovement.dev
     git_repo: https://github.com/michaelkearney55/ri.sunrisemovement.org.git
 
-hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.74.1/hugo_0.74.1_Linux-64bit.deb
+hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.75.1/hugo_0.75.1_Linux-64bit.deb
 hugo_sites:
   - title: Sunrise Movement Philadelphia
     domain: sunrisemovement.dev

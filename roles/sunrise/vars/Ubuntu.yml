@@ -1,5 +1,5 @@
-# os_packages:
-#   - 
+os_packages:
+  - micro # terminal-based text editor
 
 sudoing_group: sudo
 web_server_user: www-data
@@ -10,7 +10,7 @@ local_tls: false
 caddy_binary_location: /usr/bin/caddy
 
 # https://stackoverflow.com/questions/17570658/how-to-find-my-php-fpm-sock
-# Check /etc/php/7.3/fpm/pool.d/www.conf for location of unix socket
-# should be line like "listen = /run/php/php7.3-fpm.sock"
-php_fpm_unix_socket: /var/run/php/php7.3-fpm.sock
-php_fpm_service_name: php7.3-fpm
+# Check /etc/php/7.4/fpm/pool.d/www.conf for location of unix socket
+# should be line like "listen = /run/php/php7.4-fpm.sock"
+php_fpm_unix_socket: /var/run/php/php7.4-fpm.sock
+php_fpm_service_name: php7.4-fpm
