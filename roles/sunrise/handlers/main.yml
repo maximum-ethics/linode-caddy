@@ -1,16 +1,10 @@
-- name: restart cron
-  service:
-    name: cron
-    state: restarted
-  listen: restart cron + print time
-  when: ansible_os_family == 'Debian'
 - name: update facts so we can see if the timezone is correct now
   setup:
-  listen: restart cron + print time
+  listen: print time
 - name: print datetime after setting timezone
   debug:
     var: ansible_date_time
-  listen: restart cron + print time
+  listen: print time
 
 # seems to act like a reload of the text?
 - name: update motd-news service

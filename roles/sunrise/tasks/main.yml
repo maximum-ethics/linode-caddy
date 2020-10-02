@@ -85,7 +85,7 @@
     # name: America/Los_Angeles
   tags: timezone
   notify:
-    - restart cron + print time
+    - print time
 
 - name: configure firewall using UFW
 # Maybe I should use iptables directly, but it's easier/simpler to set up UFW

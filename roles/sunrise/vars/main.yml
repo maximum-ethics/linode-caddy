@@ -15,7 +15,6 @@ users:
     password: "{{ default_pass }}"
     shell: /bin/bash
     sshKey:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKXBle8S/TLNfjlWAOCJ5UlWzVeVr77V5ZsksVJI6wB wilsonbr@Cthulhu
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMSoD1EE/VdDb9mBYDsebsIVowqhfvNWYhe2YBcfNeTo wilsonbr@cthulu2
   - name: nelson
     password: "{{ default_pass }}"
