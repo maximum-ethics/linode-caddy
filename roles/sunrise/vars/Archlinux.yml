@@ -1,9 +1,15 @@
 os_packages:
+  - base-devel # needed for AUR
   - exa # ls alternative
   - which # to find where executables are installed
   - rsync # dependency for "synchronize" Ansible module
   - go # needed to build Caddy from source
   - hugo # static site generator https://gohugo.io/
+aur_packages:
+  - yay # preferred AUR helper
+  - micro # terminal-based text editor
+  - caddy2 # hope this makes it back into the official repos someday
+  - tealdeer # tldr client
 
 sudoing_group: wheel
 web_server_user: http

@@ -12,5 +12,7 @@
   command: "chage -d 0 {{ item.name }}"
   when: item.changed
   loop: "{{ new_accounts.results }}"
-# I might have lifted this code from this relevant GitHub issue:
+# I lifted this code from this relevant GitHub issue:
 # https://github.com/ansible/ansible/issues/18917#issuecomment-520254763
+
+# WARNING: that code doesn't seem to actually force a password change on Arch Linux

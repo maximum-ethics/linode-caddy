@@ -41,3 +41,6 @@
   copy:
     src: your_ip.sh
     dest: /etc/profile.d/your_ip.sh
+# I don't know how to set this for fish for all users
+# You can set it for an individual by putting the contents of your-ip.sh into
+# ~/.config/fish/config.fish
