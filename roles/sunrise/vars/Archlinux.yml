@@ -12,7 +12,7 @@ aur_packages:
   - tealdeer # tldr client
 
 sudoing_group: wheel
-web_server_user: http
+web_server_user: caddy
 
 local_tls: true
 # caddy_conf_autosave_dir: /srv/http/.config/caddy

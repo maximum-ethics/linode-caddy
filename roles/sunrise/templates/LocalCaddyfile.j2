@@ -13,8 +13,8 @@
 # start site blocks
 
 # public test page
-brockovich.sunrisemovement.dev {
-	root * /srv/sunrisemovement.dev/www/public/
+{{ local_hostname }}.{{ test_domain }} {
+	root * /srv/{{ test_domain }}/{{ test_subdomain }}/public/
 	import boilerplate
 	# https://caddyserver.com/docs/caddyfile/directives/templates
 	# can't use default double curly braces b/c Ansible uses them
@@ -25,16 +25,16 @@ brockovich.sunrisemovement.dev {
 }
 
 # local test page
-www.sunrisemovement.dev {
-	root * /srv/sunrisemovement.dev/www/public/
+{{ test_subdomain }}.{{ test_domain }} {
+	root * /srv/{{ test_domain }}/{{ test_subdomain }}/public/
 	import boilerplate
 	templates {
 		between (( ))
 	}
 }
 # redirect no-www to www
-sunrisemovement.dev {
-	redir https://www.sunrisemovement.dev
+{{ test_domain }} {
+	redir https://www.{{ test_domain }}
 }
 
 # handcoded Rhode Island site

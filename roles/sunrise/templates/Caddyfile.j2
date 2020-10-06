@@ -13,8 +13,8 @@
 # start site blocks
 
 # test page
-www.sunrisemovement.dev {
-	root * /srv/sunrisemovement.dev/www/public/
+www.{{ test_domain }} {
+	root * /srv/{{ test_domain }}/www/public/
 	import boilerplate
 	# https://caddyserver.com/docs/caddyfile/directives/templates
 	# can't use default double curly braces b/c Ansible uses them
@@ -23,8 +23,8 @@ www.sunrisemovement.dev {
 	}
 }
 # redirect no-www to www
-sunrisemovement.dev {
-	redir https://www.sunrisemovement.dev
+{{ test_domain }} {
+	redir https://www.{{ test_domain }}
 }
 
 # handcoded Rhode Island site

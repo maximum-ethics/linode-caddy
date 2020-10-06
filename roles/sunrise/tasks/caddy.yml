@@ -1,20 +1,3 @@
-# tips for systemd services: https://caddyserver.com/docs/install#debian-ubuntu-raspbian
-# We'll base ours off of https://github.com/caddyserver/dist/blob/master/init/caddy.service
-- name: install caddy.service file from template
-  template:
-    src: caddy.service.j2
-    dest: /etc/systemd/system/caddy.service
-    owner: root
-    group: root
-    # Arch Linux thinks this is an executable and won't run without x
-    mode: u=rwx,g=rx,o=rx
-# TODO: make sure handlers run in correct order: 
-# https://github.com/sunrisemovement/devops/issues/7
-  notify:
-    - daemon-reload service caddy
-    - restart caddy
-  tags: caddy_service
-
 - name: save info about web server user (including home dir)
   user:
     name: '{{ web_server_user }}'
@@ -30,15 +13,6 @@
     var: caddy_storage_dir
     verbosity: 1
   tags: webserver_user_registered
-# Info on data directory location defaults (which we override with our Caddyfile):
-# https://caddyserver.com/docs/conventions#data-directory
-# - name: create data directory # it's not just tls certificates
-#   file:
-#     path: /etc/caddy/storage
-#     state: directory
-#     owner: '{{ web_server_user }}'
-#     group: '{{ web_server_user }}'
-#     mode: '0755'
 
 # Info on data directory location defaults:
 # https://caddyserver.com/docs/conventions#data-directory
@@ -112,99 +86,9 @@
     name: caddy
   notify:
     - restart caddy
-  when: # list of conditions = AND
+  when:
     - not building_caddy
     - ansible_os_family == 'Debian'
-
-# Download binary from GitHub and install it
-- name: download + extract caddy binary
-  unarchive:
-    src: '{{ caddy_archive_url }}'
-    dest: /usr/local/bin/
-    remote_src: True
-    owner: '{{ web_server_user }}'
-    group: '{{ web_server_user }}'
-    mode: 0755
-  notify:
-    - restart caddy
-  # https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html#the-when-statement
-  when: # list of conditions = AND
-    - not building_caddy
-    - caddy_archive_url is defined
-
-# - name: create tmp dir for caddy download
-#   file:
-#     path: "/tmp/{{ ansible_date_time.date }}-caddydownload"
-#     state: directory
-#     mode: 0755
-#   when:
-#     - not building_caddy
-#     - caddy_binary_url is defined
-# - name: download Caddy binary
-#   get_url:
-#     url: "{{ caddy_binary_url }}"
-#     dest: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
-#     mode: 0755
-#   when:
-#     - not building_caddy
-#     - caddy_binary_url is defined
-# - name: replace caddy binary
-#   copy:
-#     remote_src: yes
-#     src: "/tmp/{{ ansible_date_time.date }}-caddydownload/caddy"
-#     dest: /usr/local/bin/caddy
-#   notify:
-#     - restart caddy
-#   when:
-#     - not building_caddy
-#     - caddy_binary_url is defined
-
-# Build latest Caddy from source and install it
-- name: add PPA so we can install latest version of Go
-  apt_repository: # https://github.com/golang/go/wiki/Ubuntu
-    repo: ppa:longsleep/golang-backports
-  when: building_caddy and ansible_distribution == 'Ubuntu'
-- name: install Go
-  package:
-    name: '{{ item }}'
-  loop:
-    - git
-    - golang-go
-  when: building_caddy and ansible_distribution == 'Ubuntu'
-
-- name: checkout Caddy v2 repository
-  git:
-    repo: https://github.com/caddyserver/caddy.git
-    dest: /tmp/caddy
-    # version: '{{ caddy_git_version }}'
-  when: building_caddy
-
-- name: build Caddy
-  command: go build
-  args:
-    chdir: /tmp/caddy/cmd/caddy
-    # creates: /tmp/caddy/cmd/caddy/caddy
-  when: building_caddy
-
-- name: replace caddy binary
-  copy:
-    remote_src: yes
-    src: /tmp/caddy/cmd/caddy/caddy
-    dest: /usr/local/bin/caddy
-    owner: '{{ web_server_user }}'
-    group: '{{ web_server_user }}'
-    mode: 0755
-  notify:
-    - restart caddy
-  when: building_caddy
-
-# Either way, make sure the binary works, then get the service running
-- name: ensure binary is executable
-  file:
-    path: /usr/local/bin/caddy
-    owner: '{{ web_server_user }}'
-    group: '{{ web_server_user }}'
-    mode: u=rwx,g=rx,o=rx
 
 # - name: install Caddy local CA cert
 #   command: '{{ caddy_binary_location }} trust'

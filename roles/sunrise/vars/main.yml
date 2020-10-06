@@ -26,14 +26,12 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKH1YH796hxWQu5B/mHwU6nfG1fDDAO8FtI3UpwcbbTs nelson@cordelia
 sudoing_group: wheel
 
-# vars for caddy_v2.yml
+# vars for caddy.yml
 caddy_storage_dir: '{{ webserver_user_registered.home }}/.local/share/caddy'
 caddy_conf_autosave_dir: '{{ webserver_user_registered.home }}/.config/caddy'
-# caddy_binary_url: https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.20/caddy2_beta20_linux_amd64
-test_domain: sunrisemovement.dev
+test_domain: maximumethics.dev
 test_subdomain: www
 building_caddy: false
-# caddy_git_version: v2
 caddyfile_name: Caddyfile.j2
 
 handcoded_websites:
