@@ -10,6 +10,13 @@
 	file_server
 }
 
+# redirect no-www to www
+(redir-to-www) {
+	{args.0} {
+		redir https://www.{args.0}{uri}
+	}
+}
+
 # start site blocks
 
 # public test page
@@ -32,10 +39,7 @@
 		between (( ))
 	}
 }
-# redirect no-www to www
-{{ test_domain }} {
-	redir https://www.{{ test_domain }}{uri}
-}
+import redir-to-www {{ test_domain }}
 
 # handcoded Rhode Island site
 www.sunrisepvd.com {
@@ -43,10 +47,7 @@ www.sunrisepvd.com {
 	import boilerplate
 	php_fastcgi unix/{{ php_fpm_unix_socket }}
 }
-# redirect no-www to www
-sunrisepvd.com {
-	redir https://www.sunrisepvd.com{uri}
-}
+import redir-to-www sunrisepvd.com
 
 # Hugo sites
 philadelphia.sunrisemovement.dev {
