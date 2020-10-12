@@ -34,20 +34,18 @@
 }
 # redirect no-www to www
 {{ test_domain }} {
-	redir https://www.{{ test_domain }}
+	redir https://www.{{ test_domain }}{uri}
 }
 
 # handcoded Rhode Island site
-ri.sunrisemovement.dev {
-	root * /srv/sunrisemovement.dev/ri/public
+www.sunrisepvd.com {
+	root * /srv/sunrisepvd.com/www/public
 	import boilerplate
 	php_fastcgi unix/{{ php_fpm_unix_socket }}
 }
-
-# Hugo SF Bay website
-sfbay.sunrisemovement.org {
-	root * /srv/sunrisemovement.org/sfbay/public
-	import boilerplate
+# redirect no-www to www
+sunrisepvd.com {
+	redir https://www.sunrisepvd.com{uri}
 }
 
 # Hugo sites

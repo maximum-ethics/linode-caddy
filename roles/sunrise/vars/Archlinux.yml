@@ -16,8 +16,6 @@ web_server_user: caddy
 
 local_tls: true
 # caddy_conf_autosave_dir: /srv/http/.config/caddy
-caddy_archive_url: https://github.com/caddyserver/caddy/releases/download/v2.2.0/caddy_2.2.0_linux_amd64.tar.gz
-caddy_binary_location: /usr/local/bin/caddy
 
 # https://stackoverflow.com/questions/17570658/how-to-find-my-php-fpm-sock
 # check /etc/php/php-fpm.d/www.conf for location of unix socket
