@@ -1,3 +1,18 @@
+# tips for systemd services: https://caddyserver.com/docs/install#debian-ubuntu-raspbian
+# We'll base ours off of https://github.com/caddyserver/dist/blob/master/init/caddy.service
+# Another source: https://aur.archlinux.org/cgit/aur.git/tree/caddy.service?h=caddy2
+- name: install caddy.service file from template
+  template:
+    src: caddy.service.j2
+    dest: /etc/systemd/system/caddy.service
+    owner: root
+    group: root
+    # Arch Linux thinks this is an executable and won't run without x
+    mode: u=rwx,g=rx,o=rx
+  notify:
+    - daemon-reload restart caddy
+  tags: caddy_service
+
 - name: save info about web server user (including home dir)
   user:
     name: '{{ web_server_user }}'

@@ -13,10 +13,18 @@
     state: started
     enabled: yes
 
-- name: daemon-reload service caddy
+- name: daemon-reload restart caddy
   systemd:
     name: caddy
     daemon_reload: yes
+    state: restarted
+  listen: daemon-reload restart caddy
+- name: let caddy bind to ports 80 and 443
+  capabilities:
+    path: '{{ caddy_binary_location }}'
+    capability: cap_net_bind_service=+ep
+    state: present
+  listen: daemon-reload restart caddy
 
 - name: reload caddy
   service:
@@ -30,7 +38,7 @@
   listen: restart caddy
 - name: let caddy bind to ports 80 and 443
   capabilities:
-    path: /usr/local/bin/caddy
+    path: '{{ caddy_binary_location }}'
     capability: cap_net_bind_service=+ep
     state: present
   listen: restart caddy

@@ -9,7 +9,7 @@ os_packages:
 aur_packages:
   - yay # preferred AUR helper
   - micro # terminal-based text editor
-  - caddy2 # hope this makes it back into the official repos someday
+  - caddy-bin # hope this makes it back into the official repos someday
   - tealdeer # tldr client
 
 sudoing_group: wheel

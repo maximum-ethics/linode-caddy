@@ -7,7 +7,7 @@ web_server_user: www-data
 local_tls: true
 # caddy_storage_dir: 
 # caddy_conf_autosave_dir: /var/www/.config/caddy
-caddy_binary_location: /usr/bin/caddy
+# caddy_binary_location: /usr/bin/caddy
 
 # https://stackoverflow.com/questions/17570658/how-to-find-my-php-fpm-sock
 # Check /etc/php/7.4/fpm/pool.d/www.conf for location of unix socket

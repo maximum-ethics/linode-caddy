@@ -29,6 +29,7 @@ sudoing_group: wheel
 # vars for caddy.yml
 caddy_storage_dir: '{{ webserver_user_registered.home }}/.local/share/caddy'
 caddy_conf_autosave_dir: '{{ webserver_user_registered.home }}/.config/caddy'
+caddy_binary_location: /usr/bin/caddy
 test_domain: maximumethics.dev
 test_subdomain: www
 building_caddy: false

@@ -69,10 +69,6 @@
     - ansible_os_family == 'Archlinux'
     - aur_packages is defined
 
-# first, log into the server and run:
-# sudo -u aur_builder gpg --keyserver pool.sks-keyservers.net --receive-keys 29D0817A67156E4F25DC24782A349DD577D586A5
-# Otherwise Caddy2 package won't work:
-# https://aur.archlinux.org/packages/caddy2/
 - name: install AUR packages
   aur:
     name: '{{ item }}'
