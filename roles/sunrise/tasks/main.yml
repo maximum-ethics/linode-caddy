@@ -26,14 +26,17 @@
   tags: updategrade
   when: ansible_os_family == 'Archlinux'
 
-- name: upgrade AUR packages
-  aur:
-    upgrade: yes
-    aur_only: yes
-  tags: updategrade
-  when: 
-    - ansible_os_family == 'Archlinux'
-    - aur_packages is defined  
+# TODO: This won't work until the user is created for it!
+# - name: upgrade AUR packages
+#   aur:
+#     upgrade: yes
+#     aur_only: yes
+#   become: yes
+#   become_user: aur_builder
+#   tags: updategrade
+#   when:
+#     - ansible_os_family == 'Archlinux'
+#     - aur_packages is defined
 
 # TODO: Also update packages installed from other sources, such as pip
 # linode_create.yml installs linode-api4 from pip
@@ -55,14 +58,14 @@
   tags: aur_builder
   when: 
     - ansible_os_family == 'Archlinux'
-    - aur_packages is defined 
+    - aur_packages is defined
 - lineinfile:
     path: /etc/sudoers.d/11-install-aur_builder
     line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
     create: yes
     validate: 'visudo -cf %s'
   tags: aur_builder
-  when: 
+  when:
     - ansible_os_family == 'Archlinux'
     - aur_packages is defined
 
@@ -77,7 +80,7 @@
   become: yes
   become_user: aur_builder
   tags: aur_packages
-  when: 
+  when:
     - ansible_os_family == 'Archlinux'
     - aur_packages is defined
 
