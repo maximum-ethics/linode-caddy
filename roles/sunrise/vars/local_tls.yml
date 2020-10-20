@@ -5,3 +5,10 @@ handcoded_websites:
   - subdomain: www
     domain_name: sunrisepvd.com
     git_repo: https://github.com/sunriseprovidence/sunrisepvd.com.git
+hugo_sites:
+  - title: Maximum Ethics
+    domain: maximumethics.dev
+    subdomain: www
+    content_repo: https://git.sr.ht/~skyfaller/maximum-ethics-website
+    # theme_repo: https://git.sr.ht/~skyfaller/maxethics-hugo
+    # theme_name: maxethics-hugo

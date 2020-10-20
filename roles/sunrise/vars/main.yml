@@ -31,24 +31,20 @@ caddy_storage_dir: '{{ webserver_user_registered.home }}/.local/share/caddy'
 caddy_conf_autosave_dir: '{{ webserver_user_registered.home }}/.config/caddy'
 caddy_binary_location: /usr/bin/caddy
 test_domain: maximumethics.dev
-test_subdomain: www
+test_subdomain: test
 building_caddy: false
 caddyfile_name: Caddyfile.j2
 
-handcoded_websites:
-  - subdomain: www
-    domain_name: sunrisepvd.com
-    git_repo: https://github.com/sunriseprovidence/sunrisepvd.com.git
+# handcoded_websites:
+#   - subdomain: www
+#     domain_name: sunrisepvd.com
+#     git_repo: https://github.com/sunriseprovidence/sunrisepvd.com.git
 
-hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.75.1/hugo_0.75.1_Linux-64bit.deb
+hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.76.5/hugo_0.76.5_Linux-64bit.deb
 hugo_sites:
-  - title: Sunrise Movement Philadelphia
-    domain: sunrisemovement.dev
-    subdomain: philadelphia
-    theme_repo: https://github.com/sunrisemovement/hugo-black-and-light-theme.git
-    theme_name: black-and-light
-  - title: Sunrise Movement Houston
-    domain: sunrisemovement.dev
-    subdomain: houston
-    theme_repo: https://github.com/sunrisemovement/hugo-black-and-light-theme.git
-    theme_name: black-and-light
+  - title: Maximum Ethics
+    domain: maximumethics.dev
+    subdomain: www
+    content_repo: https://git.sr.ht/~skyfaller/maximum-ethics-website
+    # theme_repo: https://git.sr.ht/~skyfaller/maxethics-hugo
+    # theme_name: maxethics-hugo

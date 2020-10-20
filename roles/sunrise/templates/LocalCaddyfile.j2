@@ -39,7 +39,6 @@
 		between (( ))
 	}
 }
-import redir-to-www {{ test_domain }}
 
 # handcoded Rhode Island site
 www.sunrisepvd.com {
@@ -50,12 +49,8 @@ www.sunrisepvd.com {
 import redir-to-www sunrisepvd.com
 
 # Hugo sites
-philadelphia.sunrisemovement.dev {
-	root * /srv/sunrisemovement.dev/philadelphia/public
+www.maximumethics.dev {
+	root * /srv/maximumethics.dev/www/public
 	import boilerplate
 }
-
-houston.sunrisemovement.dev {
-	root * /srv/sunrisemovement.dev/houston/public
-	import boilerplate
-}
+import redir-to-www maximumethics.dev

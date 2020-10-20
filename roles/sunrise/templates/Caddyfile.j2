@@ -10,11 +10,18 @@
 	file_server
 }
 
+# redirect no-www to www
+(redir-to-www) {
+	{args.0} {
+		redir https://www.{args.0}{uri}
+	}
+}
+
 # start site blocks
 
 # test page
-www.{{ test_domain }} {
-	root * /srv/{{ test_domain }}/www/public/
+{{ test_subdomain }}.{{ test_domain }} {
+	root * /srv/{{ test_domain }}/{{ test_subdomain }}/public/
 	import boilerplate
 	# https://caddyserver.com/docs/caddyfile/directives/templates
 	# can't use default double curly braces b/c Ansible uses them
@@ -22,35 +29,12 @@ www.{{ test_domain }} {
 		between (( ))
 	}
 }
-# redirect no-www to www
-{{ test_domain }} {
-	redir https://www.{{ test_domain }}
-}
 
 # handcoded Rhode Island site
-ri.sunrisemovement.dev {
-	root * /srv/sunrisemovement.dev/ri/public
-	import boilerplate
-	php_fastcgi unix/{{ php_fpm_unix_socket }}
-}
-
-# Hugo SF Bay website
-sfbay.sunrisemovement.dev {
-	root * /srv/sunrisemovement.dev/sfbay/public
-	import boilerplate
-}
-sfbay.sunrisemovement.org {
-	root * /srv/sunrisemovement.org/sfbay/public
-	import boilerplate
-}
 
 # Hugo sites
-philadelphia.sunrisemovement.dev {
-	root * /srv/sunrisemovement.dev/philadelphia/public
+www.maximumethics.dev {
+	root * /srv/maximumethics.dev/www/public
 	import boilerplate
 }
-
-houston.sunrisemovement.dev {
-	root * /srv/sunrisemovement.dev/houston/public
-	import boilerplate
-}
+import redir-to-www maximumethics.dev

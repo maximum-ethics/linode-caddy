@@ -17,63 +17,26 @@
   notify:
     - reload caddy
 
-# Create site directories
-- name: create srv directory if it doesn't exist
-  file:
-    path: /srv/{{ item.domain }}/{{ item.subdomain }}
-    state: directory
-    mode: 0755
-    owner: '{{ web_server_user }}'
-    group: '{{ web_server_user }}'
-  loop: '{{ hugo_sites }}'
-  register: created_directories
-
-- name: print created_directories
-  debug:
-    var: created_directories
-    verbosity: 1
-
-# item.item is used because we're iterating over the registered results from creating the directories.
-# see https://docs.ansible.com/ansible/latest/user_guide/playbooks_loops.html#registering-variables-with-a-loop for results structure
-
-# Create Site Directories task loops over hugo_sites to make directories for each element of the hugo_sites array (a Hugo website). 
-# The output of each loop iteration is stored in created_directories.
-# Each output item in created_directories has a subelement named item, 
-# which stores the hugo_sites element that the Create Site Directories task was run on.
-# Thus, in this task, item refers to the loop output collection of metadata, 
-# item.item is the subelement that contains the hugo_sites element previously described.
-- name: create new Hugo site
-  command: hugo new site /srv/{{ item.item.domain }}/{{ item.item.subdomain }}
-  become: yes
-  become_user: '{{ web_server_user }}'
-  when: item.changed
-  loop: '{{ created_directories.results }}'
-
-- name: clone git theme
+- name: clone content repo
   git:
-    repo: '{{ item.theme_repo }}'
-    dest: /srv/{{ item.domain }}/{{ item.subdomain }}/themes/{{ item.theme_name }}
+    repo: '{{ item.content_repo }}'
+    dest: /srv/{{ item.domain }}/{{ item.subdomain }}
   become: yes
   become_user: '{{ web_server_user }}'
   loop: '{{ hugo_sites }}'
-  register: theme_changes
-  notify: run Hugo if theme changed
+  # notify: run Hugo if content changed
 
-- name: create config.toml file from template
-  template:
-    src: config.toml.j2
-    dest: /srv/{{ item.domain }}/{{ item.subdomain }}/config.toml
-    owner: '{{ web_server_user }}'
-    group: '{{ web_server_user }}'
-  loop: '{{ hugo_sites }}'
-  register: config_changes
-  notify: run Hugo if config changed
+# - name: clone git theme
+#   git:
+#     repo: '{{ item.theme_repo }}'
+#     dest: /srv/themes/{{ item.theme_name }}
+#   become: yes
+#   become_user: '{{ web_server_user }}'
+#   loop: '{{ hugo_sites }}'
+#   register: theme_changes
+#   notify: run Hugo if theme changed
 
-- name: print theme_changes
-  debug:
-    var: theme_changes
-    verbosity: 1
-- name: print config_changes
-  debug:
-    var: config_changes
-    verbosity: 1
+# - name: print theme_changes
+#   debug:
+#     var: theme_changes
+#     verbosity: 1
