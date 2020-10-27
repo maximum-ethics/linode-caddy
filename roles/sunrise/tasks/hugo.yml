@@ -24,7 +24,13 @@
   become: yes
   become_user: '{{ web_server_user }}'
   loop: '{{ hugo_sites }}'
-  # notify: run Hugo if content changed
+  register: content_changes
+#  notify: run Hugo if content changed
+
+- name: print content_changes
+  debug:
+    var: content_changes
+    verbosity: 1
 
 # - name: clone git theme
 #   git:

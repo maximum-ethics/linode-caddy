@@ -49,5 +49,5 @@
   become_user: '{{ web_server_user }}'
   args:
     chdir: /srv/{{ item.item.domain }}/{{ item.item.subdomain }}
-  loop: '{{ theme_changes.results }}'
+  loop: '{{ content_changes.results }}'
   when: item.changed
