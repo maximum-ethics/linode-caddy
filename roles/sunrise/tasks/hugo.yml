@@ -25,7 +25,7 @@
   become_user: '{{ web_server_user }}'
   loop: '{{ hugo_sites }}'
   register: content_changes
-#  notify: run Hugo if content changed
+  notify: run Hugo if content changed
 
 - name: print content_changes
   debug:

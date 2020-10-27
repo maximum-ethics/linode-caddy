@@ -9,6 +9,6 @@ hugo_sites:
   - title: Maximum Ethics
     domain: maximumethics.dev
     subdomain: www
-    content_repo: https://git.sr.ht/~skyfaller/maximum-ethics-website
+    content_repo: https://git.sr.ht/~skyfaller/maximum-ethics-content
     # theme_repo: https://git.sr.ht/~skyfaller/maxethics-hugo
     # theme_name: maxethics-hugo
