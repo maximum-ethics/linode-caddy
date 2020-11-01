@@ -35,6 +35,7 @@
 # Hugo sites
 www.maximumethics.dev {
 	root * /srv/maximumethics.dev/www/public
-	import boilerplate
+	encode gzip zstd
+	file_server browse
 }
 import redir-to-www maximumethics.dev

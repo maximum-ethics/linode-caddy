@@ -21,6 +21,7 @@
   git:
     repo: '{{ item.content_repo }}'
     dest: /srv/{{ item.domain }}/{{ item.subdomain }}
+    # force: yes
   become: yes
   become_user: '{{ web_server_user }}'
   loop: '{{ hugo_sites }}'
