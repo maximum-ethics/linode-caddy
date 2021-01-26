@@ -35,10 +35,10 @@ test_subdomain: test
 building_caddy: false
 caddyfile_name: Caddyfile.j2
 
-# handcoded_websites:
-#   - subdomain: www
-#     domain_name: sunrisepvd.com
-#     git_repo: https://github.com/sunriseprovidence/sunrisepvd.com.git
+handcoded_websites:
+  - subdomain: www
+    domain_name: sunrisepvd.com
+    git_repo: https://github.com/sunriseprovidence/sunrisepvd.com.git
 
 hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.76.5/hugo_0.76.5_Linux-64bit.deb
 hugo_sites:

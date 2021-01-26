@@ -13,6 +13,18 @@
     - daemon-reload restart caddy
   tags: caddy_service
 
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/user_module.html
+# We need Caddy to have permissions to interact with PHP
+- name: Add web_server_user to http group
+  user:
+    name: '{{ web_server_user }}'
+    groups: http
+    append: yes
+  when:
+    - ansible_os_family == 'Archlinux'
+# Can't just make them the same user because the http user's home directory is
+# protected in some annoying way, so Caddy can't keep stuff there.
+
 - name: save info about web server user (including home dir)
   user:
     name: '{{ web_server_user }}'

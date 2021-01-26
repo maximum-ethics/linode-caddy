@@ -1,6 +1,10 @@
 # global options block: https://caddyserver.com/docs/caddyfile/options
 {
-	experimental_http3
+	servers {
+		protocol {
+			experimental_http3
+		}
+	}
 	local_certs
 }
 
@@ -53,5 +57,6 @@ www.maximumethics.dev {
 	root * /srv/maximumethics.dev/www/public
 	encode gzip zstd
 	file_server browse
+	tls	{{ admin_email }}
 }
 import redir-to-www maximumethics.dev

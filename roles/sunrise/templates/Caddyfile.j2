@@ -1,6 +1,10 @@
 # global options block: https://caddyserver.com/docs/caddyfile/options
 {
-	experimental_http3
+	servers {
+		protocol {
+			experimental_http3
+		}
+	}
 	email 	{{ admin_email }}
 }
 
@@ -31,6 +35,13 @@
 }
 
 # handcoded Rhode Island site
+www.sunrisepvd.com {
+	root * /srv/sunrisepvd.com/www/public
+	import boilerplate
+	php_fastcgi unix/{{ php_fpm_unix_socket }}
+	tls internal # I don't think this works, not sure how to make it work
+}
+import redir-to-www sunrisepvd.com
 
 # Hugo sites
 www.maximumethics.dev {
