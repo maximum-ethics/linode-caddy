@@ -14,7 +14,7 @@
       update_cache: yes
       cache_valid_time: 3600
       upgrade: safe
-    when: ansible_os_family == 'Debian' # or ansible_os_family == 'Pop!_OS'
+    when: ansible_os_family == 'Debian'
 
   - name: Run the equivalent of "pacman -Syu", updating sources and packages
     pacman:
