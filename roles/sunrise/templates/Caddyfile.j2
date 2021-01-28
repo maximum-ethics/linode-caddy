@@ -39,6 +39,7 @@ www.sunrisepvd.com {
 	root * /srv/sunrisepvd.com/www/public
 	import boilerplate
 	php_fastcgi unix/{{ php_fpm_unix_socket }}
+	tls on_demand
 }
 import redir-to-www sunrisepvd.com
 
