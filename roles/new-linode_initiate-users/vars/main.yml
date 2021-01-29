@@ -5,7 +5,6 @@ users:
     password: "{{ default_pass }}"
     shell: /bin/bash
     sshKey:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKKXBle8S/TLNfjlWAOCJ5UlWzVeVr77V5ZsksVJI6wB wilsonbr@Cthulhu
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMSoD1EE/VdDb9mBYDsebsIVowqhfvNWYhe2YBcfNeTo wilsonbr@cthulu2
   - name: nelson
     password: "{{ default_pass }}"
@@ -13,7 +12,6 @@ users:
     sshKey:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJcoG9tZKULXW2IQ+5MsZ3vgUBJ5C3uDbbG381S1Cjdl nelson@Valence.local
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnUmCzUu/jrZz+T5rVTEJQ73zobj+CixKJS2N9jMkhz nelson@annalise
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKg8msSyWifH18t2JmqV36UlarCg+HSHQ8LIXC3qykgC Nelson's Pixel 3a XL
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKH1YH796hxWQu5B/mHwU6nfG1fDDAO8FtI3UpwcbbTs nelson@cordelia
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRC6S9lwj62tDyeLRHkcw1+rZo87BO+6i7fBLPhbnIE nelson@cascabel
 

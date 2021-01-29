@@ -23,7 +23,8 @@
 
 # start site blocks
 
-# public test page
+# public test page (currently not actually public)
+# https://caddy.community/t/caddyfile-having-individual-sites-differ-from-global-options/11297
 {{ local_hostname }}.{{ test_domain }} {
 	root * /srv/{{ test_domain }}/{{ test_subdomain }}/public/
 	import boilerplate
@@ -32,7 +33,6 @@
 	templates {
 		between (( ))
 	}
-	tls	{{ admin_email }}
 }
 
 # local test page
@@ -57,6 +57,5 @@ www.maximumethics.dev {
 	root * /srv/maximumethics.dev/www/public
 	encode gzip zstd
 	file_server browse
-	tls	{{ admin_email }}
 }
 import redir-to-www maximumethics.dev

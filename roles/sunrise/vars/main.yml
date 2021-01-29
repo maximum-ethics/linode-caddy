@@ -22,13 +22,14 @@ users:
     sshKey:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJcoG9tZKULXW2IQ+5MsZ3vgUBJ5C3uDbbG381S1Cjdl nelson@Valence.local
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnUmCzUu/jrZz+T5rVTEJQ73zobj+CixKJS2N9jMkhz nelson@annalise
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKg8msSyWifH18t2JmqV36UlarCg+HSHQ8LIXC3qykgC Nelson's Pixel 3a XL
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKH1YH796hxWQu5B/mHwU6nfG1fDDAO8FtI3UpwcbbTs nelson@cordelia
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRC6S9lwj62tDyeLRHkcw1+rZo87BO+6i7fBLPhbnIE nelson@cascabel
 sudoing_group: wheel
 
 # vars for caddy.yml
 caddy_storage_dir: '{{ webserver_user_registered.home }}/.local/share/caddy'
 caddy_conf_autosave_dir: '{{ webserver_user_registered.home }}/.config/caddy'
+caddyfile_dir: /etc/caddy
 caddy_binary_location: /usr/bin/caddy
 test_domain: maximumethics.dev
 test_subdomain: test

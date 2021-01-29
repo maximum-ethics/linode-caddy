@@ -46,6 +46,17 @@
     name: '{{ item }}'
   loop: "{{ common_packages }}"
   tags: initial_packages
+
+- name: remove Ubuntu packages
+  package:
+    name: '{{ item }}'
+    state: absent
+  loop: '{{ uninstall_Ubuntu }}'
+  tags: remove_packages
+  when:
+    - ansible_os_family == 'Debian'
+    - uninstall_Ubuntu is defined
+
 - name: install packages specific to each OS
   package:
     name: '{{ item }}'
@@ -56,7 +67,7 @@
 - user:
     name: aur_builder
   tags: aur_builder
-  when: 
+  when:
     - ansible_os_family == 'Archlinux'
     - aur_packages is defined
 - lineinfile:

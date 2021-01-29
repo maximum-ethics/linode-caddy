@@ -4,7 +4,7 @@ os_packages:
   - fd # find alternative
   - which # to find where executables are installed
   - rsync # dependency for "synchronize" Ansible module
-  - go # needed to build Caddy from source
+  - go # needed to build Caddy from source or use Hugo modules
   - hugo # static site generator https://gohugo.io/
 aur_packages:
   - yay # preferred AUR helper

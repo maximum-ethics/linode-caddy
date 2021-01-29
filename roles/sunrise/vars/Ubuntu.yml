@@ -1,11 +1,20 @@
 os_packages:
   - micro # terminal-based text editor
+  - golang # needed to build Caddy from source or use Hugo modules
+
+uninstall_Ubuntu:
+  - apache2 # we're using Caddy instead
+  - apache2-data
+  - apache2-utils
+  - ssl-cert
 
 sudoing_group: sudo
 web_server_user: www-data
 
+# Set this to true to use the vars in local_tls.yml
 local_tls: true
-# caddy_storage_dir: 
+
+# caddy_storage_dir:
 # caddy_conf_autosave_dir: /var/www/.config/caddy
 # caddy_binary_location: /usr/bin/caddy
 

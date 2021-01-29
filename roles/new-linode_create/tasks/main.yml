@@ -51,6 +51,7 @@
   # https://pypi.org/project/linode-api4/
   pip:
     name: linode_api4
+    state: latest
 - name: Ensure linode is running (create if missing)
   # linode_v4 Ansible module documentation:
   # https://docs.ansible.com/ansible/latest/modules/linode_v4_module.html
