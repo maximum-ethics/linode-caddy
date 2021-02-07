@@ -2,7 +2,7 @@
 # ansible-galaxy install kewlfft.aur
 # https://github.com/kewlfft/ansible-aur
 
-- hosts: all
+- hosts: webservers
   become: yes
 
   roles:

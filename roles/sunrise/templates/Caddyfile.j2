@@ -23,6 +23,18 @@
 
 # start site blocks
 
+# local test page, using local certs
+{{ local_hostname }}.{{ test_domain }} {
+	root * /srv/{{ test_domain }}/{{ test_subdomain }}/public/
+	import boilerplate
+	# https://caddyserver.com/docs/caddyfile/directives/templates
+	# can't use default double curly braces b/c Ansible uses them
+	templates {
+		between (( ))
+	}
+	tls internal
+}
+
 # test page
 {{ test_subdomain }}.{{ test_domain }} {
 	root * /srv/{{ test_domain }}/{{ test_subdomain }}/public/
