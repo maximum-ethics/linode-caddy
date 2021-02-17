@@ -41,6 +41,15 @@
     verbosity: 1
   tags: webserver_user_registered
 
+# Among other things, this is where Go will assemble Hugo modules
+- name: make sure Caddy has permissions in its home dir
+  file:
+    path: '{{ webserver_user_registered.home }}'
+    state: directory
+    recurse: yes
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+
 # Info on data directory location defaults:
 # https://caddyserver.com/docs/conventions#data-directory
 - name: create data directory # it's not just tls certificates
