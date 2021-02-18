@@ -9,9 +9,21 @@
 }
 
 # reusable snippets: https://caddyserver.com/docs/caddyfile/concepts#snippets
+(cache-plz) {
+	@cachedFiles {
+		path *.jpg *.jpeg
+	}
+	@checkCache {
+		path *.css
+	}
+	header @cachedFiles Cache-Control "public, max-age=31536000, must-revalidate"
+	header @checkCache Cache-Control no-cache
+}
+
 (boilerplate) {
 	encode gzip zstd
 	file_server
+	import cache-plz
 }
 
 # redirect no-www to www
@@ -33,6 +45,7 @@
 	templates {
 		between (( ))
 	}
+	tls {{ admin_email }}
 }
 
 # local test page
@@ -57,5 +70,6 @@ www.maximumethics.dev {
 	root * /srv/maximumethics.dev/www/public
 	encode gzip zstd
 	file_server browse
+	import cache-plz
 }
 import redir-to-www maximumethics.dev
