@@ -103,10 +103,20 @@
     group: '{{ web_server_user }}'
     mode: 0755
 
-- name: install test website from template
+- name: install test html from template
   template:
     src: index.html.j2
     dest: /srv/{{ test_domain }}/{{ test_subdomain }}/public/index.html
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+    mode: 0755
+  notify:
+    - reload caddy
+  tags: test_website
+- name: install test css
+  copy:
+    src: style.css
+    dest: /srv/{{ test_domain }}/{{ test_subdomain }}/public/style.css
     owner: '{{ web_server_user }}'
     group: '{{ web_server_user }}'
     mode: 0755

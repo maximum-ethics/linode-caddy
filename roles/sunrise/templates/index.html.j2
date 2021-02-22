@@ -1,30 +1,21 @@
 <!DOCTYPE html>
-<html lang=en>
+<html lang=en-us>
 
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width, initial-scale=1">
 <meta name=description content="Minimal HTML page to test whether this web server works.">
-<link rel="icon" href="data:,">
 <title>Test Page</title>
-<style>
-:root {
-  --background: #fff;
-  --color: #000;
-} 
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000;
-    --color: snow;
-  }
-}
-
-body {
-  background-color: var(--background);
-  color: var(--color);
-}
-</style>
+<link rel=stylesheet href=/style.css>
+<link rel=icon href=data:,>
 
 <body>
-<p>Welcome to ((.Host)). The time is ((now | date "15:04:05 MST")) on ((now | date "Monday January 2, 2006")). Your IP is ((.RemoteIP)), and your browser user agent is ((.Req.Header.Get "User-Agent")).
-<p>This server, named {{ ansible_hostname }}, is running the {{ ansible_distribution }} distribution in the {{ ansible_os_family }} OS family.
+<p>
+Welcome to ((.Host)). The time is ((now | date "15:04:05 MST")) on ((now | date "Monday January 2, 2006")). Your IP is ((.RemoteIP)), and your browser user agent is ((.Req.Header.Get "User-Agent")).
+<p>
+This
+{%- if local_tls %}
+ development
+{%- else %}
+ production
+{%- endif %}
+ server, named {{ ansible_hostname }}, is running the {{ ansible_distribution }} distribution in the {{ ansible_os_family }} OS family.

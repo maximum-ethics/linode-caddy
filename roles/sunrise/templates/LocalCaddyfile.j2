@@ -29,7 +29,7 @@
 # redirect no-www to www
 (redir-to-www) {
 	{args.0} {
-		redir https://www.{args.0}{uri}
+		redir https://www.{args.0}{uri} permanent
 	}
 }
 
@@ -40,6 +40,10 @@
 {{ local_hostname }}.{{ test_domain }} {
 	root * /srv/{{ test_domain }}/{{ test_subdomain }}/public/
 	import boilerplate
+	header {
+		Content-Security-Policy: "default-src 'none'; connect-src 'self'; img-src data:; style-src 'self'; frame-ancestors 'none'"
+		X-Content-Type-Options: "nosniff"
+	}
 	# https://caddyserver.com/docs/caddyfile/directives/templates
 	# can't use default double curly braces b/c Ansible uses them
 	templates {
