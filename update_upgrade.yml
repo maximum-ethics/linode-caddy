@@ -1,12 +1,5 @@
-# first, if you want to use Arch Linux, run locally:
-# ansible-galaxy install kewlfft.aur
-# https://github.com/kewlfft/ansible-aur
-
 - hosts: webservers
   become: yes
-
-  roles:
-  - kewlfft.aur
 
   tasks:
   - name: update apt sources (if we haven't lately) + upgrade packages
@@ -20,13 +13,4 @@
     pacman:
       update_cache: yes
       upgrade: yes
-    when: ansible_os_family == 'Archlinux'
-
-  - name: upgrade AUR packages
-    aur:
-      upgrade: yes
-      aur_only: yes
-    become: yes
-    become_user: aur_builder
-    tags: updategrade
     when: ansible_os_family == 'Archlinux'
