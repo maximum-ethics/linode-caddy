@@ -1,23 +1,24 @@
 /* CSS Variables */
 :root {
-  --background: #fff;
-  --color: #000;
+	--background: #fff;
+	--color: #000;
 }
 
 /* Define colors for dark mode */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000;
-    --color: snow;
-  }
+	:root {
+		--background: #000;
+		--color: snow;
+	}
 }
 
 body {
-  background-color: var(--background);
-  color: var(--color);
-  font-family:Liberation Sans,Arial,Roboto,Helvetica,FreeSans,sans-serif;
-  max-width: clamp(47ch, 85vw, 92ch);
-  padding: 0 1ch;
+	background-color: var(--background);
+	color: var(--color);
+	font-family:Liberation Sans,Arial,Roboto,Helvetica,FreeSans,sans-serif;
+	max-width: 92ch; /* fallback for browsers w/o clamp */
+	max-width: clamp(47ch, 85vw, 92ch);
+	padding: 0 1ch;
 	margin: auto;
 	line-height: 1.45;
 }

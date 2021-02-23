@@ -1,8 +1,7 @@
 os_packages:
-  - micro # terminal-based text editor
   - golang # needed to build Caddy from source or use Hugo modules
 
-uninstall_Ubuntu:
+uninstall_packages:
   - apache2 # we're using Caddy instead
   - apache2-data
   - apache2-utils

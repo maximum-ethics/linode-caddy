@@ -1,7 +1,3 @@
-# first, if you want to use Arch Linux, run locally:
-# ansible-galaxy install kewlfft.aur
-# https://github.com/kewlfft/ansible-aur
-
 - name: Include OS-specific variables
   include_vars: "{{ ansible_distribution }}.yml"
   tags: always
@@ -26,18 +22,6 @@
   tags: updategrade
   when: ansible_os_family == 'Archlinux'
 
-# TODO: This won't work until the user is created for it!
-# - name: upgrade AUR packages
-#   aur:
-#     upgrade: yes
-#     aur_only: yes
-#   become: yes
-#   become_user: aur_builder
-#   tags: updategrade
-#   when:
-#     - ansible_os_family == 'Archlinux'
-#     - aur_packages is defined
-
 # TODO: Also update packages installed from other sources, such as pip
 # linode_create.yml installs linode-api4 from pip
 
@@ -47,15 +31,13 @@
   loop: "{{ common_packages }}"
   tags: initial_packages
 
-- name: remove Ubuntu packages
+- name: remove packages
   package:
     name: '{{ item }}'
     state: absent
-  loop: '{{ uninstall_Ubuntu }}'
+  loop: '{{ uninstall_packages }}'
   tags: remove_packages
-  when:
-    - ansible_os_family == 'Debian'
-    - uninstall_Ubuntu is defined
+  when: uninstall_packages is defined
 
 - name: install packages specific to each OS
   package:
@@ -63,33 +45,6 @@
   loop: "{{ os_packages }}"
   tags: initial_packages
   when: os_packages is defined
-
-- user:
-    name: aur_builder
-  tags: aur_builder
-  when:
-    - ansible_os_family == 'Archlinux'
-    - aur_packages is defined
-- lineinfile:
-    path: /etc/sudoers.d/11-install-aur_builder
-    line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
-    create: yes
-    validate: 'visudo -cf %s'
-  tags: aur_builder
-  when:
-    - ansible_os_family == 'Archlinux'
-    - aur_packages is defined
-
-- name: install AUR packages
-  aur:
-    name: '{{ item }}'
-  loop: '{{ aur_packages }}'
-  become: yes
-  become_user: aur_builder
-  tags: aur_packages
-  when:
-    - ansible_os_family == 'Archlinux'
-    - aur_packages is defined
 
 - name: Add limited user accounts for all Sunrise sysadmins
   user:
@@ -166,7 +121,6 @@
   import_tasks: new_handcoded.yml
   tags: new_handcoded
 
-# Hugo playbook doesn't work yet
 - name: set up Hugo websites
   import_tasks: hugo.yml
   tags: hugo

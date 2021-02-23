@@ -5,12 +5,14 @@ os_packages:
   - which # to find where executables are installed
   - rsync # dependency for "synchronize" Ansible module
   - go # needed to build Caddy from source or use Hugo modules
+# Caddy is currently in Community-Testing:
+# https://archlinux.org/packages/community-testing/x86_64/caddy/
+# I manually enabled that repo:
+# https://joshtronic.com/2019/08/19/how-to-install-packages-from-testing-on-arch-linux/
+# if it doesn't come out of testing soon we should write a play to do this
+  - caddy # web server https://caddyserver.com/
   - hugo # static site generator https://gohugo.io/
-aur_packages:
-  - yay # preferred AUR helper
-  - micro # terminal-based text editor
-  - caddy-bin # hope this makes it back into the official repos someday
-  - tealdeer # tldr client
+  - tldr # python client, use until tealdeer is available
 
 sudoing_group: wheel
 web_server_user: caddy

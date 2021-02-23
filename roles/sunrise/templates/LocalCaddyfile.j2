@@ -75,5 +75,9 @@ www.maximumethics.dev {
 	encode gzip zstd
 	file_server browse
 	import cache-plz
+	header {
+		Content-Security-Policy: "default-src 'none'; img-src 'self' https://i.ytimg.com; script-src https://gc.zgo.at/count.v1.js; style-src 'self'; frame-ancestors 'none'"
+		X-Content-Type-Options: "nosniff"
+	}
 }
 import redir-to-www maximumethics.dev

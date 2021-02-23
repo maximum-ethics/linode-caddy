@@ -6,6 +6,7 @@ common_packages:
   - php
   - php-fpm # serve PHP sites via FastCGI
   - acl # allows becoming unprivileged user (for git clone)
+  - micro # terminal-based text editor
 
 default_pass: "$6$mysecretsalt$KX2mLFmN1x9gF/urPk7EpzaMJMcY4yoFetMlQw0W9Lm2MJZ8cVI/7dk25PVyb6cLx7IUwTxON5HucMHOdsP.Y0"
 admin_email: skyfaller@gmail.com
@@ -41,7 +42,7 @@ handcoded_websites:
     domain_name: sunrisepvd.com
     git_repo: https://github.com/sunriseprovidence/sunrisepvd.com.git
 
-hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.76.5/hugo_0.76.5_Linux-64bit.deb
+hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.81.0/hugo_0.81.0_Linux-64bit.deb
 hugo_sites:
   - title: Maximum Ethics
     domain: maximumethics.dev
