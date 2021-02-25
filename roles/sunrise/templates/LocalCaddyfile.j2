@@ -41,7 +41,7 @@
 	root * /srv/{{ test_domain }}/{{ test_subdomain }}/public/
 	import boilerplate
 	header {
-		Content-Security-Policy: "default-src 'none'; connect-src 'self'; img-src data:; style-src 'self'; frame-ancestors 'none'"
+		Content-Security-Policy: "default-src 'none'; connect-src 'self'; img-src data:; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
 		X-Content-Type-Options: "nosniff"
 	}
 	# https://caddyserver.com/docs/caddyfile/directives/templates
@@ -56,6 +56,12 @@
 {{ test_subdomain }}.{{ test_domain }} {
 	root * /srv/{{ test_domain }}/{{ test_subdomain }}/public/
 	import boilerplate
+	header {
+		Content-Security-Policy: "default-src 'none'; connect-src 'self'; img-src data:; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
+		X-Content-Type-Options: "nosniff"
+	}
+	# https://caddyserver.com/docs/caddyfile/directives/templates
+	# can't use default double curly braces b/c Ansible uses them
 	templates {
 		between (( ))
 	}
@@ -66,6 +72,10 @@ www.sunrisepvd.com {
 	root * /srv/sunrisepvd.com/www/public
 	import boilerplate
 	php_fastcgi unix/{{ php_fpm_unix_socket }}
+	header {
+		Content-Security-Policy: " default-src 'none'; font-src https://fonts.gstatic.com; frame-src https://www.youtube.com; img-src 'self' https://actionnetwork.org; object-src https://actionnetwork.org/includes/js/can-embed.js https://actionnetwork.org/includes/js/jquery-min.js; script-src 'self' 'unsafe-inline' https://actionnetwork.org/includes/js/can-embed.js https://actionnetwork.org/includes/js/jquery-min.js https://actionnetwork.org/widgets/v3/form/join-the-sunrise-movement-in-providence; style-src 'self' 'unsafe-inline' https://actionnetwork.org/css/ https://fonts.googleapis.com/; frame-ancestors 'none'; base-uri 'none'"
+		X-Content-Type-Options: "nosniff"
+	}
 }
 import redir-to-www sunrisepvd.com
 
@@ -76,7 +86,7 @@ www.maximumethics.dev {
 	file_server browse
 	import cache-plz
 	header {
-		Content-Security-Policy: "default-src 'none'; img-src 'self' https://i.ytimg.com; script-src https://gc.zgo.at/count.v1.js; style-src 'self'; frame-ancestors 'none'"
+		Content-Security-Policy: "default-src 'none'; img-src 'self' https://i.ytimg.com https://skyfaller.goatcounter.com; script-src https://gc.zgo.at/count.v1.js; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
 		X-Content-Type-Options: "nosniff"
 	}
 }
