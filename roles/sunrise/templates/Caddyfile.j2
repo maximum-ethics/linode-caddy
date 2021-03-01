@@ -20,10 +20,17 @@
 	header @checkCache Cache-Control no-cache
 }
 
+(error-response) {
+	handle_errors {
+		respond "{http.error.status_code} {http.error.status_text}"
+	}
+}
+
 (boilerplate) {
 	encode gzip zstd
 	file_server
 	import cache-plz
+	import error-response
 }
 
 # redirect no-www to www
@@ -84,6 +91,7 @@ www.maximumethics.dev {
 	encode gzip zstd
 	file_server browse
 	import cache-plz
+	import error-response
 	header {
 		Content-Security-Policy: "default-src 'none'; img-src 'self' https://i.ytimg.com https://skyfaller.goatcounter.com; script-src https://gc.zgo.at/count.v1.js; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
 		X-Content-Type-Options: "nosniff"
