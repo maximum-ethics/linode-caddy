@@ -1,5 +1,6 @@
 os_packages:
   - golang # needed to build Caddy from source or use Hugo modules
+  - fd-find # find alternative
 
 uninstall_packages:
   - apache2 # we're using Caddy instead

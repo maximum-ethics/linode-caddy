@@ -1,6 +1,7 @@
 common_packages:
   - fish # Nelson's favorite shell
   - bat # cat alternative
+  - exa # ls alternative
   - mosh # better than SSH over crappy/mobile connections
   - git # check out git repositories
   - php

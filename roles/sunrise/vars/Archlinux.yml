@@ -1,6 +1,5 @@
 os_packages:
   - base-devel # needed for AUR
-  - exa # ls alternative
   - fd # find alternative
   - which # to find where executables are installed
   - rsync # dependency for "synchronize" Ansible module
