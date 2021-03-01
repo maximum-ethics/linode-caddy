@@ -16,8 +16,8 @@ body {
 	background-color: var(--background);
 	color: var(--color);
 	font-family:Liberation Sans,Arial,Roboto,Helvetica,FreeSans,sans-serif;
-	max-width: 92ch; /* fallback for browsers w/o clamp */
-	max-width: clamp(47ch, 85vw, 92ch);
+	max-width: 90ch; /* fallback for browsers w/o clamp */
+	max-width: clamp(45ch, 80vw, 90ch);
 	padding: 0 1ch;
 	margin: auto;
 	line-height: 1.45;
