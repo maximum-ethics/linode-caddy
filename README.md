@@ -1,6 +1,6 @@
 # Linode-Caddy repository
 
-## Introductory explanation (wtf is this?)
+## Introductory explanation
 
 This repository contains the [Ansible](https://www.ansible.com/) code that we use to create our web servers that we use at Maximum Ethics to host websites (static and dynamic). Essentially this contains a package of code for Ansible that is capable of configuring a fresh installation of Arch Linux into a functioning web server that can host our websites.  It also acts as documentation for how our web servers are configured should we ever need to recreate them or move to a different hosting option. This is currently written for the specific websites Maximum Ethics is hosting, and will have to be generalized later.
 
@@ -11,7 +11,7 @@ This might be useful to you if:
 - You are employed with us and wish to go your own way and/or need to host some of your clients' sites
 - You have knowledge or expertise in ethical web hosting and you'd like to contribute to our goal
 
-## Why this matters? (relate to principles on why this repository even exists)
+## Why this matters?
 
 There are plenty of businesses that put profit first, Maximum Ethics is a place for employees and customers who prioritize their values.
 
