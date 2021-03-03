@@ -129,3 +129,8 @@ Make sure all domains resolve to the correct IP addresses before using the publi
 
 Go to GitHub and sign in
 Profile->Settings->Developer Settings->Personal access tokens->Generate new token `git config --global credential.helper store` that will save your credentials next time you run a command. Then use the token in place of your password when you:`git push`
+
+## License
+
+This project is licensed under the [GNU Affero General Public License](https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License) version 3 or any later version at your choice. See the [LICENSE](LICENSE) file for details.
+
