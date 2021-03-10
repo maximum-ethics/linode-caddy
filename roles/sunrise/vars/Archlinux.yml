@@ -11,7 +11,6 @@ os_packages:
 # if it doesn't come out of testing soon we should write a play to do this
   - caddy # web server https://caddyserver.com/
   - hugo # static site generator https://gohugo.io/
-  - tldr # python client, use until tealdeer is available
 
 sudoing_group: wheel
 web_server_user: caddy
