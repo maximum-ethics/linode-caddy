@@ -12,3 +12,7 @@ hugo_sites:
     content_repo: https://git.sr.ht/~skyfaller/maximum-ethics-content
     # theme_repo: https://git.sr.ht/~skyfaller/maxethics-hugo
     # theme_name: maxethics-hugo
+  - title: Nelson's minimal Hugo website
+    domain: pavlosky.net
+    subdomain: nelson
+    content_repo: https://git.sr.ht/~skyfaller/nelson-site

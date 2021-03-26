@@ -99,3 +99,12 @@ www.maximumethics.dev {
 	}
 }
 import redir-to-www maximumethics.dev
+
+nelson.pavlosky.net {
+	root * /srv/pavlosky.net/nelson/public
+	import boilerplate
+	header {
+		Content-Security-Policy: "default-src 'none'; frame-src https://jawns.club; img-src 'self' https://i.ytimg.com; script-src https://jawns.club/embed.js; style-src 'self' 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
+		X-Content-Type-Options: "nosniff"
+	}
+}
