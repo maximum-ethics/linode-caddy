@@ -41,7 +41,7 @@
 }
 
 # start site blocks
-
+{#
 # public test page (currently not actually public)
 # https://caddy.community/t/caddyfile-having-individual-sites-differ-from-global-options/11297
 {{ local_hostname }}.{{ test_domain }} {
@@ -57,7 +57,7 @@
 		between (( ))
 	}
 	tls {{ admin_email }}
-}
+} #}
 
 # local test page
 {{ test_subdomain }}.{{ test_domain }} {
