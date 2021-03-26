@@ -17,6 +17,15 @@
   notify:
     - reload caddy
 
+- name: make sure Caddy has permissions in content repo destination
+  file:
+    path: /srv/{{ item.domain }}
+    state: directory
+    recurse: yes
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+  loop: '{{ hugo_sites }}'
+
 - name: clone content repo
   git:
     repo: '{{ item.content_repo }}'

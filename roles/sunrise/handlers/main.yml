@@ -44,7 +44,7 @@
   listen: restart caddy
 
 - name: run Hugo if content changed
-  command: hugo
+  command: hugo --cleanDestinationDir
   become: yes
   become_user: '{{ web_server_user }}'
   args:
