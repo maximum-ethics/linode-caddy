@@ -1,10 +1,6 @@
 # vars for caddy_v2.yml
 caddyfile_name: LocalCaddyfile.j2
 
-handcoded_websites:
-  - subdomain: www
-    domain_name: sunrisepvd.com
-    git_repo: https://github.com/sunriseprovidence/sunrisepvd.com.git
 hugo_sites:
   - title: Maximum Ethics
     domain: maximumethics.dev
