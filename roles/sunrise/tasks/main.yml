@@ -1,25 +1,33 @@
 - name: Include OS-specific variables
   include_vars: "{{ ansible_distribution }}.yml"
-  tags: always
+  tags:
+  - always
+  - local
 
 - name: include local TLS file when testing
   include_vars: local_tls.yml
   when: local_tls
-  tags: always
+  tags:
+  - always
+  - local
 
 - name: update apt sources + upgrade packages
   apt:
     update_cache: yes
     cache_valid_time: 3600
     upgrade: safe
-  tags: updategrade
+  tags:
+  - updategrade
+  - local
   when: ansible_os_family == 'Debian'
 
 - name: update pacman sources + upgrade packages
   pacman:
     update_cache: yes
     upgrade: yes
-  tags: updategrade
+  tags:
+  - updategrade
+  - local
   when: ansible_os_family == 'Archlinux'
 
 # TODO: Also update packages installed from other sources, such as pip
@@ -29,21 +37,27 @@
   package:
     name: '{{ item }}'
   loop: "{{ common_packages }}"
-  tags: initial_packages
+  tags:
+  - initial_packages
+  - local
 
 - name: remove packages
   package:
     name: '{{ item }}'
     state: absent
   loop: '{{ uninstall_packages }}'
-  tags: remove_packages
+  tags:
+  - remove_packages
+  - local
   when: uninstall_packages is defined
 
 - name: install packages specific to each OS
   package:
     name: '{{ item }}'
   loop: "{{ os_packages }}"
-  tags: initial_packages
+  tags:
+  - initial_packages
+  - local
   when: os_packages is defined
 
 - name: Add limited user accounts for all Sunrise sysadmins
@@ -75,24 +89,37 @@
 - name: set system's hostname
   hostname:
     name: "{{ local_hostname }}"
-  tags: hostname
+  tags:
+  - hostname
+- name: pop OS hostname
+  hostname:
+    name: "{{ local_hostname }}"
+    use: systemd
+  tags:
+  - hostname
+  - local
 - name: print hostname
   debug:
     msg: Inventory item {{ inventory_hostname }} has hostname {{ ansible_hostname }}
     verbosity: 1
-  tags: hostname
+  tags:
+  - hostname
+  - local
 
 - name: print datetime before setting timezone
   debug:
     var: ansible_date_time
     verbosity: 1
-  tags: timezone
+  tags:
+  - timezone
+  - local
 # to get list of possible timezones, run "timedatectl list-timezones"
 - name: set timezone to NYC
   timezone:
     name: America/New_York
     # name: America/Los_Angeles
-  tags: timezone
+  tags:
+  - timezone
   notify:
     - print time
 
@@ -100,7 +127,8 @@
 # Maybe I should use iptables directly, but it's easier/simpler to set up UFW
 # persistently using Ansible, so let's try it for now.
   import_tasks: ufw.yml
-  tags: ufw
+  tags:
+  - ufw
 
 # TODO: fail2ban?
 
@@ -112,18 +140,26 @@
   debug:
     msg: This server is running the {{ ansible_distribution }} distribution in the {{ ansible_os_family }} OS family.
     verbosity: 1
-  tags: caddy
+  tags:
+  - caddy
+  - local
 - name: setup Caddy V2 web server
   import_tasks: caddy.yml
-  tags: caddy
+  tags:
+  - caddy
+  - local
 
 - name: set up some handcoded websites
   import_tasks: new_handcoded.yml
-  tags: new_handcoded
+  tags:
+  - new_handcoded
+  - local
 
 - name: set up Hugo websites
   import_tasks: hugo.yml
-  tags: hugo
+  tags:
+  - hugo
+  - local
 
 # TODO: set up Longview - record and view stats, data to help diagnose problems
 

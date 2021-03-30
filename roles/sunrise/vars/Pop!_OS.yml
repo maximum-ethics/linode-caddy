@@ -1,0 +1,26 @@
+os_packages:
+  - golang # needed to build Caddy from source or use Hugo modules
+  - fd-find # find alternative
+  - hostname
+
+uninstall_packages:
+  - apache2 # we're using Caddy instead
+  - apache2-data
+  - apache2-utils
+
+sudoing_group: sudo
+web_server_user: www-data
+
+# Set this to true to use the vars in local_tls.yml
+local_tls: true
+# local_machine: true
+
+# caddy_storage_dir:
+# caddy_conf_autosave_dir: /var/www/.config/caddy
+# caddy_binary_location: /usr/bin/caddy
+
+# https://stackoverflow.com/questions/17570658/how-to-find-my-php-fpm-sock
+# Check /etc/php/7.4/fpm/pool.d/www.conf for location of unix socket
+# should be line like "listen = /run/php/php7.4-fpm.sock"
+php_fpm_unix_socket: /var/run/php/php7.4-fpm.sock
+php_fpm_service_name: php7.4-fpm

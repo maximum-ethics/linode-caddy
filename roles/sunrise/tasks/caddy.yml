@@ -131,13 +131,13 @@
     state: present
   when: # list of conditions = AND
     - not building_caddy
-    - ansible_os_family == 'Debian'
+    - ansible_os_family == 'Debian' or ansible_os_family == 'Pop!_OS'
 - name: add Caddy deb repository
   apt_repository:
     repo: deb https://dl.cloudsmith.io/public/caddy/stable/deb/debian any-version main
   when:
     - not building_caddy
-    - ansible_os_family == 'Debian'
+    - ansible_os_family == 'Debian' or ansible_os_family == 'Pop!_OS'
 - name: install Caddy from apt
   apt:
     name: caddy
@@ -145,7 +145,7 @@
     - restart caddy
   when:
     - not building_caddy
-    - ansible_os_family == 'Debian'
+    - ansible_os_family == 'Debian' or ansible_os_family == 'Pop!_OS'
 
 # - name: install Caddy local CA cert
 #   command: '{{ caddy_binary_location }} trust'
