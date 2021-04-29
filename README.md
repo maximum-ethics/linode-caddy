@@ -75,9 +75,7 @@ use ED25519
 
 ### Create localhost vars file
 
-at e.g. /etc/ansible/host_vars/localhost/vars.yml (or 
-/usr/local/etc/ansible/hosts if you use homebrew on Mac to install 
-Ansible)
+at e.g. /etc/ansible/host_vars/localhost/vars.yml (or /usr/local/etc/ansible/hosts if you use homebrew on Mac to install Ansible)
 
 ```
 inventory_directory: [e.g. /etc/ansible]
@@ -115,7 +113,7 @@ This includes setting up the [Caddy v2 web server](https://caddyserver.com/), se
 
 **WAIT!** If you are changing the IP address for an existing domain name, consider the TTL! [Linode's default TTL is 24 hours](https://www.linode.com/docs/platform/manager/dns-manager/#troubleshoot-dns-records). Many of our Godaddy subdomains currently have the TTL set to 1 hour.
 
-If you power up your new Caddy webserver before DNS resolves correctly, it won't be able to get certificates from Let's Encrypt, and won't serve your websites. Worse, you may annoy Let's Encrypt by exceeding their rate limits (requesting certs you can't get) and then you'll have to wait even longer! 
+If you power up your new Caddy webserver before DNS resolves correctly, it won't be able to get certificates from Let's Encrypt, and won't serve your websites. Worse, you may annoy Let's Encrypt by exceeding their rate limits (requesting certs you can't get) and then you'll have to wait even longer!
 
 Rather than testing changes publicly on the open web, set up a dev environment so that you can test this playbook without requesting certs from Let's Encrypt. If you use the local_tls option, Caddy will create its own local certificates on the server, and you can manually install the certs on your personal computer and point your /etc/hosts file at the correct IP address to preview what the site will look like.
 
