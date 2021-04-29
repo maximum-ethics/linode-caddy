@@ -1,0 +1,10 @@
+- name: copy fish functions
+  copy:
+    src: "{{ item }}"
+    dest: /etc/fish/functions/
+  # if we encounter a system that doesn't keep global config files here,
+  # we'll generalize to use the $__fish_sysconf_dir environment variable instead.
+  # https://fishshell.com/docs/current/index.html#autoloading-functions
+  # https://www.mydailytutorials.com/introduction-shell-command-module-ansible/
+  with_fileglob:
+    - "*"

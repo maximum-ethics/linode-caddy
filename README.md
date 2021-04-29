@@ -65,10 +65,6 @@ to install on fresh Arch:
 - micro
     - xclip
 - exa
-    - alias l "exa"
-    - funcsave l
-    - alias lt "exa --tree"
-    - alias lg "exa -halgG --git"
 - bat
 
 ### Create Personal Access Token on Linode

@@ -1,0 +1,6 @@
+---
+
+- hosts: webservers
+  become: yes
+  roles:
+    - fish-shell
