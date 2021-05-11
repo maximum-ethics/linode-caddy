@@ -16,7 +16,7 @@ admin_email: skyfaller@gmail.com
 users:
   - name: wilsonbr
     password: "{{ default_pass }}"
-    shell: /bin/bash
+    shell: /usr/bin/fish
     sshKey:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMSoD1EE/VdDb9mBYDsebsIVowqhfvNWYhe2YBcfNeTo wilsonbr@cthulu2
   - name: nelson
