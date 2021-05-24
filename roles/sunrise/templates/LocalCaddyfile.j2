@@ -108,3 +108,13 @@ nelson.pavlosky.net {
 		X-Content-Type-Options: "nosniff"
 	}
 }
+
+www.oahspesales.com {
+	root * /srv/oahspesales.com/www/public
+	import boilerplate
+	header {
+		Content-Security-Policy: "default-src 'none'; connect-src 'self'; img-src 'self'; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
+		X-Content-Type-Options: "nosniff"
+	}
+}
+import redir-to-www oahspesales.com

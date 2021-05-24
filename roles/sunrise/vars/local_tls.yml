@@ -12,3 +12,7 @@ hugo_sites:
     domain: pavlosky.net
     subdomain: nelson
     content_repo: https://git.sr.ht/~skyfaller/nelson-site
+  - title: Oahspe Sales
+    domain: oahspesales.com
+    subdomain: www
+    content_repo: https://git.sr.ht/~skyfaller/oahspesales.com
