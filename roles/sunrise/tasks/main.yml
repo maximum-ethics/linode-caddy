@@ -60,7 +60,7 @@
   - local
   when: os_packages is defined
 
-- name: Add limited user accounts for all Sunrise sysadmins
+- name: Add limited user accounts for all sysadmins
   user:
     name: "{{ item.name }}"
     password: "{{ item.password }}"
@@ -70,7 +70,7 @@
   loop: "{{ users }}"
   tags: user_accounts
 
-- name: Add ssh keys for all Sunrise sysadmins
+- name: Add ssh keys for all sysadmins
   authorized_key:
     user: "{{ item.0.name }}"
     key: "{{ item.1 }}"
