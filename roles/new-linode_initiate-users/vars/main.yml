@@ -13,6 +13,5 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJcoG9tZKULXW2IQ+5MsZ3vgUBJ5C3uDbbG381S1Cjdl nelson@Valence.local
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnUmCzUu/jrZz+T5rVTEJQ73zobj+CixKJS2N9jMkhz nelson@annalise
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKH1YH796hxWQu5B/mHwU6nfG1fDDAO8FtI3UpwcbbTs nelson@cordelia
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRC6S9lwj62tDyeLRHkcw1+rZo87BO+6i7fBLPhbnIE nelson@cascabel
 
 default_pass: "$6$mysecretsalt$KX2mLFmN1x9gF/urPk7EpzaMJMcY4yoFetMlQw0W9Lm2MJZ8cVI/7dk25PVyb6cLx7IUwTxON5HucMHOdsP.Y0"

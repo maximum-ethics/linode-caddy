@@ -27,7 +27,6 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJcoG9tZKULXW2IQ+5MsZ3vgUBJ5C3uDbbG381S1Cjdl nelson@Valence.local
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnUmCzUu/jrZz+T5rVTEJQ73zobj+CixKJS2N9jMkhz nelson@annalise
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKH1YH796hxWQu5B/mHwU6nfG1fDDAO8FtI3UpwcbbTs nelson@cordelia
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICRC6S9lwj62tDyeLRHkcw1+rZo87BO+6i7fBLPhbnIE nelson@cascabel
 sudoing_group: wheel
 
 # vars for caddy.yml
