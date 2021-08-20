@@ -6,6 +6,10 @@
   wait_for_connection:
     delay: 10
     timeout: 90
+# If the role fails here, and you can ping the hostname but not ssh to it,
+# try making a meaningless edit to your local /etc/hosts, or overwriting it
+# with no change using e.g. sudo nano /etc/hosts with ctrl+O. I don't know why
+# that would fix anything, but it does on my old Macbook Pro.
 - name: Gather facts for first time
   setup:
 
