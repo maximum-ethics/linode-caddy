@@ -14,3 +14,5 @@
 # TODO: make sure handlers execute in the correct order, by e.g. calling the 2nd handler from the first handler
 # don't rely on the order in which handlers are written down, which seems fragile
 # https://github.com/sunrisemovement/devops/issues/7
+
+# Also, consider switching to Linode's latest kernel to improve security.

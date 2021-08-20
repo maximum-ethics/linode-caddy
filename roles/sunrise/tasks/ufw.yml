@@ -30,6 +30,8 @@
     rule: limit
     port: ssh
     proto: tcp
+# If you got an error "Perhaps iptables or your kernel needs to be upgraded."
+# try updating to Linode's latest kernel
 - name: allow HTTP, HTTPS
   ufw:
     rule: allow
