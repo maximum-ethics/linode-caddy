@@ -12,10 +12,7 @@ os_packages:
   - caddy # web server https://caddyserver.com/
   - hugo # static site generator https://gohugo.io/
 
-sudoing_group: wheel
 web_server_user: caddy
-
-# caddy_conf_autosave_dir: /srv/http/.config/caddy
 
 # https://stackoverflow.com/questions/17570658/how-to-find-my-php-fpm-sock
 # check /etc/php/php-fpm.d/www.conf for location of unix socket

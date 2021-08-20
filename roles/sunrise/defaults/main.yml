@@ -1,2 +1,9 @@
 # Set this to true to use the vars in local_tls.yml
 local_tls: true
+sudoing_group: wheel
+
+# vars for caddy.yml
+caddy_storage_dir: '{{ webserver_user_registered.home }}/.local/share/caddy'
+caddy_conf_autosave_dir: '{{ webserver_user_registered.home }}/.config/caddy'
+caddyfile_dir: /etc/caddy
+caddy_binary_location: /usr/bin/caddy
