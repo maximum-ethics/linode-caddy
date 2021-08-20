@@ -29,6 +29,13 @@
       name: '{{ linode_label }}'
       state: absent
 
+  - name: Remove lines with unwanted occurrences of hostname
+    lineinfile:
+      path: "{{ inventory_directory }}/hosts"
+      regexp: '^{{ linode_label }}$'
+      state: absent
+    become: true
+
 # TODO: add task for manual confirmation
 # We don't want to destroy servers by accident
 # https://github.com/sunrisemovement/devops/issues/3
