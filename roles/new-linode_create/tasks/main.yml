@@ -9,16 +9,10 @@
   lineinfile:
     path: "{{ inventory_directory }}/hosts"
     line: '[{{ hosts_group }}]'
-# The following two tasks aren't currently idempotent
-# Also they don't place the host immediately after the host group
+
 # Consider replace module instead of lineinfile, using multiline regex
 # https://stackoverflow.com/questions/33094075/ansible-lineinfile-regex-multiline
-- name: Remove lines with unwanted occurrences of hostname
-  lineinfile:
-    path: "{{ inventory_directory }}/hosts"
-    regexp: '^{{ linode_label }}$'
-    state: absent
-  become: true
+
 - name: add hostname to ansible hosts file
   lineinfile:
     path: "{{ inventory_directory }}/hosts"
@@ -82,26 +76,31 @@
   debug:
     var: created_linode.instance.root_pass
     verbosity: 2
-# TODO: create Github issues and include those in the code comments
-# https://github.com/sunrisemovement/devops/issues/2
+
 # TODO: rewrite using SSH aliases
 # https://collectiveidea.com/blog/archives/2011/02/04/how-to-ssh-aliases
 # https://github.com/sunrisemovement/devops/issues/4
-- name: Remove lines with unwanted occurrences of hostname
-  lineinfile:
-    dest: /etc/hosts
-    regexp: "^(?!{{ created_linode.instance.ipv4.0|replace('.', '\\.') }}|{{ created_linode.instance.ipv6.split('/')[0] | lower }})\\S+\\s+{{ linode_label }}$"
-    state: absent
-  become: true
+# - name: Remove lines with unwanted occurrences of hostname
+#   lineinfile:
+#     dest: /etc/hosts
+#     regexp: "^(?!{{ created_linode.instance.ipv4.0|replace('.', '\\.') }}|{{ created_linode.instance.ipv6.split('/')[0] | lower }})\\S+\\s+{{ linode_label }}$"
+#     state: absent
+#   become: true
+
+# These are probably bad regexp but they seem to work for now
+# At least they're idempotent, unlike deleting and then re-adding in separate steps
+# TODO: actually check for properly formed IPv6 and IPv4 addresses
 - name: Add the server's ipv6 address to local /etc/hosts file
   lineinfile:
     dest: /etc/hosts
+    regexp: "^\\S+:\\S+\\s+{{ linode_label }}$"
     line: "{{ created_linode.instance.ipv6.split('/')[0] | lower }}\t{{ linode_label }}"
     state: present
   become: true
 - name: Add the server's ipv4 address to local /etc/hosts file
   lineinfile:
     dest: /etc/hosts
+    regexp: "^\\S+\\s+{{ linode_label }}$"
     line: "{{ created_linode.instance.ipv4.0 }}\t{{ linode_label }}"
     state: present
   become: true
