@@ -8,7 +8,7 @@ function fish_greeting
 
 	if set -q SSH_TTY
 		printf "\t\t\t\t Your IP: "
-		who am i | awk '{printf("%s\n"), $5;}' | sed 's/[()]//g'
+		echo $SSH_CONNECTION | awk '{printf("%s\n"), $1;}'
 	end
 
 	if set -q fish_private_mode
