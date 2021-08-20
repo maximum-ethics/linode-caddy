@@ -1,4 +1,4 @@
-hosts_group: maxethics
+hosts_group: new
 # API documentation: https://developers.linode.com/api/v4/
 linode_label: banana
 linode_type: g6-nanode-1 # https://api.linode.com/v4/linode/types
