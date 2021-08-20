@@ -15,8 +15,6 @@ os_packages:
 sudoing_group: wheel
 web_server_user: caddy
 
-# Set this to true to use the vars in local_tls.yml
-local_tls: false
 # caddy_conf_autosave_dir: /srv/http/.config/caddy
 
 # https://stackoverflow.com/questions/17570658/how-to-find-my-php-fpm-sock
