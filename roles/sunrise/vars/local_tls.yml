@@ -1,18 +1,2 @@
 # vars for caddy_v2.yml
 caddyfile_name: LocalCaddyfile.j2
-
-hugo_sites:
-  - title: Maximum Ethics
-    domain: maximumethics.dev
-    subdomain: www
-    content_repo: https://git.sr.ht/~skyfaller/maximum-ethics-content
-    # theme_repo: https://git.sr.ht/~skyfaller/maxethics-hugo
-    # theme_name: maxethics-hugo
-  - title: Nelson's minimal Hugo website
-    domain: pavlosky.net
-    subdomain: nelson
-    content_repo: https://git.sr.ht/~skyfaller/nelson-site
-  - title: Oahspe Sales
-    domain: oahspesales.com
-    subdomain: www
-    content_repo: https://git.sr.ht/~skyfaller/oahspesales.com
