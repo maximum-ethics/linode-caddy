@@ -32,7 +32,7 @@
   user:
     name: "{{ item.name }}"
     password: "{{ item.password }}"
-    shell: "{{ item.shell }}"
+    # shell: "{{ item.shell }}"
     groups: wheel
     append: yes
     update_password: on_create

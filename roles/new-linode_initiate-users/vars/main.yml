@@ -3,12 +3,10 @@ ansible_user: root
 users:
   - name: wilsonbr
     password: "{{ default_pass }}"
-    shell: /bin/bash
     sshKey:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMSoD1EE/VdDb9mBYDsebsIVowqhfvNWYhe2YBcfNeTo wilsonbr@cthulu2
   - name: nelson
     password: "{{ default_pass }}"
-    shell: /bin/bash
     sshKey:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJcoG9tZKULXW2IQ+5MsZ3vgUBJ5C3uDbbG381S1Cjdl nelson@Valence.local
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnUmCzUu/jrZz+T5rVTEJQ73zobj+CixKJS2N9jMkhz nelson@annalise
