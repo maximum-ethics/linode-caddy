@@ -1,0 +1,17 @@
+Welcome to {{ ansible_hostname }}
+{%- if ansible_hostname == "america" %}
+ 🦅
+{%- elif ansible_hostname == "banana" %}
+ 🍌
+{%- elif ansible_hostname == "dragon" %}
+ 🐉
+{%- endif -%}
+!
+
+This
+{%- if local_tls %}
+ development
+{%- else %}
+ production
+{%- endif %}
+ server is running the {{ ansible_distribution }} distribution in the {{ ansible_os_family }} OS family.

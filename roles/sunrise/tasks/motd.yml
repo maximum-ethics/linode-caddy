@@ -37,6 +37,13 @@
   notify:
   - update motd-news service
 
+- name: install motd from template
+  template:
+    src: motd.j2
+    dest: /etc/motd
+    mode: 0755
+  when: ansible_os_family == 'Archlinux' or ansible_os_family == 'Alpine'
+
 - name: Ensure your_ip.sh is installed, telling you your IP on login
   copy:
     src: your_ip.sh
