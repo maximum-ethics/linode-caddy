@@ -78,7 +78,11 @@
 www.sunrisepvd.com {
 	root * /srv/sunrisepvd.com/www/public
 	import boilerplate
+{% if php_fpm_unix_socket is defined %}
 	php_fastcgi unix/{{ php_fpm_unix_socket }}
+{% elif php_fpm_socket is defined %}
+	php_fastcgi {{ php_fpm_socket }}
+{% endif %}
 	header {
 		Content-Security-Policy: " default-src 'none'; font-src https://fonts.gstatic.com; frame-src https://www.youtube.com; img-src 'self' https://actionnetwork.org; object-src https://actionnetwork.org/includes/js/can-embed.js https://actionnetwork.org/includes/js/jquery-min.js; script-src 'self' 'unsafe-inline' https://actionnetwork.org/includes/js/can-embed.js https://actionnetwork.org/includes/js/jquery-min.js https://actionnetwork.org/widgets/v3/form/join-the-sunrise-movement-in-providence; style-src 'self' 'unsafe-inline' https://actionnetwork.org/css/ https://fonts.googleapis.com/; frame-ancestors 'none'; base-uri 'none'"
 		X-Content-Type-Options: "nosniff"

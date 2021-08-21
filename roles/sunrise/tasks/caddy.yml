@@ -9,6 +9,8 @@
     group: root
     # Arch Linux thinks this is an executable and won't run without x
     mode: u=rwx,g=rx,o=rx
+  when:
+    - ansible_os_family == 'Archlinux' or ansible_os_family == 'Debian'
   notify:
     - daemon-reload restart caddy
   tags: caddy_service
