@@ -3,14 +3,12 @@ os_packages:
   - fd # find alternative
   - which # to find where executables are installed
   - rsync # dependency for "synchronize" Ansible module
+  - php
+  - php-fpm # serve PHP sites via FastCGI
   - go # needed to build Caddy from source or use Hugo modules
-# Caddy is currently in Community-Testing:
-# https://archlinux.org/packages/community-testing/x86_64/caddy/
-# I manually enabled that repo:
-# https://joshtronic.com/2019/08/19/how-to-install-packages-from-testing-on-arch-linux/
-# if it doesn't come out of testing soon we should write a play to do this
   - caddy # web server https://caddyserver.com/
   - hugo # static site generator https://gohugo.io/
+  - tealdeer # A fast tldr client in Rust
 
 web_server_user: caddy
 

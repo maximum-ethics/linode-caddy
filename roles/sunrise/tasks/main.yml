@@ -30,16 +30,17 @@
   - local
   when: ansible_os_family == 'Archlinux'
 
+- name: update apk sources + upgrade packages
+  apk:
+    update_cache: yes
+    upgrade: yes
+  tags:
+  - updategrade
+  - local
+  when: ansible_os_family == 'Alpine'
+
 # TODO: Also update packages installed from other sources, such as pip
 # linode_create.yml installs linode-api4 from pip
-
-- name: install common packages, shared by all OSes
-  package:
-    name: '{{ item }}'
-  loop: "{{ common_packages }}"
-  tags:
-  - initial_packages
-  - local
 
 - name: remove packages
   package:
@@ -50,6 +51,14 @@
   - remove_packages
   - local
   when: uninstall_packages is defined
+
+- name: install common packages, shared by all OSes
+  package:
+    name: '{{ item }}'
+  loop: "{{ common_packages }}"
+  tags:
+  - initial_packages
+  - local
 
 - name: install packages specific to each OS
   package:

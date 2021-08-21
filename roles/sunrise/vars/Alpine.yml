@@ -1,0 +1,12 @@
+os_packages:
+  - openssh-server-pam # needed to get prompt when expiring passwd.
+  - shadow # try to set the user's shell
+  - libuser # manually change user's shell with lchsh:
+  # https://wiki.alpinelinux.org/wiki/Change_default_shell
+  - tzdata # needed to set timezone
+  - caddy # web server https://caddyserver.com/
+  - caddy-openrc # try installing default OpenRC init scripts, might clash with Caddyfile
+  - php8
+  - php8-fpm # serve PHP sites via FastCGI
+  - go # needed to build Caddy from source or use Hugo modules
+  - hugo # static site generator https://gohugo.io/

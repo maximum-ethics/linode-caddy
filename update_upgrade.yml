@@ -14,3 +14,12 @@
       update_cache: yes
       upgrade: yes
     when: ansible_os_family == 'Archlinux'
+
+  - name: update apk sources + upgrade packages
+    apk:
+      update_cache: yes
+      upgrade: yes
+    tags:
+    - updategrade
+    - local
+    when: ansible_os_family == 'Alpine'
