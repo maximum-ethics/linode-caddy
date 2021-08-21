@@ -100,20 +100,20 @@
     name: "{{ local_hostname }}"
   tags:
   - hostname
-- name: pop OS hostname
-  hostname:
-    name: "{{ local_hostname }}"
-    use: systemd
-  tags:
-  - hostname
-  - local
-- name: print hostname
-  debug:
-    msg: Inventory item {{ inventory_hostname }} has hostname {{ ansible_hostname }}
-    verbosity: 1
-  tags:
-  - hostname
-  - local
+# - name: pop OS hostname
+#   hostname:
+#     name: "{{ local_hostname }}"
+#     use: systemd
+#   tags:
+#   - hostname
+#   - local
+# - name: print hostname
+#   debug:
+#     msg: Inventory item {{ inventory_hostname }} has hostname {{ ansible_hostname }}
+#     verbosity: 1
+#   tags:
+#   - hostname
+#   - local
 
 - name: print datetime before setting timezone
   debug:
