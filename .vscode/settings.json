@@ -1,6 +1,11 @@
 {
-  "editor.insertSpaces": false,
+	"editor.insertSpaces": false,
 	"editor.detectIndentation": false,
 	"files.trimTrailingWhitespace": true,
-	"files.insertFinalNewline": true
+	"files.insertFinalNewline": true,
+	"[yaml]": {
+		"editor.insertSpaces": true,
+		"editor.tabSize": 2,
+		"editor.autoIndent": "advanced"
+	},
 }
