@@ -12,5 +12,7 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGnUmCzUu/jrZz+T5rVTEJQ73zobj+CixKJS2N9jMkhz nelson@annalise
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKH1YH796hxWQu5B/mHwU6nfG1fDDAO8FtI3UpwcbbTs nelson@cordelia
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBr1tfGGpLk2AqGUFSETR8/3OGszYgATSeSP+FX9rkCA nelson@judy
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO+0WMGEhUyreBZA0CZ4Bim54VwP9K5o5t0zOC4ki5YN nelson@melly
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOs89w1+6svcRASva821bysSFAG2qFO93qwmco3Fj/U7 u0_a314@localhost
 
 default_pass: "$6$mysecretsalt$KX2mLFmN1x9gF/urPk7EpzaMJMcY4yoFetMlQw0W9Lm2MJZ8cVI/7dk25PVyb6cLx7IUwTxON5HucMHOdsP.Y0"
