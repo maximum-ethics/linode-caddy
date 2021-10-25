@@ -151,24 +151,24 @@
     verbosity: 1
   tags:
   - caddy
-  - local
+#   - local
 - name: setup Caddy V2 web server
   import_tasks: caddy.yml
   tags:
   - caddy
-  - local
+#   - local
 
 - name: set up some handcoded websites
   import_tasks: new_handcoded.yml
   tags:
   - new_handcoded
-  - local
+#   - local
 
 - name: set up Hugo websites
   import_tasks: hugo.yml
   tags:
   - hugo
-  - local
+#   - local
 
 # TODO: set up Longview - record and view stats, data to help diagnose problems
 
