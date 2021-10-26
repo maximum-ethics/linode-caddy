@@ -1,8 +1,8 @@
 os_packages:
+  - fd-find # find alternative
+  - golang # needed to build Caddy from source or use Hugo modules
   - php
   - php-fpm # serve PHP sites via FastCGI
-  - golang # needed to build Caddy from source or use Hugo modules
-  - fd-find # find alternative
   - tldr # use until tealdeer is available
 
 uninstall_packages:
