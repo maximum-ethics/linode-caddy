@@ -3,7 +3,6 @@ os_packages:
   - php-fpm # serve PHP sites via FastCGI
   - golang # needed to build Caddy from source or use Hugo modules
   - fd-find # find alternative
-  - zoxide # navigate filesystem faster
   - tldr # use until tealdeer is available
 
 uninstall_packages:
