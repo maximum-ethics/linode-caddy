@@ -1,7 +1,6 @@
 os_packages:
   - base-devel # needed for AUR
   - fd # find alternative
-  - which # to find where executables are installed
   - rsync # dependency for "synchronize" Ansible module
   - php
   - php-fpm # serve PHP sites via FastCGI
