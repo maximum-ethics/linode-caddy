@@ -1,5 +1,6 @@
 os_packages:
   - base-devel # needed for AUR
+  - dust # visualize disk space use
   - fd # find alternative
   - rsync # dependency for "synchronize" Ansible module
   - php
