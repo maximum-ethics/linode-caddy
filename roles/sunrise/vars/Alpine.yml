@@ -14,6 +14,8 @@ os_packages:
 
 web_server_user: caddy
 
+caddy_binary_location: /usr/sbin/caddy
+
 # https://stackoverflow.com/questions/17570658/how-to-find-my-php-fpm-sock
 # check /etc/php8/php-fpm.d/www.conf for location of socket
 # should be line like "listen = 127.0.0.1:9000"
