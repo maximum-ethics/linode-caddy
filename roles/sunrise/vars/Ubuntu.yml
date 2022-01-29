@@ -7,6 +7,7 @@ os_packages:
 
 uninstall_packages:
   - apache2 # we're using Caddy instead
+  - apache2-bin
   - apache2-data
   - apache2-utils
   - ssl-cert
