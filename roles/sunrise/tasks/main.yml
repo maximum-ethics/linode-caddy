@@ -11,6 +11,16 @@
   - always
   - local
 
+- name: remove packages
+  package:
+    name: '{{ item }}'
+    state: absent
+  loop: '{{ uninstall_packages }}'
+  tags:
+  - remove_packages
+  - local
+  when: uninstall_packages is defined
+
 - name: update apt sources + upgrade packages
   apt:
     update_cache: yes
@@ -41,16 +51,6 @@
 
 # TODO: Also update packages installed from other sources, such as pip
 # linode_create.yml installs linode-api4 from pip
-
-- name: remove packages
-  package:
-    name: '{{ item }}'
-    state: absent
-  loop: '{{ uninstall_packages }}'
-  tags:
-  - remove_packages
-  - local
-  when: uninstall_packages is defined
 
 - name: install common packages, shared by all OSes
   package:
