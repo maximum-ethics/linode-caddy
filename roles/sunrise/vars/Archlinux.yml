@@ -2,13 +2,14 @@ os_packages:
   - base-devel # needed for AUR
   - dust # visualize disk space use
   - fd # find alternative
+  - tealdeer # A fast tldr client in Rust
+  - chezmoi # bring your personal dotfiles to the server
   - rsync # dependency for "synchronize" Ansible module
   - php
   - php-fpm # serve PHP sites via FastCGI
   - go # needed to build Caddy from source or use Hugo modules
   - caddy # web server https://caddyserver.com/
   - hugo # static site generator https://gohugo.io/
-  - tealdeer # A fast tldr client in Rust
 
 web_server_user: caddy
 
