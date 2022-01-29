@@ -44,20 +44,20 @@
 
 # public test page (currently not actually public)
 # https://caddy.community/t/caddyfile-having-individual-sites-differ-from-global-options/11297
-{{ local_hostname }}.{{ test_domain }} {
-	root * /srv/{{ test_domain }}/{{ test_subdomain }}/public/
-	import boilerplate
-	header {
-		Content-Security-Policy: "default-src 'none'; connect-src 'self'; img-src data:; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
-		X-Content-Type-Options: "nosniff"
-	}
-	# https://caddyserver.com/docs/caddyfile/directives/templates
-	# can't use default double curly braces b/c Ansible uses them
-	templates {
-		between (( ))
-	}
-	tls {{ admin_email }}
-}
+# {{ local_hostname }}.{{ test_domain }} {
+# 	root * /srv/{{ test_domain }}/{{ test_subdomain }}/public/
+# 	import boilerplate
+# 	header {
+# 		Content-Security-Policy: "default-src 'none'; connect-src 'self'; img-src data:; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
+# 		X-Content-Type-Options: "nosniff"
+# 	}
+# 	# https://caddyserver.com/docs/caddyfile/directives/templates
+# 	# can't use default double curly braces b/c Ansible uses them
+# 	templates {
+# 		between (( ))
+# 	}
+# 	tls {{ admin_email }}
+# }
 
 # local test page
 {{ test_subdomain }}.{{ test_domain }} {
