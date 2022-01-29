@@ -56,3 +56,7 @@ hugo_sites:
     domain: oahspesales.com
     subdomain: www
     content_repo: https://git.sr.ht/~skyfaller/oahspesales.com
+  - title: McFadden Mental Health
+    domain: robertmcfaddenmd.com
+    subdomain: www
+    content_repo: https://git.sr.ht/~skyfaller/robertmcfaddenmd.com
