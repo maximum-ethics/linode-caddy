@@ -29,6 +29,7 @@ users:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBr1tfGGpLk2AqGUFSETR8/3OGszYgATSeSP+FX9rkCA nelson@judy
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO+0WMGEhUyreBZA0CZ4Bim54VwP9K5o5t0zOC4ki5YN nelson@melly
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOs89w1+6svcRASva821bysSFAG2qFO93qwmco3Fj/U7 u0_a314@localhost
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA3Ktn0c3pSic0v1rtaRrxJ2O+9XbuyNawjj91A/D3Wf GitHub key for nelson@bobbie
 
 test_domain: maximumethics.dev
 test_subdomain: test
