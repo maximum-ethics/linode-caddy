@@ -4,8 +4,9 @@ os_packages:
   - libuser # manually change user's shell with lchsh:
   # https://wiki.alpinelinux.org/wiki/Change_default_shell
   - tzdata # needed to set timezone
-  - dust # visualize disk space use
   - chezmoi # bring your personal dotfiles to the server
+  - dust # visualize disk space use
+  - fd # find alternative
   - caddy # web server https://caddyserver.com/
   - caddy-openrc # try installing default OpenRC init scripts, might clash with Caddyfile
   - php8
