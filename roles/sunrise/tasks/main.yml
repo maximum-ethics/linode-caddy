@@ -21,6 +21,15 @@
   - local
   when: uninstall_packages is defined
 
+- name: upgrade RPM packages
+  dnf:
+    name: "*"
+    state: latest
+  tags:
+  - updategrade
+  - local
+  when: ansible_os_family == 'RedHat'
+
 - name: update apt sources + upgrade packages
   apt:
     update_cache: yes

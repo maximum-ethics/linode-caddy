@@ -1,0 +1,17 @@
+os_packages:
+  - fd-find # find alternative
+  - golang # needed to build Caddy from source or use Hugo modules
+  - php
+  - php-fpm # serve PHP sites via FastCGI
+  - tldr # use until tealdeer is available
+
+sudoing_group: wheel
+web_server_user: apache # I don't think this is right
+
+# caddy_binary_location: /usr/bin/caddy
+
+# https://stackoverflow.com/questions/17570658/how-to-find-my-php-fpm-sock
+# Check /etc/php-fpm.d/www.conf for location of unix socket
+# should be line like "listen = /run/php-fpm/www.sock"
+php_fpm_unix_socket: /var/run/php-fpm/www.sock
+php_fpm_service_name: php8.1-fpm # I don't think this is right
