@@ -17,13 +17,7 @@
       access_token: "{{ maximum_ethics_linode_token }}"
       state: absent
 
-  # - name: Remove hostname from ~/.ssh/known_hosts
-  #   lineinfile:
-  #     dest: ~/.ssh/known_hosts
-  #     regexp: "^{{ linode_label }}"
-  #     state: absent
-
-  # There's a module for that: https://docs.ansible.com/ansible/latest/modules/known_hosts_module.html
+  # https://docs.ansible.com/ansible/latest/modules/known_hosts_module.html
   - name: Remove hostname from ~/.ssh/known_hosts
     known_hosts:
       name: '{{ linode_label }}'
