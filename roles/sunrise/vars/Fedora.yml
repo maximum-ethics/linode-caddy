@@ -3,7 +3,7 @@ os_packages:
   - golang # needed to build Caddy from source or use Hugo modules
   - php
   - php-fpm # serve PHP sites via FastCGI
-  - tldr # use until tealdeer is available
+  - tealdeer # Rust tldr client
 
 sudoing_group: wheel
 web_server_user: apache # I don't think this is right
