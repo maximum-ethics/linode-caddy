@@ -1,0 +1,16 @@
+[webservers:children]
+old
+established
+new
+
+[maxethics:children]
+established
+new
+
+[old]
+caprice.skyfaller.space
+
+[established]
+america.maximumethics.dev
+
+[new]
