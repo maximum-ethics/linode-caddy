@@ -10,7 +10,7 @@
 
   tasks:
 
-  - name: Print a message
+  - name: Deleting {{ prompt_linode_label }}!
     ansible.builtin.debug:
       msg: 'Deleting {{ prompt_linode_label }}, hope that is what you wanted'
 
