@@ -104,7 +104,6 @@ at e.g. /etc/ansible/host_vars/localhost/vars.yml (or /usr/local/etc/ansible/hos
 
 ```
 inventory_directory: [e.g. /etc/ansible]
-ansible_connection: local
 maximum_ethics_linode_token: [insert yours]
 ssh_pub_key: [insert yours]
 ```
