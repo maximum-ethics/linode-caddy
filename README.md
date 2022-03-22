@@ -146,8 +146,15 @@ Make sure all domains resolve to the correct IP addresses before using the publi
 ### Push your code changes
 If you cloned with SSH as we recommend, a simple `git push` should work.
 
-If you used HTTPS to clone the repo (not recommended), Go to GitHub and sign in
-Profile->Settings->Developer Settings->Personal access tokens->Generate new token `git config --global credential.helper store` that will save your credentials next time you run a command. Then use the token in place of your password when you: `git push`
+If you used HTTPS to clone the repo (not recommended), go to GitHub and sign in.
+
+Profile->Settings->Developer Settings->Personal access tokens->Generate new token
+
+`git config --global credential.helper store`
+
+That will save your credentials next time you run a command. Then use the token in place of your password when you:
+
+`git push`
 
 ## License
 
