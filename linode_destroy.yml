@@ -2,10 +2,17 @@
 - hosts: localhost
   connection: local
 
+  vars_prompt:
+
+  - name: prompt_linode_label
+    prompt: What is the label of the linode you want to delete?
+    private: no
+
   tasks:
-  - name: include variables
-    include_vars:
-      file: roles/new-linode_create/vars/main.yml
+
+  - name: Print a message
+    ansible.builtin.debug:
+      msg: 'Deleting {{ prompt_linode_label }}, hope that is what you wanted'
 
   - name: pip install linode_api4
     pip:
@@ -13,23 +20,19 @@
 
   - name: Ensure linode is missing (delete if present)
     linode_v4:
-      label: "{{ linode_label }}"
+      label: "{{ prompt_linode_label }}"
       access_token: "{{ maximum_ethics_linode_token }}"
       state: absent
 
   # https://docs.ansible.com/ansible/latest/modules/known_hosts_module.html
   - name: Remove hostname from ~/.ssh/known_hosts
     known_hosts:
-      name: '{{ linode_label }}'
+      name: '{{ prompt_linode_label }}'
       state: absent
 
   - name: Remove lines with unwanted occurrences of hostname
     lineinfile:
       path: "{{ inventory_directory }}/hosts"
-      regexp: '^{{ linode_label }}$'
+      regexp: '^{{ prompt_linode_label }}$'
       state: absent
     become: true
-
-# TODO: add task for manual confirmation
-# We don't want to destroy servers by accident
-# https://github.com/sunrisemovement/devops/issues/3
