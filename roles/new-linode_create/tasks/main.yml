@@ -1,3 +1,23 @@
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+  tags:
+  - always
+
+- name: install pip (and any future requirements)
+  package:
+    name: '{{ item }}'
+  loop: "{{ packages }}"
+  become: true
+
+# TIP: If Ansible can't find pip, check your inventory for
+# ansible_python_interpreter and see if it's using the right location/version
+# https://stackoverflow.com/questions/57167948/module-failed-to-start-ansible
+- name: pip install linode_api4 # Dependency for linode_v4 module
+  # https://pypi.org/project/linode-api4/
+  pip:
+    name: linode_api4
+    state: latest
+
 - name: ensure hosts file exists
   file:
     path: "{{ inventory_directory }}/hosts"
@@ -38,14 +58,6 @@
     regexp: '^local_hostname:'
     line: 'local_hostname: {{ linode_label }}'
 
-# TIP: If Ansible can't find pip, check your inventory for
-# ansible_python_interpreter and see if it's using the right location/version
-# https://stackoverflow.com/questions/57167948/module-failed-to-start-ansible
-- name: pip install linode_api4 # Dependency for linode_v4 module
-  # https://pypi.org/project/linode-api4/
-  pip:
-    name: linode_api4
-    state: latest
 - name: Ensure linode is running (create if missing)
   # linode_v4 Ansible module documentation:
   # https://docs.ansible.com/ansible/latest/modules/linode_v4_module.html
