@@ -36,3 +36,10 @@
       regexp: '^{{ prompt_linode_label }}$'
       state: absent
     become: true
+
+  - name: Remove from /etc/hosts
+    lineinfile:
+      path: "/etc/hosts"
+      regexp: '{{ prompt_linode_label }}$'
+      state: absent
+    become: true
