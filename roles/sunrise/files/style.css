@@ -1,12 +1,10 @@
-/* CSS Variables */
-:root {
+html {
 	--background: #fff;
 	--color: #000;
 }
 
-/* Define colors for dark mode */
 @media (prefers-color-scheme: dark) {
-	:root {
+	html {
 		--background: #000;
 		--color: snow;
 	}
