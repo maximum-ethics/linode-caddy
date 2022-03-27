@@ -104,11 +104,15 @@
 
 # first, put local_hostname in ansible inventory
 # linode_create.yml does this automatically, but (for now) only for the person creating the server
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/hostname_module.html
 - name: set system's hostname
   hostname:
-    name: "{{ local_hostname }}"
+    name: {{ local_hostname }}
+    # use: redhat # required on Alpine Linux: https://github.com/ansible/ansible/issues/77363
   tags:
   - hostname
+  when: ansible_os_family != 'Alpine'
+
 # - name: pop OS hostname
 #   hostname:
 #     name: "{{ local_hostname }}"
