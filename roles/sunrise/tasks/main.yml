@@ -189,7 +189,7 @@
 #     name: postfix
 
 # TODO: install Wordpress
-- name: set up static archives of Wordpress sites
-  import_tasks: static_wordpress.yml
-  tags:
-  - static_wordpress
+# - name: set up static archives of Wordpress sites
+#   import_tasks: static_wordpress.yml
+#   tags:
+#   - static_wordpress
