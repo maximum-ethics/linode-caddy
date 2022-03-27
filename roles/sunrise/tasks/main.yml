@@ -147,6 +147,8 @@
   import_tasks: ufw.yml
   tags:
   - ufw
+  when: ansible_os_family != 'Alpine'
+# this is bad, we'll need a firewall before we use Alpine in production
 
 # TODO: fail2ban?
 
