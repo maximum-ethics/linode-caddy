@@ -1,0 +1,32 @@
+---
+# TIP: add the subdomain's A + AAAA records to the Linode control panel first!
+# Otherwise Let's Encrypt can't verify your certificates
+
+- name: install Caddyfile from template
+  template:
+    src: '{{ caddyfile_name }}'
+    dest: /etc/caddy/Caddyfile
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart caddy
+
+- name: create srv directory if it doesn't exist
+  file:
+    path: /srv/{{ item.domain_name }}/{{ item.subdomain }}
+    state: directory
+    mode: 0755
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+  loop: '{{ static_wp_sites }}'
+
+- name: install zip archive of static wp files
+  unarchive:
+    src: '{{ item.domain_name }}-static.zip'
+    dest: /srv/{{ item.domain_name }}/{{ item.subdomain }}/
+    owner: '{{ web_server_user }}'
+    group: '{{ web_server_user }}'
+    mode: 0755
+  loop: '{{ static_wp_sites }}'
+  # notify: reload caddy
+  notify: restart caddy

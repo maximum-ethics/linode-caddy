@@ -9,6 +9,7 @@ common_packages:
   - neofetch # show OS details
   - ripgrep # recursively searches directories for a regex
   - zoxide # smarter cd command - navigate filesystem faster
+  - unzip # make unarchive work
 
 default_pass: "$6$mysecretsalt$KX2mLFmN1x9gF/urPk7EpzaMJMcY4yoFetMlQw0W9Lm2MJZ8cVI/7dk25PVyb6cLx7IUwTxON5HucMHOdsP.Y0"
 admin_email: skyfaller@gmail.com
@@ -62,3 +63,7 @@ hugo_sites:
     domain: robertmcfaddenmd.com
     subdomain: www
     content_repo: https://git.sr.ht/~skyfaller/robertmcfaddenmd.com
+
+static_wp_sites:
+  - subdomain: static
+    domain_name: skyfaller.space
