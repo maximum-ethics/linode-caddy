@@ -2,12 +2,16 @@
   include_vars: "{{ ansible_os_family }}.yml"
   tags:
   - always
+  when: ansible_os_family != 'Darwin'
 
 - name: install pip (and any future requirements)
   package:
     name: '{{ item }}'
   loop: "{{ packages }}"
   become: true
+  when: ansible_os_family != 'Darwin'
+  # install 'python' manually in Homebrew on macOS
+  # or, figure out how to not run Homebrew as root in this play
 
 # TIP: If Ansible can't find pip, check your inventory for
 # ansible_python_interpreter and see if it's using the right location/version
