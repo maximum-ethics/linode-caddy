@@ -1,6 +1,7 @@
 - name: copy fish functions
   copy:
     src: "{{ item }}"
+    # dest: /Users/nelson/.config/fish/functions
     dest: /etc/fish/functions/
   # if we encounter a system that doesn't keep global config files here,
   # we'll generalize to use the $__fish_sysconf_dir environment variable instead.
