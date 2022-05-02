@@ -10,6 +10,19 @@
 - hosts: new
   gather_facts: no
 
+  vars_prompt:
+
+  - name: prompt_user
+    prompt: What is your username?
+    private: no
+
+  - name: prompt_password
+    prompt: What is your password?
+    private: yes
+    encrypt: sha512_crypt
+    confirm: yes
+    salt_size: 7
+
   roles:
     - new-linode_initiate-users
 
