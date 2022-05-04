@@ -109,6 +109,7 @@
   hostname:
     name: "{{ local_hostname }}"
     # use: redhat # required on Alpine Linux: https://github.com/ansible/ansible/issues/77363
+    # only for Ansible versions < 2.12.5 tho
   tags:
   - hostname
   when: ansible_os_family != 'Alpine'
