@@ -32,26 +32,42 @@
     line: '%wheel ALL=(ALL) ALL'
     validate: 'visudo -cf %s'
 
-- name: Add sudoing user accounts for all sysadmins
+- name: print users
+  debug:
+    var: users
+    verbosity: 2
+
+- name: create temporary list of users, excluding the admin running this role
+  set_fact:
+    self_excluded_users: "{{ _list | from_yaml }}"
+  loop: "{{ users }}"
+  when: item.name != prompt_user
+  vars:
+    _list: |-
+      - {{ item }}
+
+- name: Add sudoing user accounts for sysadmins (other than you)
   user:
     name: "{{ item.name }}"
     password: "{{ item.password }}"
-    # shell: "{{ item.shell }}"
     groups: wheel
     append: yes
     update_password: on_create
-  loop: "{{ users }}"
+  loop: "{{ self_excluded_users }}"
   register: new_accounts
   tags: add_users
 
-- name: print the array of new accounts
+- name: Add sudoing user account for admin running the role
+  user:
+    name: "{{ prompt_user }}"
+    password: "{{ prompt_password }}"
+    groups: wheel
+    append: yes
+  tags: add_users
+
+- name: print the array of new accounts (not including yourself)
   debug:
     var: new_accounts
-    verbosity: 2
-
-- name: print my password
-  debug:
-    var: new_accounts.results[4].item.password
     verbosity: 2
 
 - name: Add ssh keys for all sysadmins
