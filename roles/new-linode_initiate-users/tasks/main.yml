@@ -1,6 +1,4 @@
 # tasks on remote server once it has been created, as root #
-# TODO: DISABLE RUNNING THESE TASKS IF SERVER ALREADY EXISTED (how tho?)
-# https://github.com/sunrisemovement/devops/issues/9
 
 - name: Don't do anything until server is reachable via SSH
   wait_for_connection:

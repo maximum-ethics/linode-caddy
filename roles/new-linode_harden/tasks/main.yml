@@ -11,9 +11,6 @@
   - force change password
 # note that handlers are executed in the order they are written down, NOT in the order they are notified
 # https://stackoverflow.com/questions/35130051/order-of-notify-handlers
-# TODO: make sure handlers execute in the correct order, by e.g. calling the 2nd handler from the first handler
-# don't rely on the order in which handlers are written down, which seems fragile
-# https://github.com/sunrisemovement/devops/issues/7
 
 - name: Install PAM on Alpine Linux
   package:
@@ -32,6 +29,4 @@
   - restart ssh
   - force change password
 
-# Before you run any other Ansible plays, you'll have to ssh in to change your password.
-
-# Also, consider switching to Linode's latest kernel to improve security.
+# Switch to Linode's latest kernel to improve security and ensure all functions work.
