@@ -148,6 +148,16 @@ www.stairball.org {
 	redir https://www.stairball.club{uri} permanent
 }
 
+www.stairball.club {
+	root * /srv/stairball.org/static/
+	import boilerplate
+	header {
+		Content-Security-Policy: "default-src 'none'; font-src 'self'; img-src 'self' https://farm4.staticflickr.com https://live.staticflickr.com https://s.w.org; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests"
+		X-Content-Type-Options: "nosniff"
+	}
+}
+import redir-to-www stairball.club
+
 www.skyfaller.space {
 	root * /srv/skyfaller.space/static/
 	import boilerplate
