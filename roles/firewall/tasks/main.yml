@@ -1,0 +1,11 @@
+- name: install awall and dependencies
+  package:
+    name:
+      - iptables
+      - ip6tables
+      - awall
+
+# - name: activate firewall rules at boot
+#   service:
+#     name: iptables
+#     state: started

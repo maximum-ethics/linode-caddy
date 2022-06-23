@@ -1,0 +1,8 @@
+---
+
+- hosts: new
+  become: yes
+  roles:
+    - sunrise
+    - fish-shell
+    - firewall
