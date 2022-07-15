@@ -68,4 +68,4 @@ static_wp_sites:
   - subdomain: static
     domain_name: skyfaller.space
   - subdomain: static
-    domain_name: stairball.org
+    domain_name: stairball.club
