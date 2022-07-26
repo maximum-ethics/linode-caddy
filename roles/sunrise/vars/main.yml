@@ -19,7 +19,7 @@ users:
     password: "{{ default_pass }}"
     shell: /usr/bin/fish
     sshKey:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMSoD1EE/VdDb9mBYDsebsIVowqhfvNWYhe2YBcfNeTo wilsonbr@cthulu2
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPAP3OixTq8fc34Im8hWBG6JjElOxskPsnO5UmgwDHyZ wilsonbr@CthuluPopOs
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM5luwrRmBK+XE2zyy3MhxaaP6/Ua8yhIHwIgYJvBN1d wilsonbr@woody
   - name: nelson
     password: "{{ default_pass }}"
