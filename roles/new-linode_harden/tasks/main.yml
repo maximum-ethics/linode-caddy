@@ -12,6 +12,12 @@
 # note that handlers are executed in the order they are written down, NOT in the order they are notified
 # https://stackoverflow.com/questions/35130051/order-of-notify-handlers
 
+- name: update apk sources + upgrade packages
+  apk:
+    update_cache: yes
+    upgrade: yes
+  when: ansible_os_family == 'Alpine'
+
 - name: Install PAM on Alpine Linux
   package:
     name: openssh-server-pam
