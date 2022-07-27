@@ -155,6 +155,23 @@ That will save your credentials next time you run a command. Then use the token 
 
 `git push`
 
+## Transitioning away from GitHub
+We are planning to [Give up GitHub](https://sfconservancy.org/GiveUpGitHub/). As part of our migration plan, we will begin using [hydra hosting](https://seirdy.one/posts/2020/11/18/git-workflow-1/), setting up multiple git remotes of equal status. Currently we're using SourceHut, Codeberg, and GitHub, but once we have enough other hosts we'll eliminate GitHub.
+
+You can run `git remote set-url` to switch remote locations if a host goes down. Right now, your options are:
+
+- https://git.sr.ht/~skyfaller/linode-caddy
+- https://codeberg.org/maximum-ethics/linode-caddy.git
+- https://github.com/maximum-ethics/linode-caddy.git
+
+Collaborators may prefer SSH:
+
+- `git@git.sr.ht:~skyfaller/linode-caddy`
+- `git@codeberg.org:maximum-ethics/linode-caddy.git`
+- `git@github.com:maximum-ethics/linode-caddy.git`
+
+But before pushing any commits, please make sure you know how to fetch from and push to all remotes simultaneously.
+
 ## License
 
 This project is licensed under the [GNU Affero General Public License](https://en.wikipedia.org/wiki/GNU_Affero_General_Public_License) version 3 or any later version at your choice. See the [LICENSE](LICENSE) file for details.
