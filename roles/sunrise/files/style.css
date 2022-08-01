@@ -1,8 +1,5 @@
-@media (prefers-color-scheme: dark) {
-	html {
-		background-color: #000;
-		color: snow;
-	}
+html {
+	color-scheme: dark light;
 }
 
 body {
