@@ -10,6 +10,7 @@ os_packages:
   - go # needed to build Caddy from source or use Hugo modules
   - caddy # web server https://caddyserver.com/
   - hugo # static site generator https://gohugo.io/
+  - nodejs # needed for Bookshop
 
 web_server_user: caddy
 

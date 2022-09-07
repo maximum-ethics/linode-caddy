@@ -181,6 +181,12 @@
   - new_handcoded
 #   - local
 
+- name: install Node
+  import_tasks: node.yml
+  tags:
+  - node
+  when: ansible_os_family == 'Debian'
+
 - name: set up Hugo websites
   import_tasks: hugo.yml
   tags:
