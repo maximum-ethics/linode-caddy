@@ -73,3 +73,5 @@ static_wp_sites:
     domain_name: skyfaller.space
   - subdomain: static
     domain_name: stairball.club
+  - subdomain: twitterbackup
+    domain_name: skyfaller.net

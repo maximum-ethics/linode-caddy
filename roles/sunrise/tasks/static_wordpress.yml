@@ -22,7 +22,7 @@
 
 - name: install zip archive of static wp files
   unarchive:
-    src: '{{ item.domain_name }}-static.zip'
+    src: '{{ item.subdomain }}-{{ item.domain_name }}-static.zip'
     dest: /srv/{{ item.domain_name }}/{{ item.subdomain }}/
     owner: '{{ web_server_user }}'
     group: '{{ web_server_user }}'

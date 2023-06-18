@@ -68,22 +68,6 @@
 	}
 }
 
-# handcoded Rhode Island site
-www.sunrisepvd.com {
-	root * /srv/sunrisepvd.com/www/public
-	import boilerplate
-{% if php_fpm_unix_socket is defined %}
-	php_fastcgi unix/{{ php_fpm_unix_socket }}
-{% elif php_fpm_socket is defined %}
-	php_fastcgi {{ php_fpm_socket }}
-{% endif %}
-	header {
-		Content-Security-Policy: " default-src 'none'; font-src https://fonts.gstatic.com; frame-src https://www.youtube.com; img-src 'self' https://actionnetwork.org; object-src https://actionnetwork.org/includes/js/; script-src 'self' 'unsafe-inline' https://actionnetwork.org/; style-src 'self' 'unsafe-inline' https://actionnetwork.org/css/ https://fonts.googleapis.com/; frame-ancestors 'none'; base-uri 'none'"
-		X-Content-Type-Options: "nosniff"
-	}
-}
-import redir-to-www sunrisepvd.com
-
 # Hugo sites
 www.maximumethics.dev {
 	root * /srv/maximumethics.dev/www/public
@@ -154,6 +138,16 @@ static.stairball.club {
 		Content-Security-Policy: "default-src 'none'; font-src 'self'; img-src 'self' https://farm4.staticflickr.com https://live.staticflickr.com https://s.w.org; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests"
 		X-Content-Type-Options: "nosniff"
 	}
+}
+
+skyfaller.net,
+www.skyfaller.net {
+	redir https://www.skyfaller.space{uri} permanent
+}
+
+twitterbackup.skyfaller.net {
+	root * /srv/skyfaller.net/twitterbackup/
+	import boilerplate
 }
 
 www.skyfaller.space {
