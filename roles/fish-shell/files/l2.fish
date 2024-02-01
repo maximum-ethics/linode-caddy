@@ -1,3 +1,3 @@
-function l2 --wraps='exa --tree --level=2' --description 'alias l2 exa --tree --level=2'
-  exa --tree --level=2 $argv;
+function l2 --wraps='eza --tree --level=2' --description 'alias l2 eza --tree --level=2'
+  eza --tree --level=2 $argv;
 end

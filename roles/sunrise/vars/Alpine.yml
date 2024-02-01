@@ -6,6 +6,7 @@ os_packages:
   - tzdata # needed to set timezone
   - chezmoi # bring your personal dotfiles to the server
   - dust # visualize disk space use
+  - eza # ls alternative
   - fd # find alternative
   - caddy # web server https://caddyserver.com/
   - caddy-openrc # try installing default OpenRC init scripts, might clash with Caddyfile

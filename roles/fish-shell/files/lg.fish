@@ -1,3 +1,3 @@
-function lg --wraps='exa -halgG --git' --description 'alias lg=exa -halgG --git'
-  exa -halgG --git $argv;
+function lg --wraps='eza -halgG --git' --description 'alias lg=eza -halgG --git'
+  eza -halgG --git $argv;
 end

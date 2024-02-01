@@ -1,6 +1,7 @@
 os_packages:
   - base-devel # needed for AUR
   - dust # visualize disk space use
+  - eza # ls alternative
   - fd # find alternative
   - tealdeer # A fast tldr client in Rust
   - chezmoi # bring your personal dotfiles to the server

@@ -1,3 +1,3 @@
-function lt --wraps='exa --tree' --description 'alias lt exa --tree'
-  exa --tree $argv;
+function lt --wraps='eza --tree' --description 'alias lt eza --tree'
+  eza --tree $argv;
 end

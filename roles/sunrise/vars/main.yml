@@ -1,7 +1,6 @@
 common_packages:
   - acl # allows becoming unprivileged user (for git clone)
   - bat # cat alternative
-  - exa # ls alternative
   - fish # Nelson's favorite shell
   - git # check out git repositories
   - micro # terminal-based text editor
