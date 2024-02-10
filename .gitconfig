@@ -1,0 +1,14 @@
+[remote "origin"]
+	url = git@git.sr.ht:~skyfaller/linode-caddy
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	url = git@codeberg.org:maximum-ethics/linode-caddy.git
+	url = git@github.com:maximum-ethics/linode-caddy.git
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[remote "cb_mirror"]
+	url = git@codeberg.org:maximum-ethics/linode-caddy.git
+	fetch = +refs/heads/*:refs/remotes/cb_mirror/*
+[remote "gh_mirror"]
+	url = git@github.com:maximum-ethics/linode-caddy.git
+	fetch = +refs/heads/*:refs/remotes/gh_mirror/*
