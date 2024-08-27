@@ -48,7 +48,7 @@
   user:
     name: "{{ item.name }}"
     password: "{{ item.password }}"
-    groups: wheel
+    groups: wheel,mcfadden
     append: yes
     update_password: on_create
   loop: "{{ self_excluded_users }}"

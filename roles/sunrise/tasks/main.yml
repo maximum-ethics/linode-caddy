@@ -83,7 +83,7 @@
     name: "{{ item.name }}"
     password: "{{ item.password }}"
     shell: "{{ item.shell }}"
-    groups: "{{ sudoing_group }}"
+    groups: "{{ sudoing_group }},mcfadden"
     update_password: on_create
   loop: "{{ users }}"
   tags: user_accounts
