@@ -50,6 +50,10 @@ handcoded_websites:
 
 hugo_deb_url: https://github.com/gohugoio/hugo/releases/download/v0.92.1/hugo_extended_0.92.1_Linux-64bit.deb
 hugo_sites:
+  - title: Anne Sarachan
+    domain: maximumethics.dev
+    subdomain: anne
+    content_repo: https://git.sr.ht/~skyfaller/anne-hugo
   - title: Maximum Ethics
     domain: maximumethics.dev
     subdomain: www
