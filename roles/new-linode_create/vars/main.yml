@@ -1,11 +1,11 @@
 hosts_group: new
 # API documentation: https://developers.linode.com/api/v4/
-linode_label: dragon
+linode_label: banana
 linode_type: g6-nanode-1 # https://api.linode.com/v4/linode/types
 linode_region: us-east # https://api.linode.com/v4/regions
 # linode_image: linode/arch # https://api.linode.com/v4/images
 # linode_image: linode/ubuntu21.10
-linode_image: linode/alpine3.16
+linode_image: linode/arch
 # create Personal Access Token by clicking your profile in the upper right
 # My Profile -> API Tokens -> [+] Add a Personal Access Token
 # Give read/write access to at least Linodes, if not everything else
