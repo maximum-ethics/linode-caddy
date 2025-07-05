@@ -43,12 +43,12 @@
 
 - name: create temporary list of users, excluding the admin running this role
   set_fact:
-    self_excluded_users: "{{ _list | from_yaml }}"
-  loop: "{{ users }}"
-  when: item.name != prompt_user
-  vars:
-    _list: |-
-      - {{ item }}
+    not_me: "{{ users | rejectattr('name', 'match', '^'+prompt_user+'$') | list }}"
+
+- name: print not_me
+  debug:
+    var: not_me
+    verbosity: 2
 
 #TODO: Add users to groups from a list in a variable instead of hardcoding it
 - name: Add sudoing user accounts for sysadmins (other than you)
@@ -58,7 +58,7 @@
     groups: wheel,mcfadden
     append: yes
     update_password: on_create
-  loop: "{{ self_excluded_users }}"
+  loop: "{{ not_me }}"
   register: new_accounts
   tags: add_users
 
