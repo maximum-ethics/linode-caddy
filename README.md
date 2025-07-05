@@ -94,6 +94,8 @@ Or you might not, those are experimental works in progress.
 ### Create Personal Access Token on Linode
 https://www.linode.com/docs/products/tools/linode-api/guides/get-access-token/
 
+"Select All" and choose "No Access" for all permissions, then add "Read/Write" permissions for "Linodes".
+
 ### Create SSH pub key
 
 We recommend using ED25519 SSH keys. Mozilla has some [guidance for key generation](https://infosec.mozilla.org/guidelines/openssh#key-generation).
