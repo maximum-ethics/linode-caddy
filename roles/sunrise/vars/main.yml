@@ -5,7 +5,6 @@ common_packages:
   - git # check out git repositories
   - micro # terminal-based text editor
   - mosh # better than SSH over crappy/mobile connections
-  - neofetch # show OS details
   - ripgrep # recursively searches directories for a regex
   - zoxide # smarter cd command - navigate filesystem faster
   - unzip # make unarchive work

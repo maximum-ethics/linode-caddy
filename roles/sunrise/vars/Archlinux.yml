@@ -5,6 +5,7 @@ os_packages:
   - fd # find alternative
   - tealdeer # A fast tldr client in Rust
   - chezmoi # bring your personal dotfiles to the server
+  - fastfetch # show OS details
   - rsync # dependency for "synchronize" Ansible module
   - php
   - php-fpm # serve PHP sites via FastCGI
