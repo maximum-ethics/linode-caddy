@@ -1,2 +1,3 @@
 local_hostname: banana
+local_timezone: America/Chicago
 local_tls: false

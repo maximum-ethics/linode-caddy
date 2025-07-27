@@ -138,10 +138,10 @@
   - timezone
   - local
 # to get list of possible timezones, run "timedatectl list-timezones"
-- name: set timezone to NYC
+- name: set timezone (from inventory)
   timezone:
-    name: America/New_York
-    # name: America/Los_Angeles
+    name: "{{ local_timezone }}"
+    # name: America/Chicago
   tags:
   - timezone
   notify:
