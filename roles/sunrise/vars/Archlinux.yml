@@ -14,6 +14,9 @@ os_packages:
   - hugo # static site generator https://gohugo.io/
   - nodejs # needed for Bookshop
 
+uninstall_packages:
+  - linux-firmware # Unnecessary on Linode, needed on bare metal tho
+
 web_server_user: caddy
 
 caddy_binary_location: /usr/bin/caddy
